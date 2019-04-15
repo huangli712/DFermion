@@ -1,2 +1,1 @@
-# dfapp
-Dual Fermion Application
+# DFAPP (Dual Fermion Application)
