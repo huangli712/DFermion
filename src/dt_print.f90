@@ -10,7 +10,7 @@
 !!! type    : subroutines
 !!! author  : li huang (email:lihuang.dmft@gmail.com)
 !!! history : 09/15/2009 by li huang (created)
-!!!           01/10/2018 by li huang (last modified)
+!!!           04/16/2019 by li huang (last modified)
 !!! purpose : provide printing infrastructure for dual fermion engine.
 !!! status  : unstable
 !!! comment :
@@ -24,10 +24,10 @@
   subroutine dt_print_header()
      use constants, only : mystd
 
-     use version, only : V_FULL
-     use version, only : V_AUTH
-     use version, only : V_MAIL
-     use version, only : V_GPL3
+     use version, only : V_FULL_DF
+     use version, only : V_AUTH_DF
+     use version, only : V_MAIL_DF
+     use version, only : V_GPL3_DF
 
      use control, only : cname
      use control, only : nprocs
@@ -54,10 +54,10 @@
      write(mystd,'(2X,a)') 'A Modern Dual Fermion Framework For Quantum Lattice Models'
      write(mystd,*)
 
-     write(mystd,'(2X,a)') 'Version: '//V_FULL//' (built at '//__TIME__//" "//__DATE__//')'
-     write(mystd,'(2X,a)') 'Develop: '//V_AUTH
-     write(mystd,'(2X,a)') 'Support: '//V_MAIL
-     write(mystd,'(2X,a)') 'License: '//V_GPL3
+     write(mystd,'(2X,a)') 'Version: '//V_FULL_DF//' (built at '//__TIME__//" "//__DATE__//')'
+     write(mystd,'(2X,a)') 'Develop: '//V_AUTH_DF
+     write(mystd,'(2X,a)') 'Support: '//V_MAIL_DF
+     write(mystd,'(2X,a)') 'License: '//V_GPL3_DF
      write(mystd,*)
 
      write(mystd,'(2X,a)') 'start running at '//date_time_string
