@@ -3,7 +3,7 @@
 ## Introduction
 ## ============
 ##
-## Makefile for iqist/src/app/azalea directory.
+## Makefile for dfapp/src directory.
 ##
 ## Usage
 ## =====
@@ -21,20 +21,20 @@
 ## =======
 ##
 ## 01/17/2017 by li huang (created)
-## 01/10/2018 by li huang (last modified)
+## 04/16/2019 by li huang (last modified)
 ##
 ##
 
 .SUFFIXES: .f90
 
-include ../../../build/make.sys
+include ../build/make.sys
 
 modc = dt_control.o dt_context.o
 lev1 = dt_run.o dt_df.o
 lev2 = dt_stream.o dt_util.o
 lev3 = dt_dump.o dt_print.o
 main = dt_main.o
-mlib = libMM.a
+mlib = libflink.a
 
 objects = $(modc) $(lev1) $(lev2) $(lev3) $(main) $(mlib)
 
@@ -42,18 +42,20 @@ default: all
 
 all: exe
 
-cssl:
-	cp ../../base/libMM.a .
+flink: flink_lib flink_mod
 
-csml:
-	cp ../../base/constants.mod .
-	cp ../../base/mmpi.mod .
-	cp ../../base/parser.mod .
-	cp ../../base/linkedlist.mod .
-	cp ../../base/version.mod .
+flink_lib:
+	cp $(FLINK)/libflink.a .
 
-exe: cssl csml $(objects)
-	$(LINKER) $(objects) -o dmft $(LFLAGS) $(LIBS) -L/opt/local/lib/ -lfftw3
+flink_mod:
+	cp $(FLINK)/constants.mod .
+	cp $(FLINK)/mmpi.mod .
+	cp $(FLINK)/parser.mod .
+	cp $(FLINK)/linkedlist.mod .
+	cp $(FLINK)/version.mod .
+
+exe: flink $(objects)
+	$(LINKER) $(objects) -o df.x $(LFLAGS) $(LIBS) -L/opt/local/lib/ -lfftw3
 
 .f90.o:
 	$(F90) -I/opt/local/include $(FFLAGS) $*.f90
@@ -61,8 +63,8 @@ exe: cssl csml $(objects)
 clean:
 	rm -f *.mod
 	rm -f *.o
-	rm -f dmft
-	rm -f libMM.a
+	rm -f df.x
+	rm -f libflink.a
 
 clean-dat:
 	rm -f *.dat
