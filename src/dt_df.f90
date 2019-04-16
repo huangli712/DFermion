@@ -174,8 +174,16 @@
          dual_g = gnew
          dual_s = czero
 
+
+     do w=1,nffrq
+       print *, w, fmesh(w)
+       print *, dual_g(w,1,:)
+     enddo
+
          write(mystd,*)
      enddo DF_LOOP
+
+STOP
 
 !!========================================================================
 !!>>> finishing ladder dual fermion iteration                          <<<
