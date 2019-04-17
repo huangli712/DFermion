@@ -74,15 +74,15 @@
   end module df_mesh
 
 !!========================================================================
-!!>>> module dt_dmft                                                   <<<
+!!>>> module df_dmft                                                   <<<
 !!========================================================================
 
 !!
-!! @mod dt_dmft
+!! @mod df_dmft
 !!
 !! define some local variables from the output of quantum impurity solver
 !!
-  module dt_dmft
+  module df_dmft
      use constants, only : dp
 
      implicit none
@@ -108,7 +108,7 @@
 !!
      complex(dp), public, save, allocatable :: dmft_h(:,:)
 
-  end module dt_dmft
+  end module df_dmft
 
 !!========================================================================
 !!>>> module dt_dual                                                   <<<
