@@ -29,7 +29,7 @@
 
 include ../build/make.sys
 
-modc = dt_control.o dt_context.o
+modc = df_control.o dt_context.o
 lev1 = df_run.o dt_core.o
 lev2 = df_stream.o df_util.o
 lev3 = df_dump.o df_print.o df_solver.o df_diagram.o df_fft.o
