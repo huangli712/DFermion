@@ -429,12 +429,12 @@
   end subroutine df_input_dual_
 
 !!
-!! @sub dt_input_vert_
+!! @sub df_input_vert_
 !!
 !! prepare vertex functions, they are from the output of quantum impurity
 !! solver as well
 !!
-  subroutine dt_input_vert_()
+  subroutine df_input_vert_()
      use constants, only : dp
      use constants, only : mytmp
 
@@ -453,7 +453,7 @@
      integer  :: i
      integer  :: if1, if2
 
-! used to check whether the input file (dt.vert_d.in) exists
+! used to check whether the input file (df.vert_d.in) exists
      logical  :: exists
 
 ! dummy real(dp) variables
@@ -468,13 +468,13 @@
          exists = .false.
 
 ! inquire about file's existence
-         inquire (file = 'dt.vert_d.in', exist = exists)
+         inquire (file = 'df.vert_d.in', exist = exists)
 
-! find input file: dt.vert_d.in, read it
+! find input file: df.vert_d.in, read it
          if ( exists .eqv. .true. ) then
 
-! read in vertex function (density channel) from dt.vert_d.in
-             open(mytmp, file = 'dt.vert_d.in', form = 'formatted', status = 'unknown')
+! read in vertex function (density channel) from df.vert_d.in
+             open(mytmp, file = 'df.vert_d.in', form = 'formatted', status = 'unknown')
              do i=1,nbfrq
                  do if1=1,nffrq
                      do if2=1,nffrq
@@ -496,13 +496,13 @@
          exists = .false.
 
 ! inquire about file's existence
-         inquire (file = 'dt.vert_m.in', exist = exists)
+         inquire (file = 'df.vert_m.in', exist = exists)
 
 ! find input file: dt.vert_m.in, read it
          if ( exists .eqv. .true. ) then
 
-! read in vertex function (magnetic channel) from dt.vert_m.in
-             open(mytmp, file = 'dt.vert_m.in', form = 'formatted', status = 'unknown')
+! read in vertex function (magnetic channel) from df.vert_m.in
+             open(mytmp, file = 'df.vert_m.in', form = 'formatted', status = 'unknown')
              do i=1,nbfrq
                  do if1=1,nffrq
                      do if2=1,nffrq
@@ -532,7 +532,7 @@
 # endif  /* MPI */
 
      return
-  end subroutine dt_input_vert_
+  end subroutine df_input_vert_
 
 !!========================================================================
 !!>>> manage memory for dual fermion engine                            <<<
