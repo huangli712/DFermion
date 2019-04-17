@@ -139,7 +139,7 @@
      allocate(Gmat(nffrq,nffrq),       stat=istat)
 
      if ( istat /= 0 ) then
-         call s_print_error('dt_df_core','can not allocate enough memory')
+         call s_print_error('df_core','can not allocate enough memory')
      endif ! back if ( istat /= 0 ) block
 
 !!========================================================================
@@ -196,7 +196,7 @@
 
          enddo V_LOOP
 
-         call dt_df_dyson(+1, gnew, dual_s, dual_b)
+         call df_dyson(+1, gnew, dual_s, dual_b)
          call s_mix_z( size(gnew), dual_g, gnew, dfmix)
 
          dual_g = gnew
@@ -217,7 +217,7 @@ STOP
 !!>>> finishing ladder dual fermion iteration                          <<<
 !!========================================================================
 
-     call dt_df_dyson(-1, dual_g, dual_s, dual_b)
+     call df_dyson(-1, dual_g, dual_s, dual_b)
 
      do w=1,nffrq
        print *, w, fmesh(w)
