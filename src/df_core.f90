@@ -280,12 +280,12 @@ STOP
   end subroutine df_schi
 
 !!
-!! @sub dt_df_cchi
+!! @sub df_cchi
 !!
 !! calculate the charge susceptibility within the dual fermion framework
 !!
-  subroutine dt_df_cchi()
+  subroutine df_cchi()
      implicit none
 
      return
-  end subroutine dt_df_cchi
+  end subroutine df_cchi
