@@ -352,11 +352,11 @@
   end subroutine df_input_dmft_
 
 !!
-!! @sub dt_input_latt_
+!! @sub df_input_latt_
 !!
 !! prepare some lattice variables from scratch
 !!
-  subroutine dt_input_latt_()
+  subroutine df_input_latt_()
      use constants, only : dp
      use constants, only : one
 
@@ -386,7 +386,7 @@
      enddo ! over k={1,nkpts} loop
 
      return
-  end subroutine dt_input_latt_
+  end subroutine df_input_latt_
 
 !!
 !! @sub dt_input_dual_
