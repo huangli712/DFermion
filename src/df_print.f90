@@ -26,6 +26,7 @@
 
      use version, only : V_FULL_DF
      use version, only : V_AUTH_DF
+     use version, only : V_INST_DF
      use version, only : V_MAIL_DF
      use version, only : V_GPL3_DF
 
@@ -55,7 +56,7 @@
      write(mystd,*)
 
      write(mystd,'(2X,a)') 'Version: '//V_FULL_DF//' (built at '//__TIME__//" "//__DATE__//')'
-     write(mystd,'(2X,a)') 'Develop: '//V_AUTH_DF
+     write(mystd,'(2X,a)') 'Develop: '//V_AUTH_DF//' ('//V_INST_DF//')'
      write(mystd,'(2X,a)') 'Support: '//V_MAIL_DF
      write(mystd,'(2X,a)') 'License: '//V_GPL3_DF
      write(mystd,*)
