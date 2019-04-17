@@ -559,22 +559,22 @@
   end subroutine df_alloc_array
 
 !!
-!! @sub dt_reset_array
+!! @sub df_reset_array
 !!
-!! reset the key variables for dual fermion engine 
+!! reset the key variables for dual fermion framework
 !!
-  subroutine dt_reset_array()
+  subroutine df_reset_array()
      implicit none
 
      return
-  end subroutine dt_reset_array
+  end subroutine df_reset_array
 
 !!
-!! @sub dt_final_array
+!! @sub df_final_array
 !!
-!! garbage collection for this code, please refer to dt_alloc_array
+!! garbage collection for this code, please refer to df_alloc_array
 !!
-  subroutine dt_final_array()
+  subroutine df_final_array()
      use context ! ALL
 
      implicit none
@@ -587,4 +587,4 @@
      call cat_free_vert()
 
      return
-  end subroutine dt_final_array
+  end subroutine df_final_array
