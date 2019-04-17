@@ -30,13 +30,14 @@
 include ../build/make.sys
 
 modc = df_control.o df_context.o
-lev1 = df_core.o
-lev2 = df_stream.o df_util.o
-lev3 = df_dump.o df_print.o df_solver.o df_diagram.o df_fft.o
+core = df_core.o
+lev1 = df_diagram.o df_fft.o df_solver.o
+lev2 = df_dump.o df_print.o df_stream.o
+lev3 = df_util.o
 main = df_main.o
 mlib = libflink.a
 
-objects = $(modc) $(lev1) $(lev2) $(lev3) $(main) $(mlib)
+objects = $(modc) $(core) $(lev1) $(lev2) $(lev3) $(main) $(mlib)
 
 default: all
 
