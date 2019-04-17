@@ -1,27 +1,27 @@
 !!!-----------------------------------------------------------------------
 !!! project : azalea
-!!! program : dt_print_header
-!!!           dt_print_footer
-!!!           dt_print_summary
-!!!           dt_print_control
-!!!           dt_print_runtime
-!!!           dt_print_it_info
+!!! program : df_print_header
+!!!           df_print_footer
+!!!           df_print_summary
+!!!           df_print_control
+!!!           df_print_runtime
+!!!           df_print_it_info
 !!! source  : df_print.f90
 !!! type    : subroutines
 !!! author  : li huang (email:lihuang.dmft@gmail.com)
 !!! history : 09/15/2009 by li huang (created)
-!!!           04/16/2019 by li huang (last modified)
-!!! purpose : provide printing infrastructure for dual fermion engine.
+!!!           04/17/2019 by li huang (last modified)
+!!! purpose : provide printing infrastructure for dual fermion framework.
 !!! status  : unstable
 !!! comment :
 !!!-----------------------------------------------------------------------
 
 !!
-!! @sub dt_print_header
+!! @sub df_print_header
 !!
 !! print the startup information for dual fermion engine 
 !!
-  subroutine dt_print_header()
+  subroutine df_print_header()
      use constants, only : mystd
 
      use version, only : V_FULL_DF
@@ -73,7 +73,7 @@
 # endif  /* MPI */
 
      return
-  end subroutine dt_print_header
+  end subroutine df_print_header
 
 !!
 !! @sub dt_print_footer
