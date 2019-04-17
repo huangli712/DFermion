@@ -237,12 +237,12 @@ STOP
   end subroutine df_ladder
 
 !!
-!! @sub dt_df_dyson
+!! @sub df_dyson
 !!
 !! try to calculate the dual green's function or self-energy function by
 !! using the dyson equation
 !!
-  subroutine dt_df_dyson(op, dual_g, dual_s, dual_b)
+  subroutine df_dyson(op, dual_g, dual_s, dual_b)
      use constants, only : dp
      use constants, only : one
 
@@ -266,7 +266,7 @@ STOP
      endif ! back if ( op == 1 ) block
 
      return
-  end subroutine dt_df_dyson
+  end subroutine df_dyson
 
 !!
 !! @sub dt_df_schi
