@@ -1,19 +1,47 @@
 !!!-----------------------------------------------------------------------
 !!! project : azalea
-!!! program : dt_df_std
-!!!           dt_df_ladder
-!!!           dt_df_dyson
-!!!           dt_df_schi
-!!!           dt_df_cchi
-!!! source  : dt_df.f90
+!!! program : df_run
+!!!           df_std
+!!!           df_ladder
+!!!           df_dyson
+!!!           df_schi
+!!!           df_cchi
+!!! source  : df_core.f90
 !!! type    : subroutines
 !!! author  : li huang (email:lihuang.dmft@gmail.com)
 !!! history : 09/16/2009 by li huang (created)
-!!!           01/10/2018 by li huang (last modified)
+!!!           04/17/2019 by li huang (last modified)
 !!! purpose : main subroutines for the dual fermion framework.
 !!! status  : unstable
 !!! comment :
 !!!-----------------------------------------------------------------------
+
+!!
+!! @sub dt_run
+!!
+!! core computational engine, it is used to dispatch the jobs
+!!
+  subroutine df_run()
+     use control, only : isdia
+
+     implicit none
+
+     DT_CORE: &
+     select case ( isdia )
+
+         case (1)
+             call dt_df_std()
+
+         case (2)
+             call dt_df_ladder()
+
+         case default
+             call s_print_error('dt_run','this feature is not implemented')
+
+     end select DT_CORE
+
+     return
+  end subroutine df_run
 
 !!
 !! @sub dt_df_std
@@ -261,42 +289,3 @@ STOP
 
      return
   end subroutine dt_df_cchi
-!!!-----------------------------------------------------------------------
-!!! project : azalea
-!!! program : df_run
-!!! source  : df_run.f90
-!!! type    : subroutines
-!!! author  : li huang (email:lihuang.dmft@gmail.com)
-!!! history : 01/10/2018 by li huang (created)
-!!!           01/10/2018 by li huang (last modified)
-!!! purpose : main entry of the program.
-!!! status  : unstable
-!!! comment :
-!!!-----------------------------------------------------------------------
-
-!!
-!! @sub dt_run
-!!
-!! core computational engine, it is used to dispatch the jobs
-!!
-  subroutine df_run()
-     use control, only : isdia
-
-     implicit none
-
-     DT_CORE: &
-     select case ( isdia )
-
-         case (1)
-             call dt_df_std()
-
-         case (2)
-             call dt_df_ladder()
-
-         case default
-             call s_print_error('dt_run','this feature is not implemented')
-
-     end select DT_CORE
-
-     return
-  end subroutine df_run
