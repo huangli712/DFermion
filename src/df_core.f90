@@ -17,7 +17,7 @@
 !!!-----------------------------------------------------------------------
 
 !!
-!! @sub dt_run
+!! @sub df_run
 !!
 !! core computational engine, it is used to dispatch the jobs
 !!
@@ -26,7 +26,7 @@
 
      implicit none
 
-     DT_CORE: &
+     DF_CORE: &
      select case ( isdia )
 
          case (1)
@@ -36,9 +36,9 @@
              call dt_df_ladder()
 
          case default
-             call s_print_error('dt_run','this feature is not implemented')
+             call s_print_error('df_run','this feature is not implemented')
 
-     end select DT_CORE
+     end select DF_CORE
 
      return
   end subroutine df_run
