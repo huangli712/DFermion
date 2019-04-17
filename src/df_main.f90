@@ -1,18 +1,18 @@
 !!!=========+=========+=========+=========+=========+=========+=========+!
 !!! AZALEA @ iQIST                                                       !
 !!!                                                                      !
-!!! A highly optimized diagrammatic framework for dynamical mean field   ! 
+!!! A highly optimized dual fermion framework for dynamical mean field   ! 
 !!! theory which can be used to treat non-local correlations in strongly !
-!!! correlated systems
+!!! correlated systems                                                   !
 !!!                                                                      !
-!!! author  : Li Huang (at IOP/CAS & SPCLab/CAEP & UNIFR)                !
+!!! author  : Li Huang (China Academy of Engineering Physics)            !
 !!! status  : (WARNING) IN TESTING STAGE, USE IT IN YOUR RISK            !
-!!! comment : now only the dual fermion approach is implemented          !
+!!! comment : now only the ladder dual fermion approach is implemented   !
 !!!           any question, please contact with lihuang.dmft@gmail.com   !
 !!!=========+=========+=========+=========+=========+=========+=========+!
 
 !!========================================================================
-  PROGRAM DF_MAIN !                                                    <<<
+  PROGRAM DFAPP_MAIN !                                                 <<<
 !!========================================================================
 
      use mmpi, only : mp_init      ! init mpi environment
@@ -41,7 +41,7 @@
 
 # endif  /* MPI */
 
-     DMFT_START: BLOCK
+     DF_START: BLOCK
 
 ! print the welcome messages
          if ( myid == master ) then ! only master node can do it
@@ -92,5 +92,5 @@
 # endif  /* MPI */
 
 !!========================================================================
-  END PROGRAM DF_MAIN !                                                <<<
+  END PROGRAM DFAPP_MAIN !                                             <<<
 !!========================================================================
