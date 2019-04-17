@@ -269,15 +269,15 @@ STOP
   end subroutine df_dyson
 
 !!
-!! @sub dt_df_schi
+!! @sub df_schi
 !!
 !! calculate the spin susceptibility within the dual fermion framework
 !!
-  subroutine dt_df_schi()
+  subroutine df_schi()
      implicit none
 
      return
-  end subroutine dt_df_schi
+  end subroutine df_schi
 
 !!
 !! @sub dt_df_cchi
