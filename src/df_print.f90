@@ -123,33 +123,34 @@
 
      implicit none
 
-     write(mystd,'(2X,a)') 'configuration parameters -> core control'
-     write(mystd,'(2X,a)') '----------------------------------------------------'
-     write(mystd,'(4X,a8,i10,  2X,a8)') 'isdia  /', isdia , 'type / i'
+     write(mystd,'(2X,a)') '[configuration parameters] -> core control'
+     write(mystd,'(2X,a)') '-----------------------------------------------------'
+     write(mystd,'(4X,a16,i10,  2X,a8)') 'isdia  / value :', isdia , 'type : i'
 
-     write(mystd,'(2X,a)') 'configuration parameters -> lattice model'
-     write(mystd,'(2X,a)') '----------------------------------------------------'
-     write(mystd,'(4X,a8,i10,  2X,a8)') 'nband  /', nband , 'type / i'
-     write(mystd,'(4X,a8,i10,  2X,a8)') 'nspin  /', nspin , 'type / i'
-     write(mystd,'(4X,a8,i10,  2X,a8)') 'norbs  /', norbs , 'type / i'
-     write(mystd,'(4X,a8,i10,  2X,a8)') 'nkpts  /', nkpts , 'type / i'
-     write(mystd,'(4X,a8,i10,  2X,a8)') 'nkp_x  /', nkp_x , 'type / i'
-     write(mystd,'(4X,a8,i10,  2X,a8)') 'nkp_y  /', nkp_y , 'type / i'
-     write(mystd,'(4X,a8,i10,  2X,a8)') 'nkp_z  /', nkp_z , 'type / i'
-     write(mystd,'(4X,a8,f10.5,2X,a8)') 'mune   /', mune  , 'type / d'
-     write(mystd,'(4X,a8,f10.5,2X,a8)') 'beta   /', beta  , 'type / d'
-     write(mystd,'(4X,a8,f10.5,2X,a8)') 'part   /', part  , 'type / d'
+     write(mystd,'(2X,a)') '[configuration parameters] -> lattice model'
+     write(mystd,'(2X,a)') '-----------------------------------------------------'
+     write(mystd,'(4X,a16,i10,  2X,a8)') 'nband  / value :', nband , 'type : i'
+     write(mystd,'(4X,a16,i10,  2X,a8)') 'nspin  / value :', nspin , 'type : i'
+     write(mystd,'(4X,a16,i10,  2X,a8)') 'norbs  / value :', norbs , 'type : i'
+     write(mystd,'(4X,a16,i10,  2X,a8)') 'nkpts  / value :', nkpts , 'type : i'
+     write(mystd,'(4X,a16,i10,  2X,a8)') 'nkp_x  / value :', nkp_x , 'type : i'
+     write(mystd,'(4X,a16,i10,  2X,a8)') 'nkp_y  / value :', nkp_y , 'type : i'
+     write(mystd,'(4X,a16,i10,  2X,a8)') 'nkp_z  / value :', nkp_z , 'type : i'
+     write(mystd,'(4X,a16,f10.5,2X,a8)') 'mune   / value :', mune  , 'type : d'
+     write(mystd,'(4X,a16,f10.5,2X,a8)') 'beta   / value :', beta  , 'type : d'
+     write(mystd,'(4X,a16,f10.5,2X,a8)') 'part   / value :', part  , 'type : d'
 
-     write(mystd,'(2X,a)') 'configuration parameters -> dual fermion engine'
-     write(mystd,'(2X,a)') '----------------------------------------------------'
-     write(mystd,'(4X,a8,i10,  2X,a8)') 'nffrq  /', nffrq , 'type / i'
-     write(mystd,'(4X,a8,i10,  2X,a8)') 'nbfrq  /', nbfrq , 'type / i'
-     write(mystd,'(4X,a8,i10,  2X,a8)') 'ndfit  /', ndfit , 'type / i'
-     write(mystd,'(4X,a8,i10,  2X,a8)') 'nbsit  /', nbsit , 'type / i'
-     write(mystd,'(4X,a8,f10.5,2X,a8)') 'dfmix  /', dfmix , 'type / d'
-     write(mystd,'(4X,a8,f10.5,2X,a8)') 'bsmix  /', bsmix , 'type / d'
+     write(mystd,'(2X,a)') '[configuration parameters] -> dual fermion framework'
+     write(mystd,'(2X,a)') '-----------------------------------------------------'
+     write(mystd,'(4X,a16,i10,  2X,a8)') 'nffrq  / value :', nffrq , 'type : i'
+     write(mystd,'(4X,a16,i10,  2X,a8)') 'nbfrq  / value :', nbfrq , 'type : i'
+     write(mystd,'(4X,a16,i10,  2X,a8)') 'ndfit  / value :', ndfit , 'type : i'
+     write(mystd,'(4X,a16,i10,  2X,a8)') 'nbsit  / value :', nbsit , 'type : i'
+     write(mystd,'(4X,a16,f10.5,2X,a8)') 'dfmix  / value :', dfmix , 'type : d'
+     write(mystd,'(4X,a16,f10.5,2X,a8)') 'bsmix  / value :', bsmix , 'type : d'
 
      write(mystd,*)
+     STOP
 
      return
   end subroutine df_print_summary
