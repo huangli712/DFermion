@@ -1,29 +1,16 @@
 !!!-----------------------------------------------------------------------
 !!! project : azalea
-!!! program : cat_fill_l
-!!!           cat_fill_k <<<---
-!!!           cat_fft_1d
-!!!           cat_fft_2d
-!!!           cat_fft_3d <<<---
-!!!           cat_dia_1d
-!!!           cat_dia_2d
-!!!           cat_dia_3d <<<---
-!!!           cat_bse_solver
+!!! program : cat_bse_solver
 !!!           cat_bse_iterator
-!!! source  : dt_util.f90
+!!! source  : df_solver.f90
 !!! type    : subroutines
 !!! author  : li huang (email:lihuang.dmft@gmail.com)
 !!! history : 10/01/2008 by li huang (created)
-!!!           01/02/2018 by li huang (last modified)
-!!! purpose : provide some utility subroutines, such as FFT, convolution,
-!!!           and Bethe-Salpter equation solver, etc.
+!!!           04/17/2019 by li huang (last modified)
+!!! purpose : try to implement the Bethe-Salpter equation solver.
 !!! status  : unstable
 !!! comment :
 !!!-----------------------------------------------------------------------
-
-!!========================================================================
-!!>>> solve bethe-salpeter equation                                    <<<
-!!========================================================================
 
 !!
 !! note:
@@ -66,10 +53,10 @@
      complex(dp), intent(out) :: GamM(nffrq,nffrq)
 
 ! local variables
-! unit matrix
+! unitary matrix
      complex(dp) :: Imat(nffrq,nffrq)
 
-! build unit matrix
+! build unitary matrix
      call s_identity_z(nffrq, Imat)
 
 ! eval I - \gamma \chi
@@ -90,7 +77,7 @@
 !! try to solve the bethe-salpeter equation iterately
 !!
   subroutine cat_bse_iterator(niter, mix, chiM, vrtM, GamM)
-     use constants, only : dp
+     use constants, only : dp, one
 
      use control, only : nffrq
 
@@ -132,7 +119,7 @@
      BSE_ITERATOR: do it=1,niter
 
 ! calculate new \Gamma, and then mix it with Vold
-         GamM = ( vrtM + matmul(Vchi,Vold) ) * mix + (1.0_dp - mix) * Vold
+         GamM = ( vrtM + matmul(Vchi,Vold) ) * mix + (one - mix) * Vold
 
 ! calculate the difference
          diff = abs(sum(GamM - Vold)) / real(nffrq * nffrq)
