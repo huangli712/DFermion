@@ -535,15 +535,15 @@
   end subroutine df_input_vert_
 
 !!========================================================================
-!!>>> manage memory for dual fermion engine                            <<<
+!!>>> manage memory for dual fermion framework                         <<<
 !!========================================================================
 
 !!
-!! @sub dt_alloc_array
+!! @sub df_alloc_array
 !!
 !! allocate memory for global variables and then initialize them
 !!
-  subroutine dt_alloc_array()
+  subroutine df_alloc_array()
      use context ! ALL
 
      implicit none
@@ -556,7 +556,7 @@
      call cat_alloc_vert()
      
      return
-  end subroutine dt_alloc_array
+  end subroutine df_alloc_array
 
 !!
 !! @sub dt_reset_array
