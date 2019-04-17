@@ -1,23 +1,23 @@
 !!!-----------------------------------------------------------------------
 !!! project : azalea
-!!! program : dt_dump_grnf
-!!!           dt_dump_sigf
-!!!           dt_dump_hybf <<<---
-!!!           dt_dump_grnd
-!!!           dt_dump_sigd
-!!!           dt_dump_wssd <<<---
-!!!           dt_dump_grnk
-!!!           dt_dump_sigk <<<---
-!!!           dt_dump_v4_d
-!!!           dt_dump_v4_m
-!!!           dt_dump_v4_f <<<---
-!!!           dt_dump_schi
-!!!           dt_dump_cchi <<<---
-!!! source  : dt_dump.f90
+!!! program : df_dump_grnf
+!!!           df_dump_sigf
+!!!           df_dump_hybf <<<---
+!!!           df_dump_grnd
+!!!           df_dump_sigd
+!!!           df_dump_wssd <<<---
+!!!           df_dump_grnk
+!!!           df_dump_sigk <<<---
+!!!           df_dump_v4_d
+!!!           df_dump_v4_m
+!!!           df_dump_v4_f <<<---
+!!!           df_dump_schi
+!!!           df_dump_cchi <<<---
+!!! source  : df_dump.f90
 !!! type    : subroutines
 !!! author  : li huang (email:lihuang.dmft@gmail.com)
 !!! history : 09/16/2009 by li huang (created)
-!!!           01/04/2018 by li huang (last modified)
+!!!           04/17/2019 by li huang (last modified)
 !!! purpose : dump key observables produced by the diagrammatic framework
 !!!           for dynamical mean field theory to external files.
 !!! status  : unstable
