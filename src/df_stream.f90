@@ -389,11 +389,11 @@
   end subroutine df_input_latt_
 
 !!
-!! @sub dt_input_dual_
+!! @sub df_input_dual_
 !!
 !! prepare some dual variables from scratch
 !!
-  subroutine dt_input_dual_()
+  subroutine df_input_dual_()
      use constants, only : dp
      use constants, only : czero
 
@@ -426,7 +426,7 @@
      enddo ! over k={1,nkpts} loop
 
      return
-  end subroutine dt_input_dual_
+  end subroutine df_input_dual_
 
 !!
 !! @sub dt_input_vert_
