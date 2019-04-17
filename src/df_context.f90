@@ -225,11 +225,11 @@
      use control, only : nffrq, nbfrq
      use control, only : norbs
 
-     use dt_mesh
-     use dt_dmft
-     use dt_dual
-     use dt_latt
-     use dt_vert
+     use df_mesh
+     use df_dmft
+     use df_dual
+     use df_latt
+     use df_vert
 
 !!========================================================================
 !!>>> declare private variables                                        <<<
