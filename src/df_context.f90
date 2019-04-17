@@ -1,32 +1,32 @@
 !!!-----------------------------------------------------------------------
 !!! project : azalea
-!!! program : dt_mesh module
-!!!           dt_dmft module
-!!!           dt_dual module
-!!!           dt_latt module
-!!!           dt_vert module
+!!! program : df_mesh module
+!!!           df_dmft module
+!!!           df_dual module
+!!!           df_latt module
+!!!           df_vert module
 !!!           context module
-!!! source  : dmft_context.f90
+!!! source  : df_context.f90
 !!! type    : modules
 !!! author  : li huang (email:lihuang.dmft@gmail.com)
 !!! history : 09/16/2009 by li huang (created)
-!!!           01/04/2018 by li huang (last modified)
+!!!           04/17/2019 by li huang (last modified)
 !!! purpose : define the key data structure and global arrays/variables
-!!!           for diagrammatic framework for dynamical mean field theory.
+!!!           for dual fermion framework.
 !!! status  : unstable
 !!! comment :
 !!!-----------------------------------------------------------------------
 
 !!========================================================================
-!!>>> module dt_mesh                                                   <<<
+!!>>> module df_mesh                                                   <<<
 !!========================================================================
 
 !!
-!! @mod dt_mesh
+!! @mod df_mesh
 !!
 !! define some essential k-meshes and frequency meshes 
 !!
-  module dt_mesh
+  module df_mesh
      use constants, only : dp
 
 !!
@@ -71,7 +71,7 @@
 !!
      real(dp), public, save, allocatable :: bmesh(:)
 
-  end module dt_mesh
+  end module df_mesh
 
 !!========================================================================
 !!>>> module dt_dmft                                                   <<<
