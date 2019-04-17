@@ -319,7 +319,7 @@
 ! inquire about file's existence
          inquire (file = 'df.dmft_h.in', exist = exists)
 
-! find input file: dt.dmft_h.in, read it
+! find input file: df.dmft_h.in, read it
          if ( exists .eqv. .true. ) then
 
 ! read in hybridization function from df.dmft_h.in
@@ -498,7 +498,7 @@
 ! inquire about file's existence
          inquire (file = 'df.vert_m.in', exist = exists)
 
-! find input file: dt.vert_m.in, read it
+! find input file: df.vert_m.in, read it
          if ( exists .eqv. .true. ) then
 
 ! read in vertex function (magnetic channel) from df.vert_m.in
