@@ -1,13 +1,12 @@
 !!!-----------------------------------------------------------------------
 !!! project : azalea
 !!! program : control module
-!!! source  : dmft_control.f90
+!!! source  : df_control.f90
 !!! type    : module
 !!! author  : li huang (email:lihuang.dmft@gmail.com)
 !!! history : 09/15/2009 by li huang (created)
-!!!           01/10/2018 by li huang (last modified)
-!!! purpose : define global control parameters for diagrammatic framework
-!!!           for dynamical mean field theory.
+!!!           04/17/2019 by li huang (last modified)
+!!! purpose : define global control parameters for dual fermion framework.
 !!! status  : unstable
 !!! comment :
 !!!-----------------------------------------------------------------------
@@ -99,21 +98,21 @@
 !!
 !! @var nkp_x
 !!
-!! number of k-points (x-axis)
+!! number of k-points (along x-axis)
 !!
      integer, public, save :: nkp_x  = 8
 
 !!
 !! @var nkp_y
 !!
-!! number of k-points (y-axis)
+!! number of k-points (along y-axis)
 !!
      integer, public, save :: nkp_y  = 8
 
 !!
 !! @var nkp_z
 !!
-!! number of k-points (z-axis)
+!! number of k-points (along z-axis)
 !!
      integer, public, save :: nkp_z  = 8
 
@@ -122,14 +121,14 @@
 !!
 !! @var ndfit
 !!
-!! number of dual fermion iteration
+!! number of dual fermion iterations
 !!
      integer, public, save :: ndfit  = 1
 
 !!
 !! @var nbsit
 !!
-!! number of Bethe-Salpter equation iteration
+!! number of iterations for solving Bethe-Salpter equation
 !!
      integer, public, save :: nbsit  = 10
 
