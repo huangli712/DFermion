@@ -19,7 +19,7 @@
 !!
 !! @sub df_print_header
 !!
-!! print the startup information for dual fermion engine 
+!! print the startup information for dual fermion framework
 !!
   subroutine df_print_header()
      use constants, only : mystd
@@ -78,7 +78,7 @@
 !!
 !! @sub df_print_footer
 !!
-!! print the ending information for dual fermion engine
+!! print the ending information for dual fermion framework
 !!
   subroutine df_print_footer()
      use constants, only : dp
@@ -111,11 +111,11 @@
   end subroutine df_print_footer
 
 !!
-!! @sub dt_print_summary
+!! @sub df_print_summary
 !!
 !! print the running parameters, only for reference
 !!
-  subroutine dt_print_summary()
+  subroutine df_print_summary()
      use constants, only : mystd
 
      use control ! ALL
@@ -151,38 +151,44 @@
      write(mystd,*)
 
      return
-  end subroutine dt_print_summary
+  end subroutine df_print_summary
 
 !!
-!! @sub dt_print_control
+!! @sub df_print_control
 !!
 !! print the control parameters, only for reference
 !!
-  subroutine dt_print_control()
+  subroutine df_print_control()
      implicit none
 
+     CONTINUE
+
      return
-  end subroutine dt_print_control
+  end subroutine df_print_control
 
 !!
-!! @sub dt_print_runtime
+!! @sub df_print_runtime
 !!
 !! print the runtime information, including some physical observables and
 !! statistic data, only for reference
 !!
-  subroutine dt_print_runtime()
+  subroutine df_print_runtime()
      implicit none
 
+     CONTINUE
+
      return
-  end subroutine dt_print_runtime
+  end subroutine df_print_runtime
 
 !!
-!! @sub dt_print_it_info
+!! @sub df_print_it_info
 !!
 !! print the iteration information to the screen
 !!
-  subroutine dt_print_it_info()
+  subroutine df_print_it_info()
      implicit none
 
+     CONTINUE
+
      return
-  end subroutine dt_print_it_info
+  end subroutine df_print_it_info
