@@ -111,15 +111,15 @@
   end module df_dmft
 
 !!========================================================================
-!!>>> module dt_dual                                                   <<<
+!!>>> module df_dual                                                   <<<
 !!========================================================================
 
 !!
-!! @mod dt_dual
+!! @mod df_dual
 !!
 !! define dual fermion variables
 !!
-  module dt_dual
+  module df_dual
      use constants, only : dp
 
      implicit none
@@ -145,7 +145,7 @@
 !!
      complex(dp), public, save, allocatable :: dual_b(:,:,:)
 
-  end module dt_dual
+  end module df_dual
 
 !!========================================================================
 !!>>> module dt_latt                                                   <<<
