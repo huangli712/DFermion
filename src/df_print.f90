@@ -6,7 +6,7 @@
 !!!           dt_print_control
 !!!           dt_print_runtime
 !!!           dt_print_it_info
-!!! source  : dt_print.f90
+!!! source  : df_print.f90
 !!! type    : subroutines
 !!! author  : li huang (email:lihuang.dmft@gmail.com)
 !!! history : 09/15/2009 by li huang (created)
