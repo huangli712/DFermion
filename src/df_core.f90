@@ -44,22 +44,22 @@
   end subroutine df_run
 
 !!
-!! @sub dt_df_std
+!! @sub df_std
 !!
 !! implement the standard dual fermion approximation framework
 !!
-  subroutine dt_df_std()
+  subroutine df_std()
      implicit none
 
      return
-  end subroutine dt_df_std
+  end subroutine df_std
 
 !!
-!! @sub dt_df_ladder
+!! @sub df_ladder
 !!
 !! implement the ladder dual fermion approximation framework
 !!
-  subroutine dt_df_ladder()
+  subroutine df_ladder()
      use constants, only : dp
      use constants, only : one, half, czero
      use constants, only : mystd
@@ -234,7 +234,7 @@ STOP
      deallocate(Gmat)
 
      return
-  end subroutine dt_df_ladder
+  end subroutine df_ladder
 
 !!
 !! @sub dt_df_dyson
