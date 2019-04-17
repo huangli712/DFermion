@@ -25,11 +25,11 @@
 !!========================================================================
 
 !!
-!! @sub dt_setup_param
+!! @sub df_setup_param
 !!
-!! setup key parameters for dual fermion engine
+!! setup key parameters for dual fermion framework
 !!
-  subroutine dt_setup_param()
+  subroutine df_setup_param()
      use parser, only : p_create
      use parser, only : p_parse
      use parser, only : p_get
@@ -43,7 +43,7 @@
      implicit none
 
 ! local variables
-! used to check whether the input file (dt.config.in) exists
+! used to check whether the input file (df.config.in) exists
      logical :: exists
 
 ! setup general control flags
@@ -67,7 +67,7 @@
      part  = 1.00_dp ! hopping parameter t for Hubbard model
 !^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-! setup common variables for dual fermion engine
+! setup common variables for dual fermion framework
 !-------------------------------------------------------------------------
      nffrq = 16      ! number of fermionic frequencies
      nbfrq = 7       ! number of bosonic frequncies
@@ -83,8 +83,8 @@
      if ( myid == master ) then
          exists = .false.
 
-! inquire file status: dt.config.in
-         inquire (file = 'dt.config.in', exist = exists)
+! inquire file status: df.config.in
+         inquire (file = 'df.config.in', exist = exists)
 
 ! read in parameters, default setting should be overrided
          if ( exists .eqv. .true. ) then
@@ -92,7 +92,7 @@
              call p_create()
 
 ! parse the config file
-             call p_parse('dt.config.in')
+             call p_parse('df.config.in')
 
 ! extract parameters
              call p_get('isdia' , isdia )
@@ -162,7 +162,7 @@
 # endif  /* MPI */
 
      return
-  end subroutine dt_setup_param
+  end subroutine df_setup_param
 
 !!
 !! @sub dt_setup_model
