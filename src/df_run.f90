@@ -1,7 +1,7 @@
 !!!-----------------------------------------------------------------------
 !!! project : azalea
-!!! program : dt_run
-!!! source  : dt_run.f90
+!!! program : df_run
+!!! source  : df_run.f90
 !!! type    : subroutines
 !!! author  : li huang (email:lihuang.dmft@gmail.com)
 !!! history : 01/10/2018 by li huang (created)
@@ -16,7 +16,7 @@
 !!
 !! core computational engine, it is used to dispatch the jobs
 !!
-  subroutine dt_run()
+  subroutine df_run()
      use control, only : isdia
 
      implicit none
@@ -36,4 +36,4 @@
      end select DT_CORE
 
      return
-  end subroutine dt_run
+  end subroutine df_run
