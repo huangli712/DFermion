@@ -74,11 +74,11 @@
   end subroutine df_dump_grnf
 
 !!
-!! @sub dt_dump_sigf
+!! @sub df_dump_sigf
 !!
 !! write out impurity self-energy function in matsubara frequency space
 !!
-  subroutine dt_dump_sigf(rmesh, sigf)
+  subroutine df_dump_sigf(rmesh, sigf)
      use constants, only : dp
      use constants, only : czero
      use constants, only : mytmp
@@ -100,8 +100,8 @@
      integer :: i
      integer :: j
 
-! open data file: dt.dmft_s.dat
-     open(mytmp, file='dt.dmft_s.dat', form='formatted', status='unknown')
+! open data file: df.dmft_s.dat
+     open(mytmp, file='df.dmft_s.dat', form='formatted', status='unknown')
 
 ! write it
      do i=1,norbs
@@ -116,14 +116,14 @@
      close(mytmp)
 
      return
-  end subroutine dt_dump_sigf
+  end subroutine df_dump_sigf
 
 !!
-!! @sub dt_dump_hybf
+!! @sub df_dump_hybf
 !!
 !! write out impurity hybridization function in matsubara frequency space
 !!
-  subroutine dt_dump_hybf(rmesh, hybf)
+  subroutine df_dump_hybf(rmesh, hybf)
      use constants, only : dp
      use constants, only : czero
      use constants, only : mytmp
@@ -161,18 +161,18 @@
      close(mytmp)
 
      return
-  end subroutine dt_dump_hybf
+  end subroutine df_dump_hybf
 
 !!========================================================================
 !!>>> dump data of dual variables                                      <<<
 !!========================================================================
 
 !!
-!! @sub dt_dump_grnd
+!! @sub df_dump_grnd
 !!
 !! write out dual green's function in matsubara frequency space
 !!
-  subroutine dt_dump_grnd(rmesh, grnd)
+  subroutine df_dump_grnd(rmesh, grnd)
      use constants, only : dp
      use constants, only : czero
      use constants, only : mytmp
@@ -215,14 +215,14 @@
      close(mytmp)
 
      return
-  end subroutine dt_dump_grnd
+  end subroutine df_dump_grnd
 
 !!
-!! @sub dt_dump_sigd
+!! @sub df_dump_sigd
 !!
 !! write out dual self-energy function in matsubara frequency space
 !!
-  subroutine dt_dump_sigd(rmesh, sigd)
+  subroutine df_dump_sigd(rmesh, sigd)
      use constants, only : dp
      use constants, only : czero
      use constants, only : mytmp
@@ -265,14 +265,14 @@
      close(mytmp)
 
      return
-  end subroutine dt_dump_sigd
+  end subroutine df_dump_sigd
 
 !!
-!! @sub dt_dump_wssd
+!! @sub df_dump_wssd
 !!
 !! write out dual bare green's function in matsubara frequency space
 !!
-  subroutine dt_dump_wssd(rmesh, wssd)
+  subroutine df_dump_wssd(rmesh, wssd)
      use constants, only : dp
      use constants, only : czero
      use constants, only : mytmp
@@ -315,18 +315,18 @@
      close(mytmp)
 
      return
-  end subroutine dt_dump_wssd
+  end subroutine df_dump_wssd
 
 !!========================================================================
 !!>>> dump data of lattice variables                                   <<<
 !!========================================================================
 
 !!
-!! @sub dt_dump_grnk
+!! @sub df_dump_grnk
 !!
 !! write out lattice green's function in matsubara frequency space
 !!
-  subroutine dt_dump_grnk(rmesh, grnk)
+  subroutine df_dump_grnk(rmesh, grnk)
      use constants, only : dp
      use constants, only : czero
      use constants, only : mytmp
@@ -369,14 +369,14 @@
      close(mytmp)
 
      return
-  end subroutine dt_dump_grnk
+  end subroutine df_dump_grnk
 
 !!
-!! @sub dt_dump_sigk
+!! @sub df_dump_sigk
 !!
 !! write out lattice self-energy function in matsubara frequency space
 !!
-  subroutine dt_dump_sigk(rmesh, sigk)
+  subroutine df_dump_sigk(rmesh, sigk)
      use constants, only : dp
      use constants, only : czero
      use constants, only : mytmp
@@ -419,67 +419,67 @@
      close(mytmp)
 
      return
-  end subroutine dt_dump_sigk
+  end subroutine df_dump_sigk
 
 !!========================================================================
 !!>>> dump data of vertex functions                                    <<<
 !!========================================================================
 
 !!
-!! @sub dt_dump_v4_d
+!! @sub df_dump_v4_d
 !!
 !! write out vertex function (density channel) 
 !!
-  subroutine dt_dump_v4_d()
+  subroutine df_dump_v4_d()
      implicit none
 
      return
-  end subroutine dt_dump_v4_d
+  end subroutine df_dump_v4_d
 
 !!
-!! @sub dt_dump_v4_m
+!! @sub df_dump_v4_m
 !!
 !! write out vertex function (magnetic channel)
 !!
-  subroutine dt_dump_v4_m()
+  subroutine df_dump_v4_m()
      implicit none
 
      return
-  end subroutine dt_dump_v4_m
+  end subroutine df_dump_v4_m
 
 !!
-!! @sub dt_dump_v4_f
+!! @sub df_dump_v4_f
 !!
 !! write out vertex function (full vertex)
 !!
-  subroutine dt_dump_v4_f()
+  subroutine df_dump_v4_f()
      implicit none
 
      return
-  end subroutine dt_dump_v4_f
+  end subroutine df_dump_v4_f
 
 !!========================================================================
 !!>>> dump data of dynamical quantities                                <<<
 !!========================================================================
 
 !!
-!! @sub dt_dump_schi
+!! @sub df_dump_schi
 !!
 !! write out spin susceptibility
 !!
-  subroutine dt_dump_schi()
+  subroutine df_dump_schi()
      implicit none
 
      return
-  end subroutine dt_dump_schi
+  end subroutine df_dump_schi
 
 !!
-!! @sub dt_dump_cchi
+!! @sub df_dump_cchi
 !!
 !! write out charge susceptibility
 !!
-  subroutine dt_dump_cchi()
+  subroutine df_dump_cchi()
      implicit none
 
      return
-  end subroutine dt_dump_cchi
+  end subroutine df_dump_cchi
