@@ -21,7 +21,7 @@
 ## =======
 ##
 ## 01/17/2017 by li huang (created)
-## 04/16/2019 by li huang (last modified)
+## 04/17/2019 by li huang (last modified)
 ##
 ##
 
@@ -33,7 +33,7 @@ modc = dt_control.o dt_context.o
 lev1 = df_run.o dt_df.o
 lev2 = df_stream.o df_util.o
 lev3 = dt_dump.o df_print.o df_solver.o df_diagram.o df_fft.o
-main = dt_main.o
+main = df_main.o
 mlib = libflink.a
 
 objects = $(modc) $(lev1) $(lev2) $(lev3) $(main) $(mlib)
