@@ -257,12 +257,12 @@
   end subroutine df_input_mesh_
 
 !!
-!! @sub dt_input_dmft_
+!! @sub df_input_dmft_
 !!
 !! prepare some local variables, they are from the output of quantum
 !! impurity solver
 !!
-  subroutine dt_input_dmft_()
+  subroutine df_input_dmft_()
      use constants, only : dp
      use constants, only : mytmp
 
@@ -280,7 +280,7 @@
 ! loop index
      integer  :: i
 
-! used to check whether the input file (dt.dmft_g.in) exists
+! used to check whether the input file (df.dmft_g.in) exists
      logical  :: exists
 
 ! dummy real(dp) variables
@@ -293,13 +293,13 @@
          exists = .false.
 
 ! inquire about file's existence
-         inquire (file = 'dt.dmft_g.in', exist = exists)
+         inquire (file = 'df.dmft_g.in', exist = exists)
 
-! find input file: dt.dmft_g.in, read it
+! find input file: df.dmft_g.in, read it
          if ( exists .eqv. .true. ) then
 
-! read in impurity green's function from dt.dmft_g.in
-             open(mytmp, file = 'dt.dmft_g.in', form = 'formatted', status = 'unknown')
+! read in impurity green's function from df.dmft_g.in
+             open(mytmp, file = 'df.dmft_g.in', form = 'formatted', status = 'unknown')
              do i=1,nffrq
                  read(mytmp,*) r1, r2, c1, c2
                  dmft_g(i,1) = dcmplx(c1, c2)
@@ -317,13 +317,13 @@
          exists = .false.
 
 ! inquire about file's existence
-         inquire (file = 'dt.dmft_h.in', exist = exists)
+         inquire (file = 'df.dmft_h.in', exist = exists)
 
 ! find input file: dt.dmft_h.in, read it
          if ( exists .eqv. .true. ) then
 
-! read in hybridization function from dt.dmft_h.in
-             open(mytmp, file = 'dt.dmft_h.in', form = 'formatted', status = 'unknown')
+! read in hybridization function from df.dmft_h.in
+             open(mytmp, file = 'df.dmft_h.in', form = 'formatted', status = 'unknown')
              do i=1,nffrq
                  read(mytmp,*) r1, r2, c1, c2
                  dmft_h(i,1) = dcmplx(c1, c2)
@@ -349,7 +349,7 @@
 # endif  /* MPI */
 
      return
-  end subroutine dt_input_dmft_
+  end subroutine df_input_dmft_
 
 !!
 !! @sub dt_input_latt_
