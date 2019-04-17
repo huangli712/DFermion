@@ -32,7 +32,7 @@ include ../build/make.sys
 modc = dt_control.o dt_context.o
 lev1 = dt_run.o dt_df.o
 lev2 = dt_stream.o dt_util.o
-lev3 = dt_dump.o dt_print.o
+lev3 = dt_dump.o dt_print.o df_solver.o df_diagram.o
 main = dt_main.o
 mlib = libflink.a
 
