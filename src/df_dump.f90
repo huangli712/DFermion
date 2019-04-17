@@ -29,11 +29,11 @@
 !!========================================================================
 
 !!
-!! @sub dt_dump_grnf
+!! @sub df_dump_grnf
 !!
 !! write out impurity green's function in matsubara frequency space
 !!
-  subroutine dt_dump_grnf(rmesh, grnf)
+  subroutine df_dump_grnf(rmesh, grnf)
      use constants, only : dp
      use constants, only : czero
      use constants, only : mytmp
@@ -55,8 +55,8 @@
      integer :: i
      integer :: j
 
-! open data file: dt.dmft_g.dat
-     open(mytmp, file='dt.dmft_g.dat', form='formatted', status='unknown')
+! open data file: df.dmft_g.dat
+     open(mytmp, file='df.dmft_g.dat', form='formatted', status='unknown')
 
 ! write it
      do i=1,norbs
@@ -71,7 +71,7 @@
      close(mytmp)
 
      return
-  end subroutine dt_dump_grnf
+  end subroutine df_dump_grnf
 
 !!
 !! @sub dt_dump_sigf
