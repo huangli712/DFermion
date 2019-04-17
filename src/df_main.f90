@@ -41,44 +41,44 @@
 
 # endif  /* MPI */
 
-     DF_START: BLOCK
+     DFAPP_START: BLOCK
 
 ! print the welcome messages
          if ( myid == master ) then ! only master node can do it
-             call dt_print_header()
+             call df_print_header()
          endif ! back if ( myid == master ) block
 
 ! setup the parameters
-         call dt_setup_param()
+         call df_setup_param()
 
 ! allocate memory spaces
-         call dt_alloc_array()
+         call df_alloc_array()
 
 ! setup the quantum lattice model
-         call dt_setup_model()
+         call df_setup_model()
 
 ! print the runtime parameters
          if ( myid == master ) then ! only master node can do it
-             call dt_print_summary()
+             call df_print_summary()
          endif ! back if ( myid == master ) block
 
-     END BLOCK DMFT_START
+     END BLOCK DFAPP_START
 
 !!========================================================================
-     call df_run()
+     call df_run() ! call the driver
 !!========================================================================
 
-     DMFT_SLEEP: BLOCK
+     DFAPP_SLEEP: BLOCK
 
 ! deallocate memory spaces
-         call dt_final_array()
+         call df_final_array()
 
 ! print the ending messages
          if ( myid == master ) then ! only master node can do it
-             call dt_print_footer()
+             call df_print_footer()
          endif ! back if ( myid == master ) block
 
-     END BLOCK DMFT_SLEEP
+     END BLOCK DFAPP_SLEEP
 
 ! finalize mpi envirnoment
 # if defined (MPI)
