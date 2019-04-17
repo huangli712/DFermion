@@ -1,27 +1,27 @@
 !!!-----------------------------------------------------------------------
 !!! project : azalea
-!!! program : dt_setup_param
-!!!           dt_setup_model <<<---
-!!!           dt_input_mesh_
-!!!           dt_input_dmft_
-!!!           dt_input_latt_
-!!!           dt_input_dual_
-!!!           dt_input_vert_ <<<---
-!!!           dt_alloc_array
-!!!           dt_reset_array
-!!!           dt_final_array <<<---
-!!! source  : dt_stream.f90
+!!! program : df_setup_param
+!!!           df_setup_model <<<---
+!!!           df_input_mesh_
+!!!           df_input_dmft_
+!!!           df_input_latt_
+!!!           df_input_dual_
+!!!           df_input_vert_ <<<---
+!!!           df_alloc_array
+!!!           df_reset_array
+!!!           df_final_array <<<---
+!!! source  : df_stream.f90
 !!! type    : subroutines
 !!! author  : li huang (email:lihuang.dmft@gmail.com)
 !!! history : 09/16/2009 by li huang (created)
-!!!           01/03/2018 by li huang (last modified)
-!!! purpose : initialize and finalize the dual fermion engine.
+!!!           04/17/2019 by li huang (last modified)
+!!! purpose : initialize and finalize the dual fermion framework.
 !!! status  : unstable
 !!! comment :
 !!!-----------------------------------------------------------------------
 
 !!========================================================================
-!!>>> config dual fermion engine                                       <<<
+!!>>> config dual fermion framework                                    <<<
 !!========================================================================
 
 !!
