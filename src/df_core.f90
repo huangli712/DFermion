@@ -30,10 +30,10 @@
      select case ( isdia )
 
          case (1)
-             call dt_df_std()
+             call df_std()
 
          case (2)
-             call dt_df_ladder()
+             call df_ladder()
 
          case default
              call s_print_error('df_run','this feature is not implemented')
