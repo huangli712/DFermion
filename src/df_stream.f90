@@ -196,11 +196,11 @@
 !!========================================================================
 
 !!
-!! @sub dt_input_mesh_
+!! @sub df_input_mesh_
 !!
 !! prepare some essential meshes
 !!
-  subroutine dt_input_mesh_()
+  subroutine df_input_mesh_()
      use constants, only : dp
      use constants, only : one, two, pi
 
@@ -254,7 +254,7 @@
      enddo ! over i={1,nbfrq} loop
 
      return
-  end subroutine dt_input_mesh_
+  end subroutine df_input_mesh_
 
 !!
 !! @sub dt_input_dmft_
