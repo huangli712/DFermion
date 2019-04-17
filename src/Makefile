@@ -30,7 +30,7 @@
 include ../build/make.sys
 
 modc = df_control.o df_context.o
-lev1 = df_run.o dt_core.o
+lev1 = df_run.o df_core.o
 lev2 = df_stream.o df_util.o
 lev3 = df_dump.o df_print.o df_solver.o df_diagram.o df_fft.o
 main = df_main.o
