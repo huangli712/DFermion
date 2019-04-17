@@ -148,7 +148,7 @@
   end module df_dual
 
 !!========================================================================
-!!>>> module dt_latt                                                   <<<
+!!>>> module df_latt                                                   <<<
 !!========================================================================
 
 !!
@@ -156,7 +156,7 @@
 !!
 !! define some momentum-dependent (lattice) variables
 !!
-  module dt_latt
+  module df_latt
      use constants, only : dp
 
      implicit none
@@ -175,18 +175,18 @@
 !!
      complex(dp), public, save, allocatable :: latt_s(:,:,:)
 
-  end module dt_latt
+  end module df_latt
 
 !!========================================================================
-!!>>> module dt_vert                                                   <<<
+!!>>> module df_vert                                                   <<<
 !!========================================================================
 
 !!
-!! @mod dt_vert
+!! @mod df_vert
 !!
 !! define some vertex functions from the output of quantum impurity solver
 !!
-  module dt_vert
+  module df_vert
      use constants, only : dp
 
      implicit none
@@ -205,7 +205,7 @@
 !!
      complex(dp), public, save, allocatable :: vert_m(:,:,:)
 
-  end module dt_vert
+  end module df_vert
 
 !!========================================================================
 !!>>> module context                                                   <<<
