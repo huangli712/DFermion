@@ -145,8 +145,8 @@
      integer :: i
      integer :: j
 
-! open data file: dt.dmft_h.dat
-     open(mytmp, file='dt.dmft_h.dat', form='formatted', status='unknown')
+! open data file: df.dmft_h.dat
+     open(mytmp, file='df.dmft_h.dat', form='formatted', status='unknown')
 
 ! write it
      do i=1,norbs
@@ -196,8 +196,8 @@
      integer :: j
      integer :: k
 
-! open data file: dt.dual_g.dat
-     open(mytmp, file='dt.dual_g.dat', form='formatted', status='unknown')
+! open data file: df.dual_g.dat
+     open(mytmp, file='df.dual_g.dat', form='formatted', status='unknown')
 
 ! write it
      do k=1,nkpts
@@ -246,8 +246,8 @@
      integer :: j
      integer :: k
 
-! open data file: dt.dual_s.dat
-     open(mytmp, file='dt.dual_s.dat', form='formatted', status='unknown')
+! open data file: df.dual_s.dat
+     open(mytmp, file='df.dual_s.dat', form='formatted', status='unknown')
 
 ! write it
      do k=1,nkpts
@@ -296,8 +296,8 @@
      integer :: j
      integer :: k
 
-! open data file: dt.dual_b.dat
-     open(mytmp, file='dt.dual_b.dat', form='formatted', status='unknown')
+! open data file: df.dual_b.dat
+     open(mytmp, file='df.dual_b.dat', form='formatted', status='unknown')
 
 ! write it
      do k=1,nkpts
@@ -350,8 +350,8 @@
      integer :: j
      integer :: k
 
-! open data file: dt.latt_g.dat
-     open(mytmp, file='dt.latt_g.dat', form='formatted', status='unknown')
+! open data file: df.latt_g.dat
+     open(mytmp, file='df.latt_g.dat', form='formatted', status='unknown')
 
 ! write it
      do k=1,nkpts
@@ -400,8 +400,8 @@
      integer :: j
      integer :: k
 
-! open data file: dt.latt_s.dat
-     open(mytmp, file='dt.latt_s.dat', form='formatted', status='unknown')
+! open data file: df.latt_s.dat
+     open(mytmp, file='df.latt_s.dat', form='formatted', status='unknown')
 
 ! write it
      do k=1,nkpts
