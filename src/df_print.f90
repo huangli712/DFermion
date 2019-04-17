@@ -76,11 +76,11 @@
   end subroutine df_print_header
 
 !!
-!! @sub dt_print_footer
+!! @sub df_print_footer
 !!
 !! print the ending information for dual fermion engine
 !!
-  subroutine dt_print_footer()
+  subroutine df_print_footer()
      use constants, only : dp
      use constants, only : mystd
 
@@ -108,7 +108,7 @@
      write(mystd,'(2X,a)') cname//' >>> happy ending at '//date_time_string
 
      return
-  end subroutine dt_print_footer
+  end subroutine df_print_footer
 
 !!
 !! @sub dt_print_summary
