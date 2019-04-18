@@ -163,50 +163,54 @@
              call cat_dia_2d(dual_g, gstp, g2)
              gvrt = czero
 
-             O_LOOP: do o=1,norbs
+         O_LOOP: do o=1,norbs
 
-                 mmat = vert_m(:,:,v)
-                 dmat = vert_d(:,:,v)
+             mmat = vert_m(:,:,v)
+             dmat = vert_d(:,:,v)
 
-                 K_LOOP: do k=1,nkpts
+             K_LOOP: do k=1,nkpts
 
-                     call s_diag_z(nffrq, g2(:,o,k), imat)
+                 call s_diag_z(nffrq, g2(:,o,k), imat)
 
-                     call cat_bse_solver(imat, mmat, Gmat)
-                     call s_vecadd_z(nffrq, gvrt(:,o,k), Gmat, half * 3.0_dp)
-                     call cat_bse_iterator(1, one, imat, mmat, Gmat)
-                     call s_vecadd_z(nffrq, gvrt(:,o,k), Gmat, -half * half * 3.0_dp)
+                 call cat_bse_solver(imat, mmat, Gmat)
+                 call s_vecadd_z(nffrq, gvrt(:,o,k), Gmat, half * 3.0_dp)
+                 call cat_bse_iterator(1, one, imat, mmat, Gmat)
+                 call s_vecadd_z(nffrq, gvrt(:,o,k), Gmat, -half * half * 3.0_dp)
 
-                     call cat_bse_solver(imat, dmat, Gmat)
-                     call s_vecadd_z(nffrq, gvrt(:,o,k), Gmat, half * 1.0_dp)
-                     call cat_bse_iterator(1, one, imat, dmat, Gmat)
-                     call s_vecadd_z(nffrq, gvrt(:,o,k), Gmat, -half * half * 1.0_dp)
+                 call cat_bse_solver(imat, dmat, Gmat)
+                 call s_vecadd_z(nffrq, gvrt(:,o,k), Gmat, half * 1.0_dp)
+                 call cat_bse_iterator(1, one, imat, dmat, Gmat)
+                 call s_vecadd_z(nffrq, gvrt(:,o,k), Gmat, -half * half * 1.0_dp)
 
-                 enddo K_LOOP
+             enddo K_LOOP
 
-                 do w=1,nffrq
-                     call cat_fft_2d(+1, nkp_x, nkp_y, gvrt(w,o,:), vr)
-                     call cat_fft_2d(-1, nkp_x, nkp_y, gstp(w,o,:), gr)
-                     gr = vr * gr / real(nkpts * nkpts)
-                     call cat_fft_2d(+1, nkp_x, nkp_y, gr, vr)
-                     dual_s(w,o,:) = dual_s(w,o,:) + vr / beta
-                 enddo
+             do w=1,nffrq
+                 call cat_fft_2d(+1, nkp_x, nkp_y, gvrt(w,o,:), vr)
+                 call cat_fft_2d(-1, nkp_x, nkp_y, gstp(w,o,:), gr)
+                 gr = vr * gr / real(nkpts * nkpts)
+                 call cat_fft_2d(+1, nkp_x, nkp_y, gr, vr)
+                 dual_s(w,o,:) = dual_s(w,o,:) + vr / beta
+             enddo
 
-             enddo O_LOOP
+         enddo O_LOOP
 
          enddo V_LOOP
 
          call df_dyson(+1, gnew, dual_s, dual_b)
          call s_mix_z( size(gnew), dual_g, gnew, dfmix)
 
+         do w=1,nffrq
+             print *, w, fmesh(w)
+             print *, dual_s(w,1,:)
+         enddo
+
          dual_g = gnew
          dual_s = czero
 
-
-     do w=1,nffrq
-       print *, w, fmesh(w)
-       print *, dual_g(w,1,:)
-     enddo
+!     do w=1,nffrq
+!       print *, w, fmesh(w)
+!       print *, dual_g(w,1,:)
+!     enddo
 
          write(mystd,*)
      enddo DF_LOOP
