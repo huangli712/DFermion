@@ -150,7 +150,6 @@
      write(mystd,'(4X,a16,f10.5,2X,a8)') 'bsmix  / value :', bsmix , 'type : d'
 
      write(mystd,*)
-     STOP
 
      return
   end subroutine df_print_summary
