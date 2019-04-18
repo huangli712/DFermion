@@ -14,7 +14,7 @@
 !!! type    : subroutines
 !!! author  : li huang (email:lihuang.dmft@gmail.com)
 !!! history : 09/16/2009 by li huang (created)
-!!!           04/17/2019 by li huang (last modified)
+!!!           04/18/2019 by li huang (last modified)
 !!! purpose : initialize and finalize the dual fermion framework.
 !!! status  : unstable
 !!! comment :
@@ -201,7 +201,6 @@
 !! prepare some essential meshes
 !!
   subroutine df_input_mesh_()
-     use constants, only : dp
      use constants, only : one, two, pi
 
      use control, only : nffrq, nbfrq
@@ -357,7 +356,6 @@
 !! prepare some lattice variables from scratch
 !!
   subroutine df_input_latt_()
-     use constants, only : dp
      use constants, only : one
 
      use control, only : norbs
@@ -394,7 +392,6 @@
 !! prepare some dual variables from scratch
 !!
   subroutine df_input_dual_()
-     use constants, only : dp
      use constants, only : czero
 
      use control, only : norbs
