@@ -204,7 +204,7 @@
              print *, dual_s(w,1,:)
          enddo
 
-         dual_g = gnew
+!!         dual_g = gnew
          dual_s = czero
 
 !     do w=1,nffrq
