@@ -199,34 +199,17 @@
          call df_dyson(+1, gnew, dual_s, dual_b)
          call s_mix_z( size(gnew), dual_g, gnew, dfmix)
 
-         do w=1,nffrq
-             print *, w, fmesh(w)
-             print *, dual_s(w,1,:)
-         enddo
-
-!!         dual_g = gnew
+         dual_g = gnew
          dual_s = czero
-
-!     do w=1,nffrq
-!       print *, w, fmesh(w)
-!       print *, dual_g(w,1,:)
-!     enddo
 
          write(mystd,*)
      enddo DF_LOOP
-
-STOP
 
 !!========================================================================
 !!>>> finishing ladder dual fermion iteration                          <<<
 !!========================================================================
 
      call df_dyson(-1, dual_g, dual_s, dual_b)
-
-     do w=1,nffrq
-       print *, w, fmesh(w)
-       print *, dual_s(w,1,:)
-     enddo
 
      deallocate(gstp)
      deallocate(gnew)
