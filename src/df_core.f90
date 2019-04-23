@@ -142,6 +142,23 @@
          call s_print_error('df_core','can not allocate enough memory')
      endif ! back if ( istat /= 0 ) block
 
+     !print *, nkpts
+     !print *, fmesh
+     !print *, bmesh
+     !do it=1,nffrq
+     !    print *, it, fmesh(it)
+     !    print *, dual_s(it,1,:)
+     !enddo
+     vr(1) = czero
+     do it=1,nffrq
+         print *, it, fmesh(it), abs(sum(dual_g(it,1,:))) / nkpts
+         vr(1) = vr(1) + abs(sum(dual_g(it,1,:))) / nkpts
+     enddo
+     print *, vr(1) / nffrq 
+     !print *, abs(sum(dual_g)) / nffrq / nkpts / norbs 
+
+     STOP
+
 !!========================================================================
 !!>>> starting ladder dual fermion iteration                           <<<
 !!========================================================================
