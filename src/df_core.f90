@@ -203,7 +203,6 @@
              !!    print *, g2(w,1,:)
              !!enddo
              !!STOP
-             !!
 
          O_LOOP: do o=1,norbs
 
@@ -226,8 +225,6 @@
 
              enddo K_LOOP
 
-             !!STOP
-
              do w=1,nffrq
                  call cat_fft_2d(+1, nkp_x, nkp_y, gvrt(w,o,:), vr)
                  call cat_fft_2d(-1, nkp_x, nkp_y, gstp(w,o,:), gr)
@@ -238,7 +235,15 @@
 
          enddo O_LOOP
 
+         do w=1,nffrq
+             print *, w, fmesh(w)
+             print *, dual_s(w,1,:)
+         enddo
+
+         STOP
+
          enddo V_LOOP
+
          STOP
 
          call df_dyson(+1, gnew, dual_s, dual_b)
