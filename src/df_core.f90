@@ -177,9 +177,7 @@
              endif ! back if ( myid == master ) block
 
              if ( om == 0.0_dp ) then
-                 print *, v, om
                  call cat_dia_2d(dual_g, dual_g, g2)
-                 STOP
              else
                  call cat_fill_k(dual_g, gstp, om)
                  call cat_dia_2d(dual_g, gstp, g2)
