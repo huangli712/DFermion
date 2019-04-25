@@ -189,13 +189,13 @@
              !!print *
              !!print *
 
-             om = bmesh(6)
+             om = bmesh(7)
              print *, om
              call cat_fill_k(dual_g, gstp, om)
-             !call cat_dia_2d(dual_g, gstp, g2) 
+             call cat_dia_2d(dual_g, gstp, g2) 
              do w=1,nffrq
                  print *, w, fmesh(w)
-                 print *, gstp(w,1,:)
+                 print *, g2(w,1,:)
              enddo
              STOP
              !!
