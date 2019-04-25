@@ -176,8 +176,14 @@
                  write(mystd,'(2X,A,F12.6)') 'Bosonic Frequency:', om
              endif ! back if ( myid == master ) block
 
-             call cat_fill_k(dual_g, gstp, om)
-             call cat_dia_2d(dual_g, gstp, g2)
+             if ( om == 0.0_dp ) then
+                 print *, v, om
+                 call cat_dia_2d(dual_g, dual_g, g2)
+                 STOP
+             else
+                 call cat_fill_k(dual_g, gstp, om)
+                 call cat_dia_2d(dual_g, gstp, g2)
+             endif
              gvrt = czero
 
              !!do w=1,nffrq
@@ -188,16 +194,17 @@
              !!print *
              !!print *
              !!print *
-
-             om = bmesh(7)
-             print *, om
-             call cat_fill_k(dual_g, gstp, om)
-             call cat_dia_2d(dual_g, gstp, g2) 
-             do w=1,nffrq
-                 print *, w, fmesh(w)
-                 print *, g2(w,1,:)
-             enddo
-             STOP
+             !!
+             !!om = bmesh(4)
+             !!print *, om
+             !!call cat_fill_k(dual_g, gstp, om)
+             !!call cat_dia_2d(dual_g, gstp, g2) 
+             !!call cat_dia_2d(dual_g, dual_g, g2) 
+             !!do w=1,nffrq
+             !!    print *, w, fmesh(w)
+             !!    print *, g2(w,1,:)
+             !!enddo
+             !!STOP
              !!
 
          O_LOOP: do o=1,norbs
@@ -220,6 +227,8 @@
                  call s_vecadd_z(nffrq, gvrt(:,o,k), Gmat, -half * half * 1.0_dp)
 
              enddo K_LOOP
+
+             !!STOP
 
              do w=1,nffrq
                  call cat_fft_2d(+1, nkp_x, nkp_y, gvrt(w,o,:), vr)
