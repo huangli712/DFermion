@@ -103,11 +103,11 @@
      do i=1,nffrq
          w = fmesh(i) + shift
          k = floor( (w * beta / pi + nffrq + one) / two + half )
-         if ( k >= 1 .and. k <= nffrq ) then
+         if ( k >= 1 .and. k < nffrq ) then !! check k <= nffrq
              gout(i,:,:) = gin(k,:,:)
          else
              gout(i,:,:) = czero
-         endif ! back if ( k >= 1 .and. k <= nffrq ) block
+         endif ! back if ( k >= 1 .and. k < nffrq ) block
      enddo ! over i={1,nffrq} loop
 
      return

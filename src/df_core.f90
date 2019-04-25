@@ -142,22 +142,22 @@
          call s_print_error('df_core','can not allocate enough memory')
      endif ! back if ( istat /= 0 ) block
 
-     !print *, nkpts
-     !print *, fmesh
-     !print *, bmesh
-     !do it=1,nffrq
-     !    print *, it, fmesh(it)
-     !    print *, dual_s(it,1,:)
-     !enddo
-     vr(1) = czero
-     do it=1,nffrq
-         print *, it, fmesh(it), abs(sum(dual_g(it,1,:))) / nkpts
-         vr(1) = vr(1) + abs(sum(dual_g(it,1,:))) / nkpts
-     enddo
-     print *, vr(1) / nffrq 
-     !print *, abs(sum(dual_g)) / nffrq / nkpts / norbs 
-
-     STOP
+     !!print *, nkpts
+     !!print *, fmesh
+     !!print *, bmesh
+     !!do it=1,nffrq
+     !!    print *, it, fmesh(it)
+     !!    print *, dual_s(it,1,:)
+     !!enddo
+     !!
+     !!vr(1) = czero
+     !!do it=1,nffrq
+     !!    print *, it, fmesh(it), abs(sum(dual_g(it,1,:))) / nkpts
+     !!    vr(1) = vr(1) + abs(sum(dual_g(it,1,:))) / nkpts
+     !!enddo
+     !!print *, vr(1) / nffrq 
+     !!
+     !!STOP
 
 !!========================================================================
 !!>>> starting ladder dual fermion iteration                           <<<
@@ -179,6 +179,26 @@
              call cat_fill_k(dual_g, gstp, om)
              call cat_dia_2d(dual_g, gstp, g2)
              gvrt = czero
+
+             !!do w=1,nffrq
+             !!    print *, w, fmesh(w)
+             !!    print *, g2(w,1,:)
+             !!enddo
+             !!print *
+             !!print *
+             !!print *
+             !!print *
+
+             om = bmesh(6)
+             print *, om
+             call cat_fill_k(dual_g, gstp, om)
+             !call cat_dia_2d(dual_g, gstp, g2) 
+             do w=1,nffrq
+                 print *, w, fmesh(w)
+                 print *, gstp(w,1,:)
+             enddo
+             STOP
+             !!
 
          O_LOOP: do o=1,norbs
 
@@ -212,6 +232,7 @@
          enddo O_LOOP
 
          enddo V_LOOP
+         STOP
 
          call df_dyson(+1, gnew, dual_s, dual_b)
          call s_mix_z( size(gnew), dual_g, gnew, dfmix)
