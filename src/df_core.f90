@@ -235,7 +235,7 @@
 
          enddo O_LOOP
 
-         if ( v == 4 ) then
+         if ( v == 7 ) then
          do w=1,nffrq
              print *, w, fmesh(w)
              print *, dual_s(w,1,:)
