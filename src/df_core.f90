@@ -235,12 +235,14 @@
 
          enddo O_LOOP
 
+         if ( v == 3 ) then
          do w=1,nffrq
              print *, w, fmesh(w)
              print *, dual_s(w,1,:)
          enddo
 
          STOP
+         endif
 
          enddo V_LOOP
 
