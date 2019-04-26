@@ -177,11 +177,11 @@
              endif ! back if ( myid == master ) block
 
              if ( om == 0.0_dp ) then
-                 call cat_dia_2d(dual_g, dual_g, g2)
+                 gstp = dual_g
              else
                  call cat_fill_k(dual_g, gstp, om)
-                 call cat_dia_2d(dual_g, gstp, g2)
              endif
+             call cat_dia_2d(dual_g, gstp, g2)
              gvrt = czero
 
              !!do w=1,nffrq
@@ -235,7 +235,7 @@
 
          enddo O_LOOP
 
-         if ( v == 3 ) then
+         if ( v == 4 ) then
          do w=1,nffrq
              print *, w, fmesh(w)
              print *, dual_s(w,1,:)
