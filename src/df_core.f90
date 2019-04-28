@@ -300,10 +300,10 @@
 
      enddo DF_LOOP
 
-     do w=1,nffrq
-         print *, w, fmesh(w)
-         print *, dual_g(w,1,:)
-     enddo
+     !!do w=1,nffrq
+     !!    print *, w, fmesh(w)
+     !!    print *, dual_g(w,1,:)
+     !!enddo
      print *
      print *
      print *
