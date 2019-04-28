@@ -283,14 +283,20 @@
          write(mystd,*)
 
 
-         if ( it == 3 ) then
-             do w=1,nffrq
-                 print *, w, fmesh(w)
-                 print *, gnew(w,1,:)
-             enddo
-         endif
-         STOP
+         !!if ( it == 3 ) then
+         !!    do w=1,nffrq
+         !!        print *, w, fmesh(w)
+         !!        print *, gnew(w,1,:)
+         !!    enddo
+         !!    STOP
+         !!endif
      enddo DF_LOOP
+
+     do w=1,nffrq
+         print *, w, fmesh(w)
+         print *, dual_g(w,1,:)
+     enddo
+     STOP
 
 !!========================================================================
 !!>>> finishing ladder dual fermion iteration                          <<<
