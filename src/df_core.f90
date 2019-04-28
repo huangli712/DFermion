@@ -271,16 +271,25 @@
 
          call s_mix_z( size(gnew), dual_g, gnew, dfmix)
 
-         do w=1,nffrq
-             print *, w, fmesh(w)
-             print *, gnew(w,1,:)
-         enddo
-         STOP
+         !!do w=1,nffrq
+         !!    print *, w, fmesh(w)
+         !!    print *, gnew(w,1,:)
+         !!enddo
+         !!STOP
 
          dual_g = gnew
          dual_s = czero
 
          write(mystd,*)
+
+
+         if ( it == 3 )
+             do w=1,nffrq
+                 print *, w, fmesh(w)
+                 print *, gnew(w,1,:)
+             enddo
+         endif
+         STOP
      enddo DF_LOOP
 
 !!========================================================================
