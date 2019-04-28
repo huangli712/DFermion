@@ -75,7 +75,7 @@
      ndfit = 3       ! number of dual fermion iteration
      nbsit = 10      ! number of BSE iteration
 !-------------------------------------------------------------------------
-     dfmix = 0.70_dp ! mixing parameter (dual fermion iteration)
+     dfmix = 1.00_dp ! mixing parameter (dual fermion iteration)
      bsmix = 0.70_dp ! mixing parameter (BSE solver)
 !^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

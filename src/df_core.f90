@@ -263,13 +263,19 @@
          call df_dyson(+1, gnew, dual_s, dual_b)
 
 
+         !!do w=1,nffrq
+         !!    print *, w, fmesh(w)
+         !!    print *, gnew(w,1,:)
+         !!enddo
+         !!STOP
+
+         call s_mix_z( size(gnew), dual_g, gnew, dfmix)
+
          do w=1,nffrq
              print *, w, fmesh(w)
              print *, gnew(w,1,:)
          enddo
          STOP
-
-         call s_mix_z( size(gnew), dual_g, gnew, dfmix)
 
          dual_g = gnew
          dual_s = czero
