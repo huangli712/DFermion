@@ -202,7 +202,7 @@
              !!    print *, w, fmesh(w)
              !!    print *, g2(w,1,:)
              !!enddo
-             !!STOP
+             !!STOP 'hh'
 
          O_LOOP: do o=1,norbs
 
@@ -235,13 +235,13 @@
 
          enddo O_LOOP
 
-         if ( v == 6 ) then
-         do w=1,nffrq
-             print *, w, fmesh(w)
-             print *, dual_s(w,1,:)
-         enddo
+         if ( v == 7 ) then
+             do w=1,nffrq
+                 print *, w, fmesh(w)
+                 print *, dual_s(w,1,:)
+             enddo
 
-         STOP
+             STOP
          endif
 
          enddo V_LOOP
