@@ -184,6 +184,14 @@
              call cat_dia_2d(dual_g, gstp, g2)
              gvrt = czero
 
+             !! DEBUG
+             !!
+             if ( om == 0.0_dp ) then
+                 gstp = dual_g
+             else
+                 call cat_fill_k_new(dual_g, gstp, om)
+             endif
+
              !!do w=1,nffrq
              !!    print *, w, fmesh(w)
              !!    print *, g2(w,1,:)
@@ -235,17 +243,22 @@
 
          enddo O_LOOP
 
-         if ( v == 2 ) then
-             do w=1,nffrq
-                 print *, w, fmesh(w)
-                 print *, dual_s(w,1,:)
-             enddo
-
-             STOP
-         endif
+         !!if ( v == 7 ) then
+         !!    do w=1,nffrq
+         !!        print *, w, fmesh(w)
+         !!        print *, dual_s(w,1,:)
+         !!    enddo
+         !!
+         !!    STOP
+         !!endif
 
          enddo V_LOOP
 
+
+         do w=1,nffrq
+             print *, w, fmesh(w)
+             print *, dual_s(w,1,:)
+         enddo
          STOP
 
          call df_dyson(+1, gnew, dual_s, dual_b)
