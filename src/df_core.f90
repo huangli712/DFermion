@@ -283,7 +283,7 @@
          write(mystd,*)
 
 
-         if ( it == 3 )
+         if ( it == 3 ) then
              do w=1,nffrq
                  print *, w, fmesh(w)
                  print *, gnew(w,1,:)
