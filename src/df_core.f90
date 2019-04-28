@@ -280,6 +280,13 @@
          dual_g = gnew
          dual_s = czero
 
+         do w=1,nffrq
+             print *, w, fmesh(w)
+             print *, dual_g(w,1,:)
+         enddo
+         write(mystd,*)
+         write(mystd,*)
+         write(mystd,*)
          write(mystd,*)
 
 
@@ -290,19 +297,30 @@
          !!    enddo
          !!    STOP
          !!endif
+
      enddo DF_LOOP
 
      do w=1,nffrq
          print *, w, fmesh(w)
          print *, dual_g(w,1,:)
      enddo
-     STOP
+     print *
+     print *
+     print *
+     print *
 
 !!========================================================================
 !!>>> finishing ladder dual fermion iteration                          <<<
 !!========================================================================
 
      call df_dyson(-1, dual_g, dual_s, dual_b)
+
+     do w=1,nffrq
+         print *, w, fmesh(w)
+         print *, dual_s(w,1,:)
+     enddo
+
+     STOP
 
      deallocate(gstp)
      deallocate(gnew)
