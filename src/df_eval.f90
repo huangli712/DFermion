@@ -21,9 +21,10 @@
      use control, only : nffrq
      use control, only : nkpts
 
-     use context, only : fmesh
+     use context, only : ek, fmesh
      use context, only : dmft_g, dmft_h
      use context, only : dual_g
+     use context, only : latt_g
 
      implicit none
 
