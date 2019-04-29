@@ -1,3 +1,18 @@
+!!!-----------------------------------------------------------------------
+!!! project : azalea
+!!! program : df_eval_latt_g
+!!!           df_eval_latt_s
+!!!           df_eval_susc_c
+!!!           df_eval_susc_s
+!!! source  : df_eval.f90
+!!! type    : subroutines
+!!! author  : li huang (email:lihuang.dmft@gmail.com)
+!!! history : 04/29/2009 by li huang (created)
+!!!           04/29/2019 by li huang (last modified)
+!!! purpose : main subroutines for the dual fermion framework.
+!!! status  : unstable
+!!! comment :
+!!!-----------------------------------------------------------------------
 
 !!
 !! @sub df_schi

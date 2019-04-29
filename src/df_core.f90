@@ -4,13 +4,11 @@
 !!!           df_std
 !!!           df_ladder
 !!!           df_dyson
-!!!           df_schi
-!!!           df_cchi
 !!! source  : df_core.f90
 !!! type    : subroutines
 !!! author  : li huang (email:lihuang.dmft@gmail.com)
 !!! history : 09/16/2009 by li huang (created)
-!!!           04/17/2019 by li huang (last modified)
+!!!           04/29/2019 by li huang (last modified)
 !!! purpose : main subroutines for the dual fermion framework.
 !!! status  : unstable
 !!! comment :
