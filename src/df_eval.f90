@@ -2,6 +2,7 @@
 !!! project : azalea
 !!! program : df_eval_latt_g
 !!!           df_eval_latt_s
+!!!           df_eval_latt_h
 !!!           df_eval_susc_c
 !!!           df_eval_susc_s
 !!! source  : df_eval.f90
@@ -28,7 +29,15 @@
 
      implicit none
 
-     integer :: i, j, k, w
+! local variables
+! loop index for fermionic frequency \omega
+     integer :: i
+
+! loop index for orbitals
+     integer :: j
+
+! loop index for k-points
+     integer :: k
 
      do k=1,nkpts
          do j=1,norbs
@@ -41,20 +50,34 @@
          enddo ! over j={1,norbs} loop
      enddo ! over k={1,nkpts} loop
 
+
+
+     return
+  end subroutine df_eval_latt_g
+
+  subroutine df_eval_latt_s
+     implicit none
+
+     return
+  end subroutine df_eval_latt_s
+
+  subroutine df_eval_latt_h
+     implicit none
+
      do j=1,norbs
          do i=1,nffrq
              dmft_h(i,j) = dmft_h(i,j) + one / dmft_g(i,j) * sum(dual_g(i,j,:)) / sum(latt_g(i,j,:))
          enddo
      enddo
 
-     do w=1,nffrq
-         print *, w, fmesh(w), dmft_h(w,1)
+     do i=1,nffrq
+         print *, i, fmesh(i), dmft_h(i,1)
      enddo
 
      STOP 'in df_eval_latt_g'
 
      return
-  end subroutine df_eval_latt_g
+  end subroutine df_eval_latt_h
 
 !!
 !! @sub df_eval_susc_c

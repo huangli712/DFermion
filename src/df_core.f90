@@ -38,7 +38,7 @@
 
      end select DF_CORE
 
-     call df_eval_latt() 
+     call df_eval_latt_g() 
 
      return
   end subroutine df_run
