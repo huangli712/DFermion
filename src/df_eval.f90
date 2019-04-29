@@ -54,6 +54,17 @@
   end subroutine df_eval_latt
 
 !!
+!! @sub df_eval_susc_c
+!!
+!! calculate the charge susceptibility within the dual fermion framework
+!!
+  subroutine df_eval_susc_c()
+     implicit none
+
+     return
+  end subroutine df_eval_susc_c
+
+!!
 !! @sub df_eval_susc_s
 !!
 !! calculate the spin susceptibility within the dual fermion framework
@@ -63,14 +74,3 @@
 
      return
   end subroutine df_eval_susc_s
-
-!!
-!! @sub df_cchi
-!!
-!! calculate the charge susceptibility within the dual fermion framework
-!!
-  subroutine df_cchi()
-     implicit none
-
-     return
-  end subroutine df_cchi
