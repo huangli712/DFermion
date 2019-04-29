@@ -18,8 +18,12 @@
      use constants, only : one
 
      use control, only : norbs
+     use control, only : nffrq
+     use control, only : nkpts
 
      use context, only : fmesh
+     use context, only : dmft_g, dmft_h
+     use context, only : dual_g
 
      implicit none
 
