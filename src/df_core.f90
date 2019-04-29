@@ -40,7 +40,7 @@
 
      call df_eval_latt_g()
      call df_eval_latt_s()
-     call df_eval_latt_h()
+     call df_eval_dmft_h()
 
      return
   end subroutine df_run

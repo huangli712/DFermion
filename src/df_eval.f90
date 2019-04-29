@@ -2,7 +2,7 @@
 !!! project : azalea
 !!! program : df_eval_latt_g
 !!!           df_eval_latt_s
-!!!           df_eval_latt_h
+!!!           df_eval_dmft_h
 !!!           df_eval_susc_c
 !!!           df_eval_susc_s
 !!! source  : df_eval.f90
@@ -15,6 +15,11 @@
 !!! comment :
 !!!-----------------------------------------------------------------------
 
+!!
+!! @sub df_eval_latt_g
+!!
+!! calculate the lattice green's function within the dual fermion framework
+!!
   subroutine df_eval_latt_g()
      use constants, only : one
 
@@ -53,13 +58,22 @@
      return
   end subroutine df_eval_latt_g
 
+!!
+!! @sub df_eval_latt_s
+!!
+!! calculate the lattice self-energy function within the dual fermion framework
+!!
   subroutine df_eval_latt_s()
+     use constants
+     use control
+     use context
+
      implicit none
 
      return
   end subroutine df_eval_latt_s
 
-  subroutine df_eval_latt_h()
+  subroutine df_eval_dmft_h()
      use constants, only : one
 
      use control, only : norbs
@@ -84,10 +98,10 @@
          print *, i, fmesh(i), dmft_h(i,1)
      enddo
 
-     STOP 'in df_eval_latt_h'
+     STOP 'in df_eval_dmft_h'
 
      return
-  end subroutine df_eval_latt_h
+  end subroutine df_eval_dmft_h
 
 !!
 !! @sub df_eval_susc_c
