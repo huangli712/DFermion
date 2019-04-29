@@ -22,7 +22,7 @@
      use control, only : nffrq
      use control, only : nkpts
 
-     use context, only : ek, fmesh
+     use context, only : ek
      use context, only : dmft_g, dmft_h
      use context, only : dual_g
      use context, only : latt_g
@@ -50,19 +50,23 @@
          enddo ! over j={1,norbs} loop
      enddo ! over k={1,nkpts} loop
 
-
-
      return
   end subroutine df_eval_latt_g
 
-  subroutine df_eval_latt_s
+  subroutine df_eval_latt_s()
      implicit none
 
      return
   end subroutine df_eval_latt_s
 
-  subroutine df_eval_latt_h
+  subroutine df_eval_latt_h()
+     use constants
+     use control
+     use context
+
      implicit none
+
+     integer :: i, j
 
      do j=1,norbs
          do i=1,nffrq
@@ -74,7 +78,7 @@
          print *, i, fmesh(i), dmft_h(i,1)
      enddo
 
-     STOP 'in df_eval_latt_g'
+     STOP 'in df_eval_latt_h'
 
      return
   end subroutine df_eval_latt_h
