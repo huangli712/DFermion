@@ -60,9 +60,15 @@
   end subroutine df_eval_latt_s
 
   subroutine df_eval_latt_h()
-     use constants
-     use control
-     use context
+     use constants, only : one
+
+     use control, only : norbs
+     use control, only : nffrq
+
+     use context, only : fmesh
+     use context, only : dmft_g, dmft_h
+     use context, only : dual_g
+     use context, only : latt_g
 
      implicit none
 
@@ -71,8 +77,8 @@
      do j=1,norbs
          do i=1,nffrq
              dmft_h(i,j) = dmft_h(i,j) + one / dmft_g(i,j) * sum(dual_g(i,j,:)) / sum(latt_g(i,j,:))
-         enddo
-     enddo
+         enddo ! over i={1,nffrq} loop
+     enddo ! over j={1,norbs} loop
 
      do i=1,nffrq
          print *, i, fmesh(i), dmft_h(i,1)
