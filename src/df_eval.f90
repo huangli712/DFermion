@@ -73,6 +73,11 @@
      return
   end subroutine df_eval_latt_s
 
+!!
+!! @sub df_eval_dmft_h
+!!
+!! calculate the local hybridization function within the dual fermion framework
+!!
   subroutine df_eval_dmft_h()
      use constants, only : one
 
