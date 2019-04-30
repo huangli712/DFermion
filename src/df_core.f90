@@ -49,15 +49,15 @@
 
      if ( myid == master ) then
          call df_dump_latt_g(fmesh, latt_g)
-     endif
+     endif ! back if ( myid == master ) block
 
      if ( myid == master ) then
          call df_dump_latt_s(fmesh, latt_s)
-     endif
+     endif ! back if ( myid == master ) block
 
      if ( myid == master ) then
          call df_dump_dmft_h(fmesh, dmft_h)
-     endif
+     endif ! back if ( myid == master ) block
 
      return
   end subroutine df_run
