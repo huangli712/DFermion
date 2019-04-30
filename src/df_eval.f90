@@ -63,7 +63,33 @@
 !! calculate the lattice self-energy function within the dual fermion framework
 !!
   subroutine df_eval_latt_s()
+     use constants, only : one
+
+     use control, only : norbs
+     use control, only : nffrq
+     use control, only : nkpts
+
      implicit none
+
+! local variables
+! loop index for fermionic frequency \omega
+     integer :: i
+
+! loop index for orbitals
+     integer :: j
+
+! loop index for k-points
+     integer :: k
+
+     do k=1,nkpts
+         do j=1,norbs
+             do i=1,nffrq
+                 associate ( val => ( dual_s(i,j,k) * dmft_g(i,j) + one ) )
+                     latt_s(i,j,k) = dmft_s(i,j) + dual_s(i,j,k) / val
+                 end associate
+             enddo ! over i={1,nffrq} loop
+         enddo ! over j={1,norbs} loop
+     enddo ! over k={1,nkpts} loop
 
      return
   end subroutine df_eval_latt_s
