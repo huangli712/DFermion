@@ -31,7 +31,7 @@
 ## =======
 ##
 ## 05/11/2015 by li huang (created)
-## 04/12/2019 by li huang (last modified)
+## 04/30/2019 by li huang (last modified)
 ##
 ##
 
@@ -62,3 +62,8 @@ LFLAGS = $(OMP)
 #-------------------------------------------------------------------------
 LIBS   = -framework Accelerate
 FLINK  = /Users/lihuang/Working/dmft/flink/src
+
+# External fast fourier transformation library
+#-------------------------------------------------------------------------
+FFT_INC= -I/opt/local/include
+FFT_LIB= -L/opt/local/lib/ -lfftw3 
