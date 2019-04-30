@@ -9,7 +9,7 @@
 !!! type    : subroutines
 !!! author  : li huang (email:lihuang.dmft@gmail.com)
 !!! history : 04/29/2009 by li huang (created)
-!!!           04/29/2019 by li huang (last modified)
+!!!           04/30/2019 by li huang (last modified)
 !!! purpose : main subroutines for the dual fermion framework.
 !!! status  : unstable
 !!! comment :
@@ -126,13 +126,6 @@
              end associate
          enddo ! over i={1,nffrq} loop
      enddo ! over j={1,norbs} loop
-
-     !! DEBUG
-     do i=1,nffrq
-         print *, i, fmesh(i), dmft_h(i,1)
-     enddo
-
-     STOP 'in df_eval_dmft_h'
 
      return
   end subroutine df_eval_dmft_h
