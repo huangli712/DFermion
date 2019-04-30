@@ -282,15 +282,14 @@
          dual_g = gnew
          dual_s = czero
 
-         do w=1,nffrq
-             print *, w, fmesh(w)
-             print *, dual_g(w,1,:)
-         enddo
-         write(mystd,*)
-         write(mystd,*)
-         write(mystd,*)
-         write(mystd,*)
-
+         !!do w=1,nffrq
+         !!    print *, w, fmesh(w)
+         !!    print *, dual_g(w,1,:)
+         !!enddo
+         !!write(mystd,*)
+         !!write(mystd,*)
+         !!write(mystd,*)
+         !!write(mystd,*)
 
          !!if ( it == 3 ) then
          !!    do w=1,nffrq
