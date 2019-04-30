@@ -90,7 +90,11 @@
 
      implicit none
 
+! local variables
+! loop index for fermionic frequency \omega
      integer :: i
+
+! loop index for orbitals
      integer :: j
 
      do j=1,norbs
@@ -101,6 +105,7 @@
          enddo ! over i={1,nffrq} loop
      enddo ! over j={1,norbs} loop
 
+     !! DEBUG
      do i=1,nffrq
          print *, i, fmesh(i), dmft_h(i,1)
      enddo
