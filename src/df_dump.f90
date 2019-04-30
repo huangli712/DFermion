@@ -1,13 +1,13 @@
 !!!-----------------------------------------------------------------------
 !!! project : azalea
-!!! program : df_dump_grnf
-!!!           df_dump_sigf
-!!!           df_dump_hybf <<<---
-!!!           df_dump_grnd
-!!!           df_dump_sigd
-!!!           df_dump_wssd <<<---
-!!!           df_dump_grnk
-!!!           df_dump_sigk <<<---
+!!! program : df_dump_dmft_g
+!!!           df_dump_dmft_s
+!!!           df_dump_dmft_h <<<---
+!!!           df_dump_dual_g
+!!!           df_dump_dual_s
+!!!           df_dump_dual_b <<<---
+!!!           df_dump_latt_g
+!!!           df_dump_latt_s <<<---
 !!!           df_dump_v4_d
 !!!           df_dump_v4_m
 !!!           df_dump_v4_f <<<---
@@ -17,7 +17,7 @@
 !!! type    : subroutines
 !!! author  : li huang (email:lihuang.dmft@gmail.com)
 !!! history : 09/16/2009 by li huang (created)
-!!!           04/17/2019 by li huang (last modified)
+!!!           04/30/2019 by li huang (last modified)
 !!! purpose : dump key observables produced by the diagrammatic framework
 !!!           for dynamical mean field theory to external files.
 !!! status  : unstable
@@ -29,11 +29,11 @@
 !!========================================================================
 
 !!
-!! @sub df_dump_grnf
+!! @sub df_dump_dmft_g
 !!
 !! write out impurity green's function in matsubara frequency space
 !!
-  subroutine df_dump_grnf(rmesh, grnf)
+  subroutine df_dump_dmft_g(rmesh, grnf)
      use constants, only : dp
      use constants, only : czero
      use constants, only : mytmp
@@ -71,14 +71,14 @@
      close(mytmp)
 
      return
-  end subroutine df_dump_grnf
+  end subroutine df_dump_dmft_g
 
 !!
-!! @sub df_dump_sigf
+!! @sub df_dump_dmft_s
 !!
 !! write out impurity self-energy function in matsubara frequency space
 !!
-  subroutine df_dump_sigf(rmesh, sigf)
+  subroutine df_dump_dmft_s(rmesh, sigf)
      use constants, only : dp
      use constants, only : czero
      use constants, only : mytmp
@@ -116,14 +116,14 @@
      close(mytmp)
 
      return
-  end subroutine df_dump_sigf
+  end subroutine df_dump_dmft_s
 
 !!
-!! @sub df_dump_hybf
+!! @sub df_dump_dmft_h
 !!
 !! write out impurity hybridization function in matsubara frequency space
 !!
-  subroutine df_dump_hybf(rmesh, hybf)
+  subroutine df_dump_dmft_h(rmesh, hybf)
      use constants, only : dp
      use constants, only : czero
      use constants, only : mytmp
@@ -161,18 +161,18 @@
      close(mytmp)
 
      return
-  end subroutine df_dump_hybf
+  end subroutine df_dump_dmft_h
 
 !!========================================================================
 !!>>> dump data of dual variables                                      <<<
 !!========================================================================
 
 !!
-!! @sub df_dump_grnd
+!! @sub df_dump_dual_g
 !!
 !! write out dual green's function in matsubara frequency space
 !!
-  subroutine df_dump_grnd(rmesh, grnd)
+  subroutine df_dump_dual_g(rmesh, grnd)
      use constants, only : dp
      use constants, only : czero
      use constants, only : mytmp
@@ -215,14 +215,14 @@
      close(mytmp)
 
      return
-  end subroutine df_dump_grnd
+  end subroutine df_dump_dual_g
 
 !!
-!! @sub df_dump_sigd
+!! @sub df_dump_dual_s
 !!
 !! write out dual self-energy function in matsubara frequency space
 !!
-  subroutine df_dump_sigd(rmesh, sigd)
+  subroutine df_dump_dual_s(rmesh, sigd)
      use constants, only : dp
      use constants, only : czero
      use constants, only : mytmp
@@ -265,14 +265,14 @@
      close(mytmp)
 
      return
-  end subroutine df_dump_sigd
+  end subroutine df_dump_dual_s
 
 !!
-!! @sub df_dump_wssd
+!! @sub df_dump_dual_b
 !!
 !! write out dual bare green's function in matsubara frequency space
 !!
-  subroutine df_dump_wssd(rmesh, wssd)
+  subroutine df_dump_dual_b(rmesh, wssd)
      use constants, only : dp
      use constants, only : czero
      use constants, only : mytmp
@@ -315,18 +315,18 @@
      close(mytmp)
 
      return
-  end subroutine df_dump_wssd
+  end subroutine df_dump_dual_b
 
 !!========================================================================
 !!>>> dump data of lattice variables                                   <<<
 !!========================================================================
 
 !!
-!! @sub df_dump_grnk
+!! @sub df_dump_latt_g
 !!
 !! write out lattice green's function in matsubara frequency space
 !!
-  subroutine df_dump_grnk(rmesh, grnk)
+  subroutine df_dump_latt_g(rmesh, grnk)
      use constants, only : dp
      use constants, only : czero
      use constants, only : mytmp
@@ -369,14 +369,14 @@
      close(mytmp)
 
      return
-  end subroutine df_dump_grnk
+  end subroutine df_dump_latt_g
 
 !!
-!! @sub df_dump_sigk
+!! @sub df_dump_latt_s
 !!
 !! write out lattice self-energy function in matsubara frequency space
 !!
-  subroutine df_dump_sigk(rmesh, sigk)
+  subroutine df_dump_latt_s(rmesh, sigk)
      use constants, only : dp
      use constants, only : czero
      use constants, only : mytmp
@@ -419,7 +419,7 @@
      close(mytmp)
 
      return
-  end subroutine df_dump_sigk
+  end subroutine df_dump_latt_s
 
 !!========================================================================
 !!>>> dump data of vertex functions                                    <<<

@@ -23,6 +23,10 @@
      use control, only : isdia
      use control, only : myid, master
 
+     use context, only : fmesh
+     use context, only : dmft_h
+     use context, only : latt_g, latt_s
+ 
      implicit none
 
      DF_CORE: &
