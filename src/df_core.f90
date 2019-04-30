@@ -305,10 +305,10 @@
      !!    print *, w, fmesh(w)
      !!    print *, dual_g(w,1,:)
      !!enddo
-     print *
-     print *
-     print *
-     print *
+     !!print *
+     !!print *
+     !!print *
+     !!print *
 
 !!========================================================================
 !!>>> finishing ladder dual fermion iteration                          <<<
