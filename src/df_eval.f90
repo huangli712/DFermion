@@ -44,13 +44,16 @@
 ! loop index for k-points
      integer :: k
 
+! complex(dp) dummy variables
+     complex(dp) :: zh
+
      do k=1,nkpts
          do j=1,norbs
              do i=1,nffrq
-                 latt_g(i,j,k) =  ( one / ( dmft_h(i,j) - ek(k) ) ) + &
-                                  ( one / ( dmft_h(i,j) - ek(k) ) ) / &
-                                  dmft_g(i,j) * dual_g(i,j,k) / dmft_g(i,j) * &
-                                  ( one / ( dmft_h(i,j) - ek(k) ) ) 
+                 zh = ( one / ( dmft_h(i,j) - ek(k) ) )
+                 latt_g(i,j,k) =  zh + &
+                                  zh / dmft_g(i,j) * dual_g(i,j,k) / dmft_g(i,j) * &
+                                  zh 
              enddo ! over i={1,nffrq} loop
          enddo ! over j={1,norbs} loop
      enddo ! over k={1,nkpts} loop
