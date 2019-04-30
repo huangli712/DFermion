@@ -188,11 +188,11 @@
 
              !! DEBUG
              !!
-             if ( om == 0.0_dp ) then
-                 gstp = dual_g
-             else
-                 call cat_fill_k_new(dual_g, gstp, om)
-             endif
+             !!if ( om == 0.0_dp ) then
+             !!    gstp = dual_g
+             !!else
+             !!    call cat_fill_k_new(dual_g, gstp, om)
+             !!endif
 
              !!do w=1,nffrq
              !!    print *, w, fmesh(w)
