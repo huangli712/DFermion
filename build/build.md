@@ -181,10 +181,10 @@ Please download the latest version of [FFTW3](http://fftw.org/download.html). An
 
 ### FFT\_LIB
 
-Specify where the header files of FFTW3 is. Now the DFAPP software package depends on FFTW3 heavily.
+Specify where the library files of FFTW3 is. Now the DFAPP software package depends on FFTW3 heavily.
 
 **Possible options**:
 
-* -I/opt/local/include
+* -L/opt/local/lib/ -lfftw3
 
 Please download the latest version of [FFTW3](http://fftw.org/download.html). And then install it on your favourite directory.
