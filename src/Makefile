@@ -21,7 +21,7 @@
 ## =======
 ##
 ## 01/17/2017 by li huang (created)
-## 04/29/2019 by li huang (last modified)
+## 04/30/2019 by li huang (last modified)
 ##
 ##
 
@@ -56,10 +56,10 @@ flink_mod:
 	cp $(FLINK)/version.mod .
 
 exe: flink $(objects)
-	$(LINKER) $(objects) -o df.x $(LFLAGS) $(LIBS) -L/opt/local/lib/ -lfftw3
+	$(LINKER) $(objects) -o df.x $(LFLAGS) $(LIBS) $(FFT_LIB)
 
 .f90.o:
-	$(F90) -I/opt/local/include $(FFLAGS) $*.f90
+	$(F90) $(FFT_INC) $(FFLAGS) $*.f90
 
 clean:
 	rm -f *.mod
