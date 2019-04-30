@@ -8,7 +8,7 @@
 !!! type    : subroutines
 !!! author  : li huang (email:lihuang.dmft@gmail.com)
 !!! history : 09/16/2009 by li huang (created)
-!!!           04/29/2019 by li huang (last modified)
+!!!           04/30/2019 by li huang (last modified)
 !!! purpose : main subroutines for the dual fermion framework.
 !!! status  : unstable
 !!! comment :
@@ -21,6 +21,7 @@
 !!
   subroutine df_run()
      use control, only : isdia
+     use control, only : myid, master
 
      implicit none
 
@@ -41,6 +42,18 @@
      call df_eval_latt_g()
      call df_eval_latt_s()
      call df_eval_dmft_h()
+
+     if ( myid == master ) then
+         call df_dump_latt_g()
+     endif
+
+     if ( myid == master ) then
+         call df_dump_latt_s()
+     endif
+
+     if ( myid == master ) then
+         call df_dump_dmft_h()
+     endif
 
      return
   end subroutine df_run
