@@ -90,11 +90,14 @@
 
      implicit none
 
-     integer :: i, j
+     integer :: i
+     integer :: j
 
      do j=1,norbs
          do i=1,nffrq
-             dmft_h(i,j) = dmft_h(i,j) + one / dmft_g(i,j) * sum(dual_g(i,j,:)) / sum(latt_g(i,j,:))
+             associate ( zh => ( sum( dual_g(i,j,:) ) / sum( latt_g(i,j,:) ) ) )
+                 dmft_h(i,j) = dmft_h(i,j) + one / dmft_g(i,j) * zh 
+             end associate
          enddo ! over i={1,nffrq} loop
      enddo ! over j={1,norbs} loop
 
