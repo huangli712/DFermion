@@ -66,4 +66,4 @@ FLINK  = /Users/lihuang/Working/dmft/flink/src
 # External fast fourier transformation library
 #-------------------------------------------------------------------------
 FFT_INC= -I/opt/local/include
-FFT_LIB= -L/opt/local/lib/ -lfftw3 
+FFT_LIB= -L/opt/local/lib/ -lfftw3
