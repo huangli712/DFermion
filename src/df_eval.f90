@@ -69,6 +69,10 @@
      use control, only : nffrq
      use control, only : nkpts
 
+     use context, only : dmft_g, dmft_s
+     use context, only : dual_s
+     use context, only : latt_s
+
      implicit none
 
 ! local variables
