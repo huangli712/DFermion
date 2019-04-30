@@ -48,15 +48,15 @@
      call df_eval_dmft_h()
 
      if ( myid == master ) then
-         call df_dump_latt_g()
+         call df_dump_latt_g(fmesh, latt_g)
      endif
 
      if ( myid == master ) then
-         call df_dump_latt_s()
+         call df_dump_latt_s(fmesh, latt_s)
      endif
 
      if ( myid == master ) then
-         call df_dump_dmft_h()
+         call df_dump_dmft_h(fmesh, dmft_h)
      endif
 
      return
