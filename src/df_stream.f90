@@ -14,7 +14,7 @@
 !!! type    : subroutines
 !!! author  : li huang (email:lihuang.dmft@gmail.com)
 !!! history : 09/16/2009 by li huang (created)
-!!!           04/18/2019 by li huang (last modified)
+!!!           04/30/2019 by li huang (last modified)
 !!! purpose : initialize and finalize the dual fermion framework.
 !!! status  : unstable
 !!! comment :
@@ -262,22 +262,26 @@
 !! impurity solver
 !!
   subroutine df_input_dmft_()
-     use constants, only : dp
+     use constants, only : dp, one, czi
      use constants, only : mytmp
 
      use mmpi, only : mp_bcast
      use mmpi, only : mp_barrier
 
+     use control, only : norbs
      use control, only : nffrq
+     use control, only : mune
      use control, only : myid, master
 
-     use context, only : dmft_g, dmft_h
+     use context, only : fmesh
+     use context, only : dmft_g, dmft_s, dmft_h
 
      implicit none
 
 ! local variables
 ! loop index
      integer  :: i
+     integer  :: j
 
 ! used to check whether the input file (df.dmft_g.in) exists
      logical  :: exists
@@ -346,6 +350,15 @@
      call mp_barrier()
 
 # endif  /* MPI */
+
+! try to calculate the local self-energy function
+     do i=1,norbs
+         do j=1,nffrq
+             associate ( val => ( czi * fmesh(j) + mune ) )
+                 dmft_s(j,i) =  val - dmft_h(j,i) - one / dmft_g(j,i)
+             end associate
+         enddo ! over j={1,nffrq} loop
+     enddo ! over i={1,norbs} loop
 
      return
   end subroutine df_input_dmft_

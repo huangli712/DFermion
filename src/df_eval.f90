@@ -63,10 +63,6 @@
 !! calculate the lattice self-energy function within the dual fermion framework
 !!
   subroutine df_eval_latt_s()
-     use constants
-     use control
-     use context
-
      implicit none
 
      return
