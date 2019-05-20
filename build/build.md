@@ -19,7 +19,7 @@ The make.sys file is the key component of the building system. You have to modif
 * Intel Math Kernel Library
 
 ### Utility library
-* FLINK 
+* FLINK
 
 ### Fast fourier transformation library
 * FFTW3
