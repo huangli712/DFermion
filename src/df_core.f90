@@ -192,7 +192,7 @@
 
              om = bmesh(v)
              if ( myid == master ) then ! only master node can do it
-                 write(mystd,'(2X,A,F12.6)') 'Bosonic Frequency:', om
+                 write(mystd,'(4X,A,I2,A,F12.8,A)') 'bosonic frequency -> ', v, ' (', om, ')'
              endif ! back if ( myid == master ) block
 
              if ( om == 0.0_dp ) then
@@ -315,6 +315,10 @@
          !!    enddo
          !!    STOP
          !!endif
+
+         if ( myid == master ) then
+             write(mystd,*)
+         endif
 
      enddo DF_LOOP
 
