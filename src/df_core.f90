@@ -158,7 +158,7 @@
      allocate(Gmat(nffrq,nffrq),       stat=istat)
 
      if ( istat /= 0 ) then
-         call s_print_error('df_core','can not allocate enough memory')
+         call s_print_error('df_ladder','can not allocate enough memory')
      endif ! back if ( istat /= 0 ) block
 
      !!print *, nkpts
@@ -192,7 +192,7 @@
 
              om = bmesh(v)
              if ( myid == master ) then ! only master node can do it
-                 write(mystd,'(4X,A,I2,A,F12.8,A)') 'bosonic frequency -> ', v, ' (', om, ')'
+                 write(mystd,'(4X,A,I2,A,F12.8,A)') 'bosonic frequency => ', v, ' (', om, ')'
              endif ! back if ( myid == master ) block
 
              if ( om == 0.0_dp ) then
