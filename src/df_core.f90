@@ -273,11 +273,11 @@
 
          enddo V_LOOP
 
-         !!do w=1,nffrq
-         !!    print *, w, fmesh(w)
-         !!    print *, dual_s(w,1,:)
-         !!enddo
-         !!STOP
+         do w=1,nffrq
+             print *, w, fmesh(w)
+             print *, dual_s(w,1,:)
+         enddo
+         STOP
 
          call df_dyson(+1, gnew, dual_s, dual_b)
 
