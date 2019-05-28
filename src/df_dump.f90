@@ -10,9 +10,9 @@
 !!!           df_dump_latt_s <<<---
 !!!           df_dump_susc_c
 !!!           df_dump_susc_s <<<---
-!!!           df_dump_v4_d
-!!!           df_dump_v4_m
-!!!           df_dump_v4_f <<<---
+!!!           df_dump_vert_d
+!!!           df_dump_vert_m
+!!!           df_dump_vert_f <<<---
 !!! source  : df_dump.f90
 !!! type    : subroutines
 !!! author  : li huang (email:lihuang.dmft@gmail.com)
@@ -452,34 +452,34 @@
 !!========================================================================
 
 !!
-!! @sub df_dump_v4_d
+!! @sub df_dump_vert_d
 !!
 !! write out vertex function (density channel) 
 !!
-  subroutine df_dump_v4_d()
+  subroutine df_dump_vert_d()
      implicit none
 
      return
-  end subroutine df_dump_v4_d
+  end subroutine df_dump_vert_d
 
 !!
-!! @sub df_dump_v4_m
+!! @sub df_dump_vert_m
 !!
 !! write out vertex function (magnetic channel)
 !!
-  subroutine df_dump_v4_m()
+  subroutine df_dump_vert_m()
      implicit none
 
      return
-  end subroutine df_dump_v4_m
+  end subroutine df_dump_vert_m
 
 !!
-!! @sub df_dump_v4_f
+!! @sub df_dump_vert_f
 !!
 !! write out vertex function (full vertex)
 !!
-  subroutine df_dump_v4_f()
+  subroutine df_dump_vert_f()
      implicit none
 
      return
-  end subroutine df_dump_v4_f
+  end subroutine df_dump_vert_f
