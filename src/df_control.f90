@@ -5,7 +5,7 @@
 !!! type    : module
 !!! author  : li huang (email:lihuang.dmft@gmail.com)
 !!! history : 09/15/2009 by li huang (created)
-!!!           04/17/2019 by li huang (last modified)
+!!!           05/29/2019 by li huang (last modified)
 !!! purpose : define global control parameters for dual fermion framework.
 !!! status  : unstable
 !!! comment :
@@ -23,7 +23,7 @@
 !!
 !! @var cname
 !!
-!! code name of the diagrammatic framework
+!! code name of the dual fermion framework
 !!
      character(len = 06), public, save :: cname = 'AZALEA'
 
