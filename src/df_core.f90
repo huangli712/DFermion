@@ -205,11 +205,11 @@
 
              !! DEBUG
              !!
-             !!if ( om == 0.0_dp ) then
-             !!    gstp = dual_g
-             !!else
-             !!    call cat_fill_k_new(dual_g, gstp, om)
-             !!endif
+             if ( om == 0.0_dp ) then
+                 gstp = dual_g
+             else
+                 call cat_fill_k_new(dual_g, gstp, om)
+             endif
 
              !!do w=1,nffrq
              !!    print *, w, fmesh(w)
@@ -273,14 +273,14 @@
 
          enddo V_LOOP
 
-         do w=1,nffrq
-             print *, w, fmesh(w)
-             print *, dual_s(w,1,:)
-         enddo
-         STOP
+         !!if ( it == 10 ) then
+         !!    do w=1,nffrq
+         !!        print *, w, fmesh(w), dual_s(w,1,1)
+         !!    enddo
+         !!    STOP
+         !!endif
 
          call df_dyson(+1, gnew, dual_s, dual_b)
-
 
          !!do w=1,nffrq
          !!    print *, w, fmesh(w)
@@ -299,10 +299,13 @@
          dual_g = gnew
          dual_s = czero
 
-         !!do w=1,nffrq
-         !!    print *, w, fmesh(w)
-         !!    print *, dual_g(w,1,:)
-         !!enddo
+         !!if ( it == 10 ) then
+         !!    do w=1,nffrq
+         !!        print *, w, fmesh(w), dual_g(w,1,1)
+         !!    enddo
+         !!    STOP
+         !!endif
+
          !!write(mystd,*)
          !!write(mystd,*)
          !!write(mystd,*)
@@ -338,10 +341,8 @@
      call df_dyson(-1, dual_g, dual_s, dual_b)
 
      !!do w=1,nffrq
-     !!    print *, w, fmesh(w)
-     !!    print *, dual_s(w,1,:)
+     !!    print *, w, fmesh(w), dual_s(w,1,1)
      !!enddo
-
      !!STOP
 
      deallocate(gstp)
