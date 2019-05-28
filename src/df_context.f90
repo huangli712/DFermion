@@ -4,8 +4,8 @@
 !!!           df_dmft module
 !!!           df_dual module
 !!!           df_latt module
-!!!           df_vert module
 !!!           df_susc module
+!!!           df_vert module
 !!!           context module
 !!! source  : df_context.f90
 !!! type    : modules
@@ -179,36 +179,6 @@
   end module df_latt
 
 !!========================================================================
-!!>>> module df_vert                                                   <<<
-!!========================================================================
-
-!!
-!! @mod df_vert
-!!
-!! define some vertex functions from the output of quantum impurity solver
-!!
-  module df_vert
-     use constants, only : dp
-
-     implicit none
-
-!!
-!! @var vert_d
-!!
-!! density vertex
-!!
-     complex(dp), public, save, allocatable :: vert_d(:,:,:)
-
-!!
-!! @var vert_m
-!!
-!! magnetic vertex
-!!
-     complex(dp), public, save, allocatable :: vert_m(:,:,:)
-
-  end module df_vert
-
-!!========================================================================
 !!>>> module df_susc                                                   <<<
 !!========================================================================
 
@@ -239,6 +209,36 @@
   end module df_susc
 
 !!========================================================================
+!!>>> module df_vert                                                   <<<
+!!========================================================================
+
+!!
+!! @mod df_vert
+!!
+!! define some vertex functions from the output of quantum impurity solver
+!!
+  module df_vert
+     use constants, only : dp
+
+     implicit none
+
+!!
+!! @var vert_d
+!!
+!! density vertex
+!!
+     complex(dp), public, save, allocatable :: vert_d(:,:,:)
+
+!!
+!! @var vert_m
+!!
+!! magnetic vertex
+!!
+     complex(dp), public, save, allocatable :: vert_m(:,:,:)
+
+  end module df_vert
+
+!!========================================================================
 !!>>> module context                                                   <<<
 !!========================================================================
 
@@ -260,8 +260,8 @@
      use df_dmft
      use df_dual
      use df_latt
-     use df_vert
      use df_susc
+     use df_vert
 
 !!========================================================================
 !!>>> declare private variables                                        <<<
