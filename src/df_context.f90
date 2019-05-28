@@ -11,7 +11,7 @@
 !!! type    : modules
 !!! author  : li huang (email:lihuang.dmft@gmail.com)
 !!! history : 09/16/2009 by li huang (created)
-!!!           05/04/2019 by li huang (last modified)
+!!!           05/28/2019 by li huang (last modified)
 !!! purpose : define the key data structure and global arrays/variables
 !!!           for dual fermion framework.
 !!! status  : unstable
@@ -212,7 +212,30 @@
 !!>>> module df_susc                                                   <<<
 !!========================================================================
 
+!!
+!! @mod df_susc
+!!
+!! define charge and spin susceptibilities
+!!
   module df_susc
+     use constants, only : dp
+
+     implicit none
+
+!!
+!! @var susc_c
+!!
+!! charge susceptibility
+!!
+     complex(dp), public, save, allocatable :: susc_c(:,:,:)
+
+!!
+!! @var susc_s
+!!
+!! spin susceptibility
+!!
+     complex(dp), public, save, allocatable :: susc_s(:,:,:)
+
   end module df_susc
 
 !!========================================================================
@@ -407,7 +430,28 @@
      return
   end subroutine cat_alloc_vert
 
+!!
+!! @sub cat_alloc_susc
+!!
+!! allocate memory for susc-related variables
+!!
   subroutine cat_alloc_susc()
+     implicit none
+
+! allocate memory
+     allocate(susc_c(nbfrq,norbs,nkpts), stat=istat)
+     allocate(susc_s(nbfrq,norbs,nkpts), stat=istat)
+
+! check the status
+     if ( istat /= 0 ) then
+         call s_print_error('cat_alloc_susc','can not allocate enough memory')
+     endif ! back if ( istat /= 0 ) block
+
+! initialize them
+     susc_c = czero
+     susc_s = czero
+
+     return
   end subroutine cat_alloc_susc
 
 !!========================================================================
