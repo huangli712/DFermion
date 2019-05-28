@@ -8,16 +8,16 @@
 !!!           df_dump_dual_b <<<---
 !!!           df_dump_latt_g
 !!!           df_dump_latt_s <<<---
+!!!           df_dump_susc_c
+!!!           df_dump_susc_s <<<---
 !!!           df_dump_v4_d
 !!!           df_dump_v4_m
 !!!           df_dump_v4_f <<<---
-!!!           df_dump_schi
-!!!           df_dump_cchi <<<---
 !!! source  : df_dump.f90
 !!! type    : subroutines
 !!! author  : li huang (email:lihuang.dmft@gmail.com)
 !!! history : 09/16/2009 by li huang (created)
-!!!           04/30/2019 by li huang (last modified)
+!!!           05/29/2019 by li huang (last modified)
 !!! purpose : dump key observables produced by the diagrammatic framework
 !!!           for dynamical mean field theory to external files.
 !!! status  : unstable
@@ -422,6 +422,32 @@
   end subroutine df_dump_latt_s
 
 !!========================================================================
+!!>>> dump data of dynamical quantities                                <<<
+!!========================================================================
+
+!!
+!! @sub df_dump_susc_c
+!!
+!! write out charge susceptibility
+!!
+  subroutine df_dump_susc_c()
+     implicit none
+
+     return
+  end subroutine df_dump_susc_c
+
+!!
+!! @sub df_dump_susc_s
+!!
+!! write out spin susceptibility
+!!
+  subroutine df_dump_susc_s()
+     implicit none
+
+     return
+  end subroutine df_dump_susc_s
+
+!!========================================================================
 !!>>> dump data of vertex functions                                    <<<
 !!========================================================================
 
@@ -457,29 +483,3 @@
 
      return
   end subroutine df_dump_v4_f
-
-!!========================================================================
-!!>>> dump data of dynamical quantities                                <<<
-!!========================================================================
-
-!!
-!! @sub df_dump_schi
-!!
-!! write out spin susceptibility
-!!
-  subroutine df_dump_schi()
-     implicit none
-
-     return
-  end subroutine df_dump_schi
-
-!!
-!! @sub df_dump_cchi
-!!
-!! write out charge susceptibility
-!!
-  subroutine df_dump_cchi()
-     implicit none
-
-     return
-  end subroutine df_dump_cchi
