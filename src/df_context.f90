@@ -279,16 +279,16 @@
      public :: cat_alloc_dmft
      public :: cat_alloc_dual
      public :: cat_alloc_latt
-     public :: cat_alloc_vert
      public :: cat_alloc_susc
+     public :: cat_alloc_vert
 
 ! declaration of module procedures: deallocate memory
      public :: cat_free_mesh
      public :: cat_free_dmft
      public :: cat_free_dual
      public :: cat_free_latt
-     public :: cat_free_vert
      public :: cat_free_susc
+     public :: cat_free_vert
 
   contains ! encapsulated functionality
 
@@ -407,30 +407,6 @@
   end subroutine cat_alloc_latt
 
 !!
-!! @sub cat_alloc_vert
-!!
-!! allocate memory for vert-related variables
-!!
-  subroutine cat_alloc_vert()
-     implicit none
-
-! allocate memory
-     allocate(vert_d(nffrq,nffrq,nbfrq), stat=istat)
-     allocate(vert_m(nffrq,nffrq,nbfrq), stat=istat)
-
-! check the status
-     if ( istat /= 0 ) then
-         call s_print_error('cat_alloc_vert','can not allocate enough memory')
-     endif ! back if ( istat /= 0 ) block
-
-! initialize them
-     vert_d = czero
-     vert_m = czero
-
-     return
-  end subroutine cat_alloc_vert
-
-!!
 !! @sub cat_alloc_susc
 !!
 !! allocate memory for susc-related variables
@@ -453,6 +429,30 @@
 
      return
   end subroutine cat_alloc_susc
+
+!!
+!! @sub cat_alloc_vert
+!!
+!! allocate memory for vert-related variables
+!!
+  subroutine cat_alloc_vert()
+     implicit none
+
+! allocate memory
+     allocate(vert_d(nffrq,nffrq,nbfrq), stat=istat)
+     allocate(vert_m(nffrq,nffrq,nbfrq), stat=istat)
+
+! check the status
+     if ( istat /= 0 ) then
+         call s_print_error('cat_alloc_vert','can not allocate enough memory')
+     endif ! back if ( istat /= 0 ) block
+
+! initialize them
+     vert_d = czero
+     vert_m = czero
+
+     return
+  end subroutine cat_alloc_vert
 
 !!========================================================================
 !!>>> deallocate memory subroutines                                    <<<
@@ -522,6 +522,20 @@
   end subroutine cat_free_latt
 
 !!
+!! @sub cat_free_susc
+!!
+!! deallocate memory for susc-related variables
+!!
+  subroutine cat_free_susc()
+     implicit none
+
+     if ( allocated(susc_c) ) deallocate(susc_c)
+     if ( allocated(susc_s) ) deallocate(susc_s)
+
+     return
+  end subroutine cat_free_susc
+
+!!
 !! @sub cat_free_vert
 !!
 !! deallocate memory for vert-related variables
@@ -534,8 +548,5 @@
 
      return
   end subroutine cat_free_vert
-
-  subroutine cat_free_susc()
-  end subroutine cat_free_susc
 
   end module context
