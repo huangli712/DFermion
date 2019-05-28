@@ -431,6 +431,13 @@
 !! write out charge susceptibility
 !!
   subroutine df_dump_susc_c()
+     use constants, only : dp
+     use constants, only : mytmp
+
+     use control, only : norbs
+     use control, only : nbfrq
+     use control, only : nkpts
+
      implicit none
 
      return
