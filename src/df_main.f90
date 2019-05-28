@@ -65,7 +65,7 @@
      END BLOCK DFAPP_START
 
 !!========================================================================
-     call df_run() ! call the driver
+     call DF_RUN() ! call the driver                                   <<<
 !!========================================================================
 
      DFAPP_SLEEP: BLOCK
