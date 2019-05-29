@@ -169,7 +169,7 @@
      use constants, only : dp, one
 
      use control, only : nkpts, norbs, nffrq
-     use context, only : dmft_g, dmft_h, ek, dual_b
+     use context, only : dmft_g, dmft_h, ek, dual_b, dual_g
 
      implicit none
 
@@ -188,6 +188,7 @@
      enddo ! over k={1,nkpts} loop
 
      Lwk = Lwk / dual_b * (-one)
+     Lwk = Lwk * dual_g
 
      !! DEBUG
      do i=1,nffrq
