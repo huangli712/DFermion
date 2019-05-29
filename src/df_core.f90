@@ -8,7 +8,7 @@
 !!! type    : subroutines
 !!! author  : li huang (email:lihuang.dmft@gmail.com)
 !!! history : 09/16/2009 by li huang (created)
-!!!           04/30/2019 by li huang (last modified)
+!!!           05/29/2019 by li huang (last modified)
 !!! purpose : main subroutines for the dual fermion framework.
 !!! status  : unstable
 !!! comment :
@@ -47,6 +47,8 @@
      call df_eval_latt_g()
      call df_eval_latt_s()
      call df_eval_dmft_h()
+     call df_eval_susc_c()
+     call df_eval_susc_s()
 
      if ( myid == master ) then
          call df_dump_dmft_h(fmesh, dmft_h)
