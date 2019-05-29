@@ -62,7 +62,7 @@
      nkp_y = 8       ! number of k-points (y_axis)
      nkp_z = 8       ! number of k-points (z_axis)
 !-------------------------------------------------------------------------
-     mune  = 2.00_dp ! chemical potential or fermi level
+     mune  = 0.00_dp ! chemical potential or fermi level
      beta  = 1.00_dp ! inversion of temperature
      part  = 1.00_dp ! hopping parameter t for Hubbard model
 !^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

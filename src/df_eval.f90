@@ -138,6 +138,11 @@
 ! loop index for k-points
      integer :: k
 
+!!
+!! note:
+!!
+!! dual_s must be updated ahead of time. however, dmft_g and dmft_s are old.
+!!
      do k=1,nkpts
          do j=1,norbs
              do i=1,nffrq
