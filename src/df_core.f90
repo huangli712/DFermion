@@ -44,11 +44,12 @@
 
      end select DF_CORE
 
+     call df_eval_susc_c()
+     call df_eval_susc_s()
+
      call df_eval_latt_g()
      call df_eval_latt_s()
      call df_eval_dmft_h()
-     call df_eval_susc_c()
-     call df_eval_susc_s()
 
      if ( myid == master ) then
          call df_dump_dmft_h(fmesh, dmft_h)

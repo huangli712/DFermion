@@ -166,15 +166,18 @@
 !! calculate the charge susceptibility within the dual fermion framework
 !!
   subroutine df_eval_susc_c()
-     use constants, only : one
+     use constants, only : dp, one
 
      use control, only : nkpts, norbs, nffrq
-     use context, only : dmft_g, dmft_h, ek
+     use context, only : dmft_g, dmft_h, ek, dual_b
 
      implicit none
 
      integer :: i, j, k
-     complex(dp), allocatable :: Lwk(nffrq,norbs,nkpts)
+     complex(dp), allocatable :: Lwk(:,:,:)
+     allocate(Lwk(nffrq,norbs,nkpts))
+
+     !! print *, 'here'
 
      do k=1,nkpts
          do j=1,norbs
@@ -185,6 +188,12 @@
      enddo ! over k={1,nkpts} loop
 
      Lwk = Lwk / dual_b * (-one)
+
+     !! DEBUG
+     do i=1,nffrq
+         print *, i, Lwk(i,1,1), Lwk(i,1,2)
+     enddo
+     STOP
 
      return
   end subroutine df_eval_susc_c
