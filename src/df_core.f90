@@ -25,6 +25,7 @@
 
      use context, only : fmesh
      use context, only : dmft_h
+     use context, only : dual_g, dual_s, dual_b
      use context, only : latt_g, latt_s
  
      implicit none
