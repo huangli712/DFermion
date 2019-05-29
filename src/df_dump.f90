@@ -480,8 +480,47 @@
 !!
 !! write out spin susceptibility
 !!
-  subroutine df_dump_susc_s()
+  subroutine df_dump_susc_s(rmesh, susc)
+     use constants, only : dp
+     use constants, only : czero
+     use constants, only : mytmp
+
+     use control, only : norbs
+     use control, only : nbfrq
+     use control, only : nkpts
+
      implicit none
+
+! external arguments
+! matsubara frequency mesh
+     real(dp), intent(in)    :: rmesh(nbfrq)
+
+! spin susceptibility
+     complex(dp), intent(in) :: susc(nbfrq,norbs,nkpts)
+
+! local variables
+! loop index
+     integer :: i
+     integer :: j
+     integer :: k
+
+! open data file: df.susc_s.dat
+     open(mytmp, file='df.susc_s.dat', form='formatted', status='unknown')
+
+! write it
+     do k=1,nkpts
+         do j=1,norbs
+             write(mytmp,'(2(a,i6))') '# kpt:', k, '  orb:', j
+             do i=1,nbfrq
+                 write(mytmp,'(i6,5f16.8)') i, rmesh(i), susc(i,j,k), czero
+             enddo ! over i={1,nffrq} loop
+             write(mytmp,*) ! write empty lines
+             write(mytmp,*)
+         enddo ! over j={1,norbs} loop
+     enddo ! over k={1,nkpts} loop
+
+! close data file
+     close(mytmp)
 
      return
   end subroutine df_dump_susc_s
