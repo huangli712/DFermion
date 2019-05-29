@@ -59,6 +59,18 @@
          call df_dump_dmft_h(fmesh, dmft_h)
      endif ! back if ( myid == master ) block
 
+     if ( myid == master ) then
+         call df_dump_dual_g(fmesh, dual_g)
+     endif ! back if ( myid == master ) block
+
+     if ( myid == master ) then
+         call df_dump_dual_s(fmesh, dual_s)
+     endif ! back if ( myid == master ) block
+
+     if ( myid == master ) then
+         call df_dump_dual_b(fmesh, dual_b)
+     endif ! back if ( myid == master ) block
+
      return
   end subroutine df_run
 

@@ -30,7 +30,6 @@
      use control, only : norbs
      use control, only : nffrq
 
-     use context, only : fmesh
      use context, only : dmft_g, dmft_h
      use context, only : dual_g
      use context, only : latt_g
@@ -44,6 +43,11 @@
 ! loop index for orbitals
      integer :: j
 
+!!
+!! note:
+!!
+!! dual_g and latt_g must be updated ahead of time.
+!!
      do j=1,norbs
          do i=1,nffrq
              associate ( zh => ( sum( dual_g(i,j,:) ) / sum( latt_g(i,j,:) ) ) )
@@ -88,6 +92,11 @@
 ! loop index for k-points
      integer :: k
 
+!!
+!! note:
+!!
+!! dual_g must be updated ahead of time. however, dmft_h is old.
+!!
      do k=1,nkpts
          do j=1,norbs
              do i=1,nffrq
