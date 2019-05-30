@@ -167,9 +167,17 @@
 !! calculate the charge susceptibility within the dual fermion framework
 !!
   subroutine df_eval_susc_c()
+     use constants, only : dp
+
+     use control, only : nffrq
+     use context, only : bmesh
+     use context, only : vert_d
+
      implicit none
 
-     call cat_susc_value()
+! local variables
+
+     call cat_susc_value( 1.0_dp, bmesh(1), vert_d(:,:,1) )
 
      return
   end subroutine df_eval_susc_c
@@ -185,7 +193,7 @@
      return
   end subroutine df_eval_susc_s
 
-  subroutine cat_susc_value()
+  subroutine cat_susc_value(norm, omega, vert)
      use constants, only : dp, one, cone, czero
 
      use control, only : nkpts, norbs, nffrq
@@ -194,7 +202,13 @@
 
      implicit none
 
+     real(dp), intent(in) :: norm
+     real(dp), intent(in) :: omega
+     complex(dp), intent(in)  :: vert(nffrq,nffrq)
+
+! local variables
      integer :: i, j, k
+     complex(dp) :: susc
 
      complex(dp), allocatable :: Lwk(:,:,:)
      complex(dp), allocatable :: gstp(:,:,:)
@@ -206,8 +220,6 @@
      complex(dp), allocatable :: mmat(:,:)
      complex(dp), allocatable :: Gmat(:,:)
 
-     real(dp) :: om, norm
-     complex(dp) :: susc
      complex(dp) :: ytmp(nffrq)
 
      allocate(Lwk(nffrq,norbs,nkpts))
