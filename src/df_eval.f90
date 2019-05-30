@@ -225,10 +225,10 @@
      call cat_dia_2d(dual_g, gstp, gd2)
 
      !! DEBUG
-     do i=1,nffrq
-         print *, fmesh(i), gd2(i,1,1), gd2(i,1,2)
-     enddo
-     STOP
+     !!do i=1,nffrq
+     !!    print *, fmesh(i), gd2(i,1,1), gd2(i,1,2)
+     !!enddo
+     !!STOP
 
      if ( om == 0.0_dp ) then
          gstp = Lwk
@@ -237,12 +237,24 @@
      endif
      call cat_dia_2d(Lwk, gstp, gt2)
 
+     !! DEBUG
+     !!do i=1,nffrq
+     !!    print *, fmesh(i), gt2(i,1,1), gt2(i,1,2)
+     !!enddo
+     !!STOP
+
      if ( om == 0.0_dp ) then
          gstp = latt_g
      else
          call cat_fill_k(latt_g, gstp, om)
      endif
      call cat_dia_2d(latt_g, gstp, gl2)
+
+     !! DEBUG
+     !!do i=1,nffrq
+     !!    print *, fmesh(i), gl2(i,1,1), gl2(i,1,2)
+     !!enddo
+     !!STOP
 
      return
   end subroutine df_eval_susc_c
