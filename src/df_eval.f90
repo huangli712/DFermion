@@ -231,9 +231,6 @@
      allocate(mmat(nffrq,nffrq))
      allocate(Gmat(nffrq,nffrq))
 
-     norm = 0.5_dp
-     om = bmesh(1)
-
      do k=1,nkpts
          do j=1,norbs
              do i=1,nffrq
