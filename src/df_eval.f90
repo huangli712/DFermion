@@ -240,24 +240,12 @@
      endif
      call cat_dia_2d(dual_g, gstp, gd2)
 
-     !! DEBUG
-     !!do i=1,nffrq
-     !!    print *, fmesh(i), gd2(i,1,1), gd2(i,1,2)
-     !!enddo
-     !!STOP
-
      if ( om == 0.0_dp ) then
          gstp = Lwk
      else
          call cat_fill_k(Lwk, gstp, om)
      endif
      call cat_dia_2d(Lwk, gstp, gt2)
-
-     !! DEBUG
-     !!do i=1,nffrq
-     !!    print *, fmesh(i), gt2(i,1,1), gt2(i,1,2)
-     !!enddo
-     !!STOP
 
      if ( om == 0.0_dp ) then
          gstp = latt_g
@@ -266,27 +254,14 @@
      endif
      call cat_dia_2d(latt_g, gstp, gl2)
 
-     !! DEBUG
-     !!do i=1,nffrq
-     !!    print *, fmesh(i), gl2(i,1,1), gl2(i,1,2)
-     !!enddo
-     !!STOP
-
      mmat = vert_m(:,:,1)
      do k=1,nkpts
          call s_diag_z(nffrq, gd2(:,1,k), imat)
          call cat_bse_solver(imat, mmat, Gmat)
 
-         !! DEBUG
-         !!print *, Gmat
-         !!STOP
-
-         !!susc = matmul(matmul(transpose(gt2(:,1,k)), Gmat), gt2(:,1,k))
-
          ytmp = czero
          call zgemv('N', nffrq, nffrq, cone, Gmat, nffrq, gt2(:,1,k), 1, czero, ytmp, 1)
          susc = dot_product(gt2(:,1,k), ytmp) * norm
-         !! DEBUG
          print *, k, susc
      enddo
 
