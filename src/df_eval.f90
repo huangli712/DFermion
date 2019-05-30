@@ -170,7 +170,7 @@
 
      use control, only : nkpts, norbs, nffrq
      use context, only : dmft_g, dmft_h, ek, dual_b, dual_g, bmesh, fmesh
-     use context, only : vert_m, latt_g
+     use context, only : vert_m, vert_d, latt_g
 
      implicit none
 
@@ -182,6 +182,9 @@
      complex(dp), allocatable :: gd2(:,:,:)
      complex(dp), allocatable :: gt2(:,:,:)
      complex(dp), allocatable :: gl2(:,:,:)
+     complex(dp), allocatable :: imat(:,:)
+     complex(dp), allocatable :: mmat(:,:)
+     complex(dp), allocatable :: Gmat(:,:)
 
      real(dp) :: om
 
@@ -190,6 +193,9 @@
      allocate(gd2(nffrq,norbs,nkpts))
      allocate(gt2(nffrq,norbs,nkpts))
      allocate(gl2(nffrq,norbs,nkpts))
+     allocate(imat(nffrq,nffrq))
+     allocate(mmat(nffrq,nffrq))
+     allocate(Gmat(nffrq,nffrq))
 
      !! print *, 'here'
 
@@ -255,6 +261,16 @@
      !!    print *, fmesh(i), gl2(i,1,1), gl2(i,1,2)
      !!enddo
      !!STOP
+
+     mmat = vert_m(:,:,v)
+     do k=1,nkpts
+         call s_diag_z(nffrq, gd2(:,1,k), imat)
+         call cat_bse_solver(imat, mmat, Gmat)
+
+         !! DEBUG
+         print *, Gmat
+         STOP
+     enddo
 
      return
   end subroutine df_eval_susc_c
