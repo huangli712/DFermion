@@ -44,11 +44,11 @@
 
      end select DF_CORE
 
-     call df_eval_susc_c()
-     call df_eval_susc_s()
-
      call df_eval_latt_g()
      call df_eval_latt_s()
+
+     call df_eval_susc_c()
+     call df_eval_susc_s()
 
      call df_eval_dmft_h()
 
