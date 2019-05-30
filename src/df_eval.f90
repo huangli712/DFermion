@@ -10,7 +10,7 @@
 !!! type    : subroutines
 !!! author  : li huang (email:lihuang.dmft@gmail.com)
 !!! history : 04/29/2009 by li huang (created)
-!!!           05/29/2019 by li huang (last modified)
+!!!           05/31/2019 by li huang (last modified)
 !!! purpose : try to evaluate some key observables.
 !!! status  : unstable
 !!! comment :
@@ -207,6 +207,11 @@
      return
   end subroutine df_eval_susc_s
 
+!!
+!! @sub cat_susc_value
+!!
+!!
+!!
   subroutine cat_susc_value(susc, omega, vert)
      use constants, only : dp, one, cone, czero
 
@@ -249,7 +254,6 @@
              enddo ! over i={1,nffrq} loop
          enddo ! over j={1,norbs} loop
      enddo ! over k={1,nkpts} loop
-
      Lwk = Lwk / dual_b * (-one)
      Lwk = Lwk * dual_g
 
