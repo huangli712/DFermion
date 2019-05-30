@@ -169,6 +169,8 @@
   subroutine df_eval_susc_c()
      implicit none
 
+     call cat_susc_value()
+
      return
   end subroutine df_eval_susc_c
 
@@ -217,9 +219,8 @@
      allocate(mmat(nffrq,nffrq))
      allocate(Gmat(nffrq,nffrq))
 
-     !! print *, 'here'
-
      norm = 0.5_dp
+     om = bmesh(1)
 
      do k=1,nkpts
          do j=1,norbs
@@ -231,19 +232,6 @@
 
      Lwk = Lwk / dual_b * (-one)
      Lwk = Lwk * dual_g
-
-     !! DEBUG
-     !!do i=1,nffrq
-     !!    print *, i, Lwk(i,1,1), Lwk(i,1,2)
-     !!enddo
-     !!STOP
-
-     !! DEBUG
-     !!print *, bmesh(1)
-     !!print *, vert_m(:,:,1)
-     !!STOP
-
-     om = bmesh(1)
 
      if ( om == 0.0_dp ) then
          gstp = dual_g
@@ -301,8 +289,6 @@
          !! DEBUG
          print *, k, susc
      enddo
-
-     STOP
 
      return
   end subroutine cat_susc_value
