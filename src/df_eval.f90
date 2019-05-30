@@ -181,7 +181,7 @@
      complex(dp), allocatable :: susc(:)
      allocate(susc(nkpts))
 
-     call cat_susc_value( susc, 1.0_dp, bmesh(1), vert_d(:,:,1) )
+     call cat_susc_value( susc, bmesh(1), vert_d(:,:,1) )
 
      do i=1,nkpts
          print *, i, susc(i)
@@ -203,7 +203,7 @@
      return
   end subroutine df_eval_susc_s
 
-  subroutine cat_susc_value(susc, norm, omega, vert)
+  subroutine cat_susc_value(susc, omega, vert)
      use constants, only : dp, one, cone, czero
 
      use control, only : nkpts, norbs, nffrq
@@ -212,10 +212,8 @@
 
      implicit none
 
-     real(dp), intent(in) :: norm
      real(dp), intent(in) :: omega
      complex(dp), intent(in)  :: vert(nffrq,nffrq)
-
      complex(dp), intent(out) :: susc(nkpts)
 
 ! local variables
@@ -278,7 +276,7 @@
 
          ytmp = czero
          call zgemv('N', nffrq, nffrq, cone, Gmat, nffrq, gt2(:,1,k), 1, czero, ytmp, 1)
-         susc(k) = dot_product(gt2(:,1,k), ytmp) * norm
+         susc(k) = dot_product(gt2(:,1,k), ytmp)
      enddo
 
      return
