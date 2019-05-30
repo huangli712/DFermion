@@ -169,14 +169,16 @@
      use constants, only : dp, one
 
      use control, only : nkpts, norbs, nffrq
-     use context, only : dmft_g, dmft_h, ek, dual_b, dual_g, bmesh
+     use context, only : dmft_g, dmft_h, ek, dual_b, dual_g, bmesh, fmesh
      use context, only : vert_m, latt_g
 
      implicit none
 
      integer :: i, j, k
+
      complex(dp), allocatable :: Lwk(:,:,:)
      complex(dp), allocatable :: gstp(:,:,:)
+
      complex(dp), allocatable :: gd2(:,:,:)
      complex(dp), allocatable :: gt2(:,:,:)
      complex(dp), allocatable :: gl2(:,:,:)
@@ -221,6 +223,12 @@
          call cat_fill_k(dual_g, gstp, om)
      endif
      call cat_dia_2d(dual_g, gstp, gd2)
+
+     !! DEBUG
+     do i=1,nffrq
+         print *, fmesh(i), gd2(i,1,1), gd2(i,1,2)
+     enddo
+     STOP
 
      if ( om == 0.0_dp ) then
          gstp = Lwk
