@@ -5,6 +5,7 @@
 !!!           df_eval_latt_s
 !!!           df_eval_susc_c
 !!!           df_eval_susc_s
+!!!           cat_susc_value
 !!! source  : df_eval.f90
 !!! type    : subroutines
 !!! author  : li huang (email:lihuang.dmft@gmail.com)
@@ -166,6 +167,23 @@
 !! calculate the charge susceptibility within the dual fermion framework
 !!
   subroutine df_eval_susc_c()
+     implicit none
+
+     return
+  end subroutine df_eval_susc_c
+
+!!
+!! @sub df_eval_susc_s
+!!
+!! calculate the spin susceptibility within the dual fermion framework
+!!
+  subroutine df_eval_susc_s()
+     implicit none
+
+     return
+  end subroutine df_eval_susc_s
+
+  subroutine cat_susc_value()
      use constants, only : dp, one, cone, czero
 
      use control, only : nkpts, norbs, nffrq
@@ -287,15 +305,4 @@
      STOP
 
      return
-  end subroutine df_eval_susc_c
-
-!!
-!! @sub df_eval_susc_s
-!!
-!! calculate the spin susceptibility within the dual fermion framework
-!!
-  subroutine df_eval_susc_s()
-     implicit none
-
-     return
-  end subroutine df_eval_susc_s
+  end subroutine cat_susc_value
