@@ -169,13 +169,25 @@
      use constants, only : dp, one
 
      use control, only : nkpts, norbs, nffrq
-     use context, only : dmft_g, dmft_h, ek, dual_b, dual_g
+     use context, only : dmft_g, dmft_h, ek, dual_b, dual_g, bmesh
+     use context, only : vert_m, latt_g
 
      implicit none
 
      integer :: i, j, k
      complex(dp), allocatable :: Lwk(:,:,:)
+     complex(dp), allocatable :: gstp(:,:,:)
+     complex(dp), allocatable :: gd2(:,:,:)
+     complex(dp), allocatable :: gt2(:,:,:)
+     complex(dp), allocatable :: gl2(:,:,:)
+
+     real(dp) :: om
+
      allocate(Lwk(nffrq,norbs,nkpts))
+     allocate(gstp(nffrq,norbs,nkpts))
+     allocate(gd2(nffrq,norbs,nkpts))
+     allocate(gt2(nffrq,norbs,nkpts))
+     allocate(gl2(nffrq,norbs,nkpts))
 
      !! print *, 'here'
 
@@ -191,10 +203,38 @@
      Lwk = Lwk * dual_g
 
      !! DEBUG
-     do i=1,nffrq
-         print *, i, Lwk(i,1,1), Lwk(i,1,2)
-     enddo
-     STOP
+     !!do i=1,nffrq
+     !!    print *, i, Lwk(i,1,1), Lwk(i,1,2)
+     !!enddo
+     !!STOP
+
+     !! DEBUG
+     !!print *, bmesh(1)
+     !!print *, vert_m(:,:,1)
+     !!STOP
+
+     om = bmesh(1)
+
+     if ( om == 0.0_dp ) then
+         gstp = dual_g
+     else
+         call cat_fill_k(dual_g, gstp, om)
+     endif
+     call cat_dia_2d(dual_g, gstp, gd2)
+
+     if ( om == 0.0_dp ) then
+         gstp = Lwk
+     else
+         call cat_fill_k(Lwk, gstp, om)
+     endif
+     call cat_dia_2d(Lwk, gstp, gt2)
+
+     if ( om == 0.0_dp ) then
+         gstp = latt_g
+     else
+         call cat_fill_k(latt_g, gstp, om)
+     endif
+     call cat_dia_2d(latt_g, gstp, gl2)
 
      return
   end subroutine df_eval_susc_c
