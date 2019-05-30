@@ -285,6 +285,7 @@
      enddo
 
      STOP
+
      return
   end subroutine df_eval_susc_c
 
