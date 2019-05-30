@@ -188,7 +188,7 @@
      enddo ! over i={1,nbfrq} loop
 
      do i=1,nkpts
-         print *, i, susc(1,i)
+         print *, i, susc_c(1,1,i)
      enddo
 
      deallocate(susc)
@@ -280,7 +280,7 @@
 
          ytmp = czero
          call zgemv('N', nffrq, nffrq, cone, Gmat, nffrq, gt2(:,1,k), 1, czero, ytmp, 1)
-         susc(:,k) = dot_product(gt2(:,1,k), ytmp)
+         susc(1,k) = dot_product(gt2(:,1,k), ytmp)
      enddo
 
      return

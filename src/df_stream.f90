@@ -14,7 +14,7 @@
 !!! type    : subroutines
 !!! author  : li huang (email:lihuang.dmft@gmail.com)
 !!! history : 09/16/2009 by li huang (created)
-!!!           04/30/2019 by li huang (last modified)
+!!!           05/31/2019 by li huang (last modified)
 !!! purpose : initialize and finalize the dual fermion framework.
 !!! status  : unstable
 !!! comment :
@@ -563,6 +563,7 @@
      call cat_alloc_dmft()
      call cat_alloc_dual()
      call cat_alloc_latt()
+     call cat_alloc_susc()
      call cat_alloc_vert()
      
      return
@@ -594,6 +595,7 @@
      call cat_free_dmft()
      call cat_free_dual()
      call cat_free_latt()
+     call cat_free_susc()
      call cat_free_vert()
 
      return
