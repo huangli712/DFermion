@@ -242,17 +242,17 @@
      Lwk = Lwk / dual_b * (-one)
      Lwk = Lwk * dual_g
 
-     if ( om == 0.0_dp ) then
+     if ( omega == 0.0_dp ) then
          gstp = dual_g
      else
-         call cat_fill_k(dual_g, gstp, om)
+         call cat_fill_k(dual_g, gstp, omega)
      endif
      call cat_dia_2d(dual_g, gstp, gd2)
 
-     if ( om == 0.0_dp ) then
+     if ( omega == 0.0_dp ) then
          gstp = Lwk
      else
-         call cat_fill_k(Lwk, gstp, om)
+         call cat_fill_k(Lwk, gstp, omega)
      endif
      call cat_dia_2d(Lwk, gstp, gt2)
 
