@@ -211,8 +211,8 @@
      use constants, only : dp, one, cone, czero
 
      use control, only : nkpts, norbs, nffrq
-     use context, only : dmft_g, dmft_h, ek, dual_b, dual_g, bmesh, fmesh
-     use context, only : vert_m, vert_d, latt_g
+     use context, only : dmft_g, dmft_h, ek, dual_b, dual_g
+     use context, only : latt_g
 
      implicit none
 
