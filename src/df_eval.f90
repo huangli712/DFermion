@@ -166,7 +166,7 @@
 !! calculate the charge susceptibility within the dual fermion framework
 !!
   subroutine df_eval_susc_c()
-     use constants, only : dp, one
+     use constants, only : dp, one, cone, czero
 
      use control, only : nkpts, norbs, nffrq
      use context, only : dmft_g, dmft_h, ek, dual_b, dual_g, bmesh, fmesh
@@ -186,7 +186,9 @@
      complex(dp), allocatable :: mmat(:,:)
      complex(dp), allocatable :: Gmat(:,:)
 
-     real(dp) :: om
+     real(dp) :: om, norm
+     complex(dp) :: susc
+     complex(dp) :: ytmp(nffrq)
 
      allocate(Lwk(nffrq,norbs,nkpts))
      allocate(gstp(nffrq,norbs,nkpts))
@@ -198,6 +200,8 @@
      allocate(Gmat(nffrq,nffrq))
 
      !! print *, 'here'
+
+     norm = 0.5_dp
 
      do k=1,nkpts
          do j=1,norbs
@@ -262,16 +266,25 @@
      !!enddo
      !!STOP
 
-     mmat = vert_m(:,:,v)
+     mmat = vert_m(:,:,1)
      do k=1,nkpts
          call s_diag_z(nffrq, gd2(:,1,k), imat)
          call cat_bse_solver(imat, mmat, Gmat)
 
          !! DEBUG
-         print *, Gmat
-         STOP
+         !!print *, Gmat
+         !!STOP
+
+         !!susc = matmul(matmul(transpose(gt2(:,1,k)), Gmat), gt2(:,1,k))
+
+         ytmp = czero
+         call zgemv('N', nffrq, nffrq, cone, Gmat, nffrq, gt2(:,1,k), 1, czero, ytmp, 1)
+         susc = dot_product(gt2(:,1,k), ytmp) * norm
+         !! DEBUG
+         print *, k, susc
      enddo
 
+     STOP
      return
   end subroutine df_eval_susc_c
 
