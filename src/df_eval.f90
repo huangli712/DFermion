@@ -263,7 +263,7 @@
 
      do k=1,nkpts
          call s_diag_z(nffrq, gd2(:,1,k), imat)
-         call cat_bse_solver(imat, mmat, Gmat)
+         call cat_bse_solver(imat, vert, Gmat)
 
          ytmp = czero
          call zgemv('N', nffrq, nffrq, cone, Gmat, nffrq, gt2(:,1,k), 1, czero, ytmp, 1)
