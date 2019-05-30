@@ -217,7 +217,6 @@
      complex(dp), allocatable :: gt2(:,:,:)
      complex(dp), allocatable :: gl2(:,:,:)
      complex(dp), allocatable :: imat(:,:)
-     complex(dp), allocatable :: mmat(:,:)
      complex(dp), allocatable :: Gmat(:,:)
 
      complex(dp) :: ytmp(nffrq)
@@ -228,7 +227,6 @@
      allocate(gt2(nffrq,norbs,nkpts))
      allocate(gl2(nffrq,norbs,nkpts))
      allocate(imat(nffrq,nffrq))
-     allocate(mmat(nffrq,nffrq))
      allocate(Gmat(nffrq,nffrq))
 
      do k=1,nkpts
@@ -256,14 +254,13 @@
      endif
      call cat_dia_2d(Lwk, gstp, gt2)
 
-     if ( om == 0.0_dp ) then
+     if ( omega == 0.0_dp ) then
          gstp = latt_g
      else
-         call cat_fill_k(latt_g, gstp, om)
+         call cat_fill_k(latt_g, gstp, omega)
      endif
      call cat_dia_2d(latt_g, gstp, gl2)
 
-     mmat = vert_m(:,:,1)
      do k=1,nkpts
          call s_diag_z(nffrq, gd2(:,1,k), imat)
          call cat_bse_solver(imat, mmat, Gmat)
