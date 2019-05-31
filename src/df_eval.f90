@@ -338,7 +338,7 @@
 !!
 !! @sub cat_susc_value
 !!
-!!
+!! try to calculate the susceptibility for a given bosonic frequency
 !!
   subroutine cat_susc_value(susc, vert, gd2, gt2, gl2)
      use constants, only : dp, one, cone, czero
