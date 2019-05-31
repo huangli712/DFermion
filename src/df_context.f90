@@ -11,7 +11,7 @@
 !!! type    : modules
 !!! author  : li huang (email:lihuang.dmft@gmail.com)
 !!! history : 09/16/2009 by li huang (created)
-!!!           05/28/2019 by li huang (last modified)
+!!!           05/31/2019 by li huang (last modified)
 !!! purpose : define the key data structure and global arrays/variables
 !!!           for dual fermion framework.
 !!! status  : unstable
@@ -105,9 +105,16 @@
 !!
 !! @var dmft_h
 !!
-!! local hybridization function
+!! local hybridization function (old, input)
 !!
      complex(dp), public, save, allocatable :: dmft_h(:,:)
+
+!!
+!! @var dmft_y
+!!
+!! local hybridization function (new, output)
+!!
+     complex(dp), public, save, allocatable :: dmft_y(:,:)
 
   end module df_dmft
 
@@ -342,6 +349,7 @@
      allocate(dmft_g(nffrq,norbs), stat=istat)
      allocate(dmft_s(nffrq,norbs), stat=istat)
      allocate(dmft_h(nffrq,norbs), stat=istat)
+     allocate(dmft_y(nffrq,norbs), stat=istat)
 
 ! check the status
      if ( istat /= 0 ) then
@@ -352,6 +360,7 @@
      dmft_g = czero
      dmft_s = czero
      dmft_h = czero
+     dmft_y = czero
 
      return
   end subroutine cat_alloc_dmft
@@ -488,6 +497,7 @@
      if ( allocated(dmft_g) ) deallocate(dmft_g)
      if ( allocated(dmft_s) ) deallocate(dmft_s)
      if ( allocated(dmft_h) ) deallocate(dmft_h)
+     if ( allocated(dmft_y) ) deallocate(dmft_y)
 
      return
   end subroutine cat_free_dmft
