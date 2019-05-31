@@ -249,6 +249,16 @@
 
      real(dp), intent(in) :: omega
 
+     complex(dp), allocatable :: gstp(:,:,:)
+     complex(dp), allocatable :: gd2(:,:,:)
+     complex(dp), allocatable :: gt2(:,:,:)
+     complex(dp), allocatable :: gl2(:,:,:)
+
+     allocate(gstp(nffrq,norbs,nkpts))
+     allocate(gd2(nffrq,norbs,nkpts))
+     allocate(gt2(nffrq,norbs,nkpts))
+     allocate(gl2(nffrq,norbs,nkpts))
+
      if ( omega == 0.0_dp ) then
          gstp = dual_g
      else
@@ -291,26 +301,15 @@
      complex(dp), intent(out) :: susc(norbs,nkpts)
 
 ! local variables
-     integer :: i, j, k
+     integer :: k
 
-     complex(dp), allocatable :: gstp(:,:,:)
-
-     complex(dp), allocatable :: gd2(:,:,:)
-     complex(dp), allocatable :: gt2(:,:,:)
-     complex(dp), allocatable :: gl2(:,:,:)
      complex(dp), allocatable :: imat(:,:)
      complex(dp), allocatable :: Gmat(:,:)
 
      complex(dp) :: ytmp(nffrq)
 
-     allocate(gstp(nffrq,norbs,nkpts))
-     allocate(gd2(nffrq,norbs,nkpts))
-     allocate(gt2(nffrq,norbs,nkpts))
-     allocate(gl2(nffrq,norbs,nkpts))
      allocate(imat(nffrq,nffrq))
      allocate(Gmat(nffrq,nffrq))
-
-
 
      do k=1,nkpts
          call s_diag_z(nffrq, gd2(:,1,k), imat)
