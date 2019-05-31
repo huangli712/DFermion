@@ -234,7 +234,7 @@
 !! try to calculate L_{\Omega,\omega}(q)
 !!
   subroutine cat_susc_lwq(Lwq)
-     use constants, only : dp, one
+     use constants, only : dp
 
      use control, only : norbs
      use control, only : nffrq
@@ -269,12 +269,17 @@
          enddo ! over j={1,norbs} loop
      enddo ! over k={1,nkpts} loop
 
-     Lwq = Lwq / dual_b !!! * (-one)
+     Lwq = Lwq / dual_b
      Lwq = Lwq * dual_g
 
      return
   end subroutine cat_susc_lwq
 
+!!
+!! @sub cat_susc_conv
+!!
+!! try to calculate convolution between some lattice quantities
+!!
   subroutine cat_susc_conv(omega, Lwk, gd2, gt2, gl2)
      use constants, only : dp
 
