@@ -174,7 +174,7 @@
   subroutine df_eval_susc_c()
      use constants, only : dp
 
-     use control, only : nkpts, norbs, nbfrq
+     use control, only : nkpts, norbs, nbfrq, nffrq
      use context, only : bmesh
      use context, only : vert_d
      use context, only : susc_c
@@ -184,7 +184,10 @@
 ! local variables
      integer :: i
 
+     complex(dp), allocatable :: Lwk(:,:,:)
      complex(dp), allocatable :: susc(:,:)
+
+     allocate(Lwk(nffrq,norbs,nkpts))
      allocate(susc(norbs,nkpts))
 
      do i=1,nbfrq 
@@ -260,7 +263,6 @@
 ! local variables
      integer :: i, j, k
 
-     complex(dp), allocatable :: Lwk(:,:,:)
      complex(dp), allocatable :: gstp(:,:,:)
 
      complex(dp), allocatable :: gd2(:,:,:)
@@ -271,7 +273,6 @@
 
      complex(dp) :: ytmp(nffrq)
 
-     allocate(Lwk(nffrq,norbs,nkpts))
      allocate(gstp(nffrq,norbs,nkpts))
      allocate(gd2(nffrq,norbs,nkpts))
      allocate(gt2(nffrq,norbs,nkpts))
