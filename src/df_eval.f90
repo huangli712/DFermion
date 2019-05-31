@@ -281,43 +281,55 @@
 !! try to calculate convolution between some lattice quantities
 !!
   subroutine cat_susc_conv(omega, Lwq, gd2, gt2, gl2)
-     use constants, only : dp
+     use constants, only : dp, zero
 
-     use control, only : nffrq, norbs, nkpts
-     use context, only : dual_g, latt_g
+     use control, only : norbs
+     use control, only : nffrq
+     use control, only : nkpts
+
+     use context, only : dual_g
+     use context, only : latt_g
 
      implicit none
 
+! external arguments
      real(dp), intent(in) :: omega
-     complex(dp), intent(in) :: Lwq(nffrq,norbs,nkpts)
+     complex(dp), intent(in)  :: Lwq(nffrq,norbs,nkpts)
      complex(dp), intent(out) :: gd2(nffrq,norbs,nkpts)
      complex(dp), intent(out) :: gt2(nffrq,norbs,nkpts)
      complex(dp), intent(out) :: gl2(nffrq,norbs,nkpts)
 
+! local variables
      complex(dp), allocatable :: gstp(:,:,:)
+
+! allocate memory
      allocate(gstp(nffrq,norbs,nkpts))
 
-     if ( omega == 0.0_dp ) then
+! gd2 means the convolution of two dual green's functions
+     if ( omega == zero ) then
          gstp = dual_g
      else
          call cat_fill_k(dual_g, gstp, omega)
      endif
      call cat_dia_2d(dual_g, gstp, gd2)
 
-     if ( omega == 0.0_dp ) then
+! gt2 means the convolution of two L_{\Omega,\omega}{q}
+     if ( omega == zero ) then
          gstp = Lwq
      else
          call cat_fill_k(Lwq, gstp, omega)
      endif
      call cat_dia_2d(Lwq, gstp, gt2)
 
-     if ( omega == 0.0_dp ) then
+! gl2 means the convolution of two lattice green's functions
+     if ( omega == zero ) then
          gstp = latt_g
      else
          call cat_fill_k(latt_g, gstp, omega)
      endif
      call cat_dia_2d(latt_g, gstp, gl2)
 
+! deallocate memory
      deallocate(gstp)
 
      return
