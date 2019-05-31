@@ -254,6 +254,13 @@
      integer :: j
      integer :: k
 
+!!
+!! L_{\Omega,\omega}(q) = G_{dual} G_{latt} / G^{0}_{dual}
+!!
+
+! try to calculate G_{latt}
+! since latt_g was already updated at df_eval_latt_g(), here we have to
+! recompute it. note that dmft_g and dmft_h were old.
      do k=1,nkpts
          do j=1,norbs
              do i=1,nffrq
@@ -262,7 +269,7 @@
          enddo ! over j={1,norbs} loop
      enddo ! over k={1,nkpts} loop
 
-     Lwq = Lwq / dual_b * (-one)
+     Lwq = Lwq / dual_b !!! * (-one)
      Lwq = Lwq * dual_g
 
      return
