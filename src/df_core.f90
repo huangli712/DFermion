@@ -24,7 +24,7 @@
      use control, only : myid, master
 
      use context, only : fmesh
-     use context, only : dmft_h
+     use context, only : dmft_y
      use context, only : dual_g, dual_s, dual_b
      use context, only : latt_g, latt_s
  
@@ -53,7 +53,7 @@
      call df_eval_dmft_h()
 
      if ( myid == master ) then
-         call df_dump_dmft_h(fmesh, dmft_h)
+         call df_dump_dmft_h(fmesh, dmft_y)
      endif ! back if ( myid == master ) block
 
      if ( myid == master ) then
