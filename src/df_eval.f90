@@ -343,7 +343,9 @@
   subroutine cat_susc_value(susc, vert, gd2, gt2, gl2)
      use constants, only : dp, cone, czero
 
-     use control, only : nkpts, norbs, nffrq
+     use control, only : norbs
+     use control, only : nffrq
+     use control, only : nkpts
 
      implicit none
 
@@ -356,6 +358,7 @@
      complex(dp), intent(in) :: gl2(nffrq,norbs,nkpts)
 
 ! local variables
+     integer :: i
      integer :: k
 
      complex(dp), allocatable :: yvec(:)
@@ -367,14 +370,16 @@
      allocate(imat(nffrq,nffrq))
      allocate(Gmat(nffrq,nffrq))
 
-     do k=1,nkpts
-         call s_diag_z(nffrq, gd2(:,1,k), imat)
-         call cat_bse_solver(imat, vert, Gmat)
+     do i=1,norbs
+         do k=1,nkpts
+             call s_diag_z(nffrq, gd2(:,i,k), imat)
+             call cat_bse_solver(imat, vert, Gmat)
 
-         yvec = czero
-         call zgemv('N', nffrq, nffrq, cone, Gmat, nffrq, gt2(:,1,k), 1, czero, yvec, 1)
-         susc(1,k) = dot_product(gt2(:,1,k), yvec)
-     enddo ! over k={1,nkpts} loop
+             yvec = czero
+             call zgemv('N', nffrq, nffrq, cone, Gmat, nffrq, gt2(:,i,k), 1, czero, yvec, 1)
+             susc(i,k) = dot_product(gt2(:,i,k), yvec)
+         enddo ! over k={1,nkpts} loop
+     enddo ! over i={1,norbs} loop
 
 ! deallocate memory
      deallocate(yvec)
