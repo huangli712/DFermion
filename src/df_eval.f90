@@ -245,6 +245,10 @@
   end subroutine cat_susc_lwq
 
   subroutine cat_susc_conv(omega)
+     use constants, only : dp
+
+     use control, only : nffrq, norbs, nkpts
+
      implicit none
 
      real(dp), intent(in) :: omega
