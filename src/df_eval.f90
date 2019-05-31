@@ -221,7 +221,7 @@
 
      implicit none
 
-     complex(dp), intent(in) :: Lwq(nffrq,norbs,nkpts)
+     complex(dp), intent(out) :: Lwq(nffrq,norbs,nkpts)
 
      integer :: i, j, k
 
