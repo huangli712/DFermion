@@ -174,10 +174,13 @@
   subroutine df_eval_susc_c()
      use constants, only : dp, one
 
-     use control, only : nkpts, norbs, nbfrq, nffrq
+     use control, only : norbs
+     use control, only : nffrq, nbfrq
+     use control, only : nkpts
+
      use context, only : bmesh
-     use context, only : vert_d
      use context, only : susc_c
+     use context, only : vert_d
 
      implicit none
 
@@ -225,10 +228,18 @@
      return
   end subroutine df_eval_susc_s
 
+!!
+!! @sub cat_susc_lwq
+!!
+!! try to calculate L_{\Omega,\omega}(q)
+!!
   subroutine cat_susc_lwq(Lwq)
      use constants, only : dp, one
 
-     use control, only : norbs, nffrq, nkpts
+     use control, only : norbs
+     use control, only : nffrq
+     use control, only : nkpts
+
      use context, only : dmft_g, dmft_h, ek
      use context, only : dual_b, dual_g
 
