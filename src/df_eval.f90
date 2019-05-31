@@ -213,7 +213,7 @@
   end subroutine df_eval_susc_s
 
   subroutine cat_susc_lwq(Lwq)
-     use constants, only : one
+     use constants, only : dp, one
 
      use control, only : norbs, nffrq, nkpts
      use context, only : dmft_g, dmft_h, ek
