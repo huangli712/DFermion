@@ -172,7 +172,7 @@
 !! calculate the charge susceptibility within the dual fermion framework
 !!
   subroutine df_eval_susc_c()
-     use constants, only : dp
+     use constants, only : dp, one
 
      use control, only : nkpts, norbs, nbfrq, nffrq
      use context, only : bmesh
@@ -185,8 +185,6 @@
      integer :: i
 
      complex(dp), allocatable :: Lwk(:,:,:)
-     complex(dp), allocatable :: susc(:,:)
-
      complex(dp), allocatable :: gd2(:,:,:)
      complex(dp), allocatable :: gt2(:,:,:)
      complex(dp), allocatable :: gl2(:,:,:)
@@ -195,21 +193,18 @@
      allocate(gd2(nffrq,norbs,nkpts))
      allocate(gt2(nffrq,norbs,nkpts))
      allocate(gl2(nffrq,norbs,nkpts))
-     allocate(susc(norbs,nkpts))
 
      call cat_susc_lwq(Lwk)
 
      do i=1,nbfrq 
          call cat_susc_conv( bmesh(i), Lwk, gd2, gt2, gl2 )
-         call cat_susc_value( susc, vert_d(:,:,i), gd2, gt2, gl2 )
-         susc_c(i,:,:) = susc * 1.0_dp
+         call cat_susc_value( susc_c(i,:,:), vert_d(:,:,i), gd2, gt2, gl2 )
+         susc_c(i,:,:) = susc_c(i,:,:) * one
      enddo ! over i={1,nbfrq} loop
 
      do i=1,nkpts
          print *, i, susc_c(1,1,i)
      enddo
-
-     deallocate(susc)
 
      return
   end subroutine df_eval_susc_c
