@@ -212,6 +212,33 @@
      return
   end subroutine df_eval_susc_s
 
+  subroutine cat_susc_lwq(Lwq)
+     use constants, only : one
+
+     use control, only : norbs, nffrq, nkpts
+     use context, only : dmft_g, dmft_h, ek
+     use context, only : dual_b, dual_g
+
+     implicit none
+
+     complex(dp), intent(in) :: Lwq(nffrq,norbs,nkpts)
+
+     integer :: i, j, k
+
+     do k=1,nkpts
+         do j=1,norbs
+             do i=1,nffrq
+                 Lwq(i,j,k) = one / ( one / dmft_g(i,j) + dmft_h(i,j) - ek(k) ) 
+             enddo ! over i={1,nffrq} loop
+         enddo ! over j={1,norbs} loop
+     enddo ! over k={1,nkpts} loop
+
+     Lwq = Lwq / dual_b * (-one)
+     Lwq = Lwq * dual_g
+
+     return
+  end subroutine cat_susc_lwq
+
 !!
 !! @sub cat_susc_value
 !!
@@ -252,15 +279,6 @@
      allocate(imat(nffrq,nffrq))
      allocate(Gmat(nffrq,nffrq))
 
-     do k=1,nkpts
-         do j=1,norbs
-             do i=1,nffrq
-                 Lwk(i,j,k) = one / ( one / dmft_g(i,j) + dmft_h(i,j) - ek(k) ) 
-             enddo ! over i={1,nffrq} loop
-         enddo ! over j={1,norbs} loop
-     enddo ! over k={1,nkpts} loop
-     Lwk = Lwk / dual_b * (-one)
-     Lwk = Lwk * dual_g
 
      if ( omega == 0.0_dp ) then
          gstp = dual_g
