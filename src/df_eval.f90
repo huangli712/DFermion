@@ -240,14 +240,19 @@
      use control, only : nffrq
      use control, only : nkpts
 
-     use context, only : dmft_g, dmft_h, ek
-     use context, only : dual_b, dual_g
+     use context, only : ek
+     use context, only : dmft_g, dmft_h
+     use context, only : dual_g, dual_b
 
      implicit none
 
+! external arguments
      complex(dp), intent(out) :: Lwq(nffrq,norbs,nkpts)
 
-     integer :: i, j, k
+! local variables
+     integer :: i
+     integer :: j
+     integer :: k
 
      do k=1,nkpts
          do j=1,norbs
