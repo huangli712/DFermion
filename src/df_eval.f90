@@ -280,7 +280,7 @@
 !!
 !! try to calculate convolution between some lattice quantities
 !!
-  subroutine cat_susc_conv(omega, Lwk, gd2, gt2, gl2)
+  subroutine cat_susc_conv(omega, Lwq, gd2, gt2, gl2)
      use constants, only : dp
 
      use control, only : nffrq, norbs, nkpts
@@ -289,7 +289,7 @@
      implicit none
 
      real(dp), intent(in) :: omega
-     complex(dp), intent(in) :: Lwk(nffrq,norbs,nkpts)
+     complex(dp), intent(in) :: Lwq(nffrq,norbs,nkpts)
      complex(dp), intent(out) :: gd2(nffrq,norbs,nkpts)
      complex(dp), intent(out) :: gt2(nffrq,norbs,nkpts)
      complex(dp), intent(out) :: gl2(nffrq,norbs,nkpts)
@@ -305,11 +305,11 @@
      call cat_dia_2d(dual_g, gstp, gd2)
 
      if ( omega == 0.0_dp ) then
-         gstp = Lwk
+         gstp = Lwq
      else
-         call cat_fill_k(Lwk, gstp, omega)
+         call cat_fill_k(Lwq, gstp, omega)
      endif
-     call cat_dia_2d(Lwk, gstp, gt2)
+     call cat_dia_2d(Lwq, gstp, gt2)
 
      if ( omega == 0.0_dp ) then
          gstp = latt_g
