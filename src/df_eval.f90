@@ -6,7 +6,7 @@
 !!!           df_eval_susc_c
 !!!           df_eval_susc_s
 !!!           cat_susc_lwq
-!!!           cat_susc_prep
+!!!           cat_susc_conv
 !!!           cat_susc_value
 !!! source  : df_eval.f90
 !!! type    : subroutines
@@ -190,6 +190,8 @@
      allocate(Lwk(nffrq,norbs,nkpts))
      allocate(susc(norbs,nkpts))
 
+     call cat_susc_lwq(Lwk)
+
      do i=1,nbfrq 
          call cat_susc_value( susc, bmesh(i), vert_d(:,:,i) )
          susc_c(i,:,:) = susc * 1.0_dp
@@ -242,12 +244,41 @@
      return
   end subroutine cat_susc_lwq
 
+  subroutine cat_susc_conv(omega)
+     implicit none
+
+     real(dp), intent(in) :: omega
+
+     if ( omega == 0.0_dp ) then
+         gstp = dual_g
+     else
+         call cat_fill_k(dual_g, gstp, omega)
+     endif
+     call cat_dia_2d(dual_g, gstp, gd2)
+
+     if ( omega == 0.0_dp ) then
+         gstp = Lwk
+     else
+         call cat_fill_k(Lwk, gstp, omega)
+     endif
+     call cat_dia_2d(Lwk, gstp, gt2)
+
+     if ( omega == 0.0_dp ) then
+         gstp = latt_g
+     else
+         call cat_fill_k(latt_g, gstp, omega)
+     endif
+     call cat_dia_2d(latt_g, gstp, gl2)
+
+     return
+  end subroutine cat_susc_conv
+
 !!
 !! @sub cat_susc_value
 !!
 !!
 !!
-  subroutine cat_susc_value(susc, omega, vert)
+  subroutine cat_susc_value(susc, vert)
      use constants, only : dp, one, cone, czero
 
      use control, only : nkpts, norbs, nffrq
@@ -256,7 +287,6 @@
 
      implicit none
 
-     real(dp), intent(in) :: omega
      complex(dp), intent(in)  :: vert(nffrq,nffrq)
      complex(dp), intent(out) :: susc(norbs,nkpts)
 
@@ -281,26 +311,6 @@
      allocate(Gmat(nffrq,nffrq))
 
 
-     if ( omega == 0.0_dp ) then
-         gstp = dual_g
-     else
-         call cat_fill_k(dual_g, gstp, omega)
-     endif
-     call cat_dia_2d(dual_g, gstp, gd2)
-
-     if ( omega == 0.0_dp ) then
-         gstp = Lwk
-     else
-         call cat_fill_k(Lwk, gstp, omega)
-     endif
-     call cat_dia_2d(Lwk, gstp, gt2)
-
-     if ( omega == 0.0_dp ) then
-         gstp = latt_g
-     else
-         call cat_fill_k(latt_g, gstp, omega)
-     endif
-     call cat_dia_2d(latt_g, gstp, gl2)
 
      do k=1,nkpts
          call s_diag_z(nffrq, gd2(:,1,k), imat)
