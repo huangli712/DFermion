@@ -347,8 +347,10 @@
 
      implicit none
 
+! external arguments
      complex(dp), intent(in)  :: vert(nffrq,nffrq)
      complex(dp), intent(out) :: susc(norbs,nkpts)
+
      complex(dp), intent(in) :: gd2(nffrq,norbs,nkpts)
      complex(dp), intent(in) :: gt2(nffrq,norbs,nkpts)
      complex(dp), intent(in) :: gl2(nffrq,norbs,nkpts)
@@ -356,11 +358,12 @@
 ! local variables
      integer :: k
 
+     complex(dp), allocatable :: yvec(:)
      complex(dp), allocatable :: imat(:,:)
      complex(dp), allocatable :: Gmat(:,:)
 
-     complex(dp) :: ytmp(nffrq)
-
+! allocate memory
+     allocate(yvec(nffrq))
      allocate(imat(nffrq,nffrq))
      allocate(Gmat(nffrq,nffrq))
 
@@ -368,10 +371,15 @@
          call s_diag_z(nffrq, gd2(:,1,k), imat)
          call cat_bse_solver(imat, vert, Gmat)
 
-         ytmp = czero
-         call zgemv('N', nffrq, nffrq, cone, Gmat, nffrq, gt2(:,1,k), 1, czero, ytmp, 1)
-         susc(1,k) = dot_product(gt2(:,1,k), ytmp)
-     enddo
+         yvec = czero
+         call zgemv('N', nffrq, nffrq, cone, Gmat, nffrq, gt2(:,1,k), 1, czero, yvec, 1)
+         susc(1,k) = dot_product(gt2(:,1,k), yvec)
+     enddo ! over k={1,nkpts} loop
+
+! deallocate memory
+     deallocate(yvec)
+     deallocate(imat)
+     deallocate(Gmat)
 
      return
   end subroutine cat_susc_value
