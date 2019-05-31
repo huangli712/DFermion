@@ -234,7 +234,7 @@
 !! try to calculate L_{\Omega,\omega}(q)
 !!
   subroutine cat_susc_lwq(Lwq)
-     use constants, only : dp
+     use constants, only : dp, one
 
      use control, only : norbs
      use control, only : nffrq
