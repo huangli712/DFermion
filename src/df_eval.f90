@@ -393,7 +393,7 @@
      integer :: i
      integer :: k
 
-     real(dp), parameter :: add_lattice_bubble = zero
+     complex(dp), parameter :: add_lattice_bubble = czero
 
      complex(dp), allocatable :: yvec(:)
      complex(dp), allocatable :: imat(:,:)
