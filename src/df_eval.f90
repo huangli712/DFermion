@@ -12,7 +12,7 @@
 !!! type    : subroutines
 !!! author  : li huang (email:lihuang.dmft@gmail.com)
 !!! history : 04/29/2009 by li huang (created)
-!!!           05/31/2019 by li huang (last modified)
+!!!           06/01/2019 by li huang (last modified)
 !!! purpose : try to evaluate some key observables.
 !!! status  : unstable
 !!! comment :
@@ -234,6 +234,36 @@
      use context, only : vert_m
 
      implicit none
+
+! local variables
+     integer :: i
+
+     complex(dp), allocatable :: Lwq(:,:,:)
+     complex(dp), allocatable :: gd2(:,:,:)
+     complex(dp), allocatable :: gt2(:,:,:)
+     complex(dp), allocatable :: gl2(:,:,:)
+
+     allocate(Lwq(nffrq,norbs,nkpts))
+     allocate(gd2(nffrq,norbs,nkpts))
+     allocate(gt2(nffrq,norbs,nkpts))
+     allocate(gl2(nffrq,norbs,nkpts))
+
+     call cat_susc_lwq(Lwq)
+
+     do i=1,nbfrq 
+         call cat_susc_conv( bmesh(i), Lwq, gd2, gt2, gl2 )
+         call cat_susc_value( susc_s(i,:,:), vert_m(:,:,i), gd2, gt2, gl2 )
+         susc_s(i,:,:) = susc_s(i,:,:) * one
+     enddo ! over i={1,nbfrq} loop
+
+     do i=1,nkpts
+         print *, i, susc_s(1,1,i)
+     enddo
+
+     deallocate(Lwq)
+     deallocate(gd2)
+     deallocate(gt2)
+     deallocate(gl2)
 
      return
   end subroutine df_eval_susc_s
