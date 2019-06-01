@@ -12,7 +12,7 @@
 !!! type    : subroutines
 !!! author  : li huang (email:lihuang.dmft@gmail.com)
 !!! history : 04/29/2009 by li huang (created)
-!!!           06/01/2019 by li huang (last modified)
+!!!           06/02/2019 by li huang (last modified)
 !!! purpose : try to evaluate some key observables.
 !!! status  : unstable
 !!! comment :
@@ -172,7 +172,8 @@
 !! calculate the charge susceptibility within the dual fermion framework
 !!
   subroutine df_eval_susc_c()
-     use constants, only : dp, one
+     use constants, only : dp
+     use constants, only : one
 
      use control, only : norbs
      use control, only : nffrq, nbfrq
@@ -185,17 +186,29 @@
      implicit none
 
 ! local variables
+! loop index for bosonic frequencies
      integer :: i
 
+! L_{\omega,k}
      complex(dp), allocatable :: Lwq(:,:,:)
+
+! convolution of dual green's function:
+!     \sum_{k} G_{d}(\omgea, k) G_{d}(\omega + \Omega, k + q)
      complex(dp), allocatable :: gd2(:,:,:)
+
+! convolution of Lwq
+!     \sum_{k} L(\omega, k) L(\omega + \Omega, k + q)
      complex(dp), allocatable :: gt2(:,:,:)
+
+! convolution of lattice green's function
+!     \sum_{k} G_{d}(\omgea, k) G_{d}(\omega + \Omega, k + q)
      complex(dp), allocatable :: gl2(:,:,:)
 
-     allocate(Lwq(nffrq,norbs,nkpts))
-     allocate(gd2(nffrq,norbs,nkpts))
-     allocate(gt2(nffrq,norbs,nkpts))
-     allocate(gl2(nffrq,norbs,nkpts))
+! allocate memory
+     allocate(Lwq(nffrq,norbs,nkpts), stat=istat)
+     allocate(gd2(nffrq,norbs,nkpts), stat=istat)
+     allocate(gt2(nffrq,norbs,nkpts), stat=istat)
+     allocate(gl2(nffrq,norbs,nkpts), stat=istat)
 
      call cat_susc_lwq(Lwq)
 
@@ -205,6 +218,7 @@
          susc_c(i,:,:) = susc_c(i,:,:) * one
      enddo ! over i={1,nbfrq} loop
 
+! deallocate memory
      deallocate(Lwq)
      deallocate(gd2)
      deallocate(gt2)
