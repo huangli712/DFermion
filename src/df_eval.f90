@@ -223,7 +223,7 @@
 !! calculate the spin susceptibility within the dual fermion framework
 !!
   subroutine df_eval_susc_s()
-     use constants, only : dp, one
+     use constants, only : dp, half
 
      use control, only : norbs
      use control, only : nffrq, nbfrq
@@ -253,7 +253,7 @@
      do i=1,nbfrq 
          call cat_susc_conv( bmesh(i), Lwq, gd2, gt2, gl2 )
          call cat_susc_value( susc_s(i,:,:), vert_m(:,:,i), gd2, gt2, gl2 )
-         susc_s(i,:,:) = susc_s(i,:,:) * one
+         susc_s(i,:,:) = susc_s(i,:,:) * half
      enddo ! over i={1,nbfrq} loop
 
      do i=1,nkpts
