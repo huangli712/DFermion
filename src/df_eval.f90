@@ -205,10 +205,6 @@
          susc_c(i,:,:) = susc_c(i,:,:) * one
      enddo ! over i={1,nbfrq} loop
 
-     do i=1,nkpts
-         print *, i, susc_c(1,1,i)
-     enddo
-
      deallocate(Lwq)
      deallocate(gd2)
      deallocate(gt2)
@@ -255,10 +251,6 @@
          call cat_susc_value( susc_s(i,:,:), vert_m(:,:,i), gd2, gt2, gl2 )
          susc_s(i,:,:) = susc_s(i,:,:) * half
      enddo ! over i={1,nbfrq} loop
-
-     do i=1,nkpts
-         print *, i, susc_s(1,1,i)
-     enddo
 
      deallocate(Lwq)
      deallocate(gd2)
