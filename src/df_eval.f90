@@ -189,19 +189,22 @@
 ! loop index for bosonic frequencies
      integer :: i
 
+! status flag
+     integer :: istat
+
 ! L_{\omega,k}
      complex(dp), allocatable :: Lwq(:,:,:)
 
 ! convolution of dual green's function:
-!     \sum_{k} G_{d}(\omgea, k) G_{d}(\omega + \Omega, k + q)
+! --> \sum_{k} G_{d}(\omgea, k) G_{d}(\omega + \Omega, k + q)
      complex(dp), allocatable :: gd2(:,:,:)
 
-! convolution of Lwq
-!     \sum_{k} L(\omega, k) L(\omega + \Omega, k + q)
+! convolution of Lwq:
+! --> \sum_{k} L(\omega, k) L(\omega + \Omega, k + q)
      complex(dp), allocatable :: gt2(:,:,:)
 
-! convolution of lattice green's function
-!     \sum_{k} G_{d}(\omgea, k) G_{d}(\omega + \Omega, k + q)
+! convolution of lattice green's function:
+! --> \sum_{k} G_{d}(\omgea, k) G_{d}(\omega + \Omega, k + q)
      complex(dp), allocatable :: gl2(:,:,:)
 
 ! allocate memory
@@ -209,6 +212,10 @@
      allocate(gd2(nffrq,norbs,nkpts), stat=istat)
      allocate(gt2(nffrq,norbs,nkpts), stat=istat)
      allocate(gl2(nffrq,norbs,nkpts), stat=istat)
+
+     if ( istat /= 0 ) then
+         call s_print_error('df_eval_susc_c','can not allocate enough memory')
+     endif ! back if ( istat /= 0 ) block
 
      call cat_susc_lwq(Lwq)
 
