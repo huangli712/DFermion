@@ -393,6 +393,8 @@
      integer :: i
      integer :: k
 
+     real(dp), parameter :: add_lattice_bubble = zero
+
      complex(dp), allocatable :: yvec(:)
      complex(dp), allocatable :: imat(:,:)
      complex(dp), allocatable :: Gmat(:,:)
@@ -406,10 +408,10 @@
          do k=1,nkpts
              call s_diag_z(nffrq, gd2(:,i,k), imat)
              call cat_bse_solver(imat, vert, Gmat)
-
              yvec = czero
              call zgemv('N', nffrq, nffrq, cone, Gmat, nffrq, gt2(:,i,k), 1, czero, yvec, 1)
-             susc(i,k) = dot_product(gt2(:,i,k), yvec)
+             susc(i,k) = dot_product(gt2(:,i,k), yvec) 
+             susc(i,k) = susc(i,k) + sum(gl2(:,i,k)) * add_lattice_bubble
          enddo ! over k={1,nkpts} loop
      enddo ! over i={1,norbs} loop
 
