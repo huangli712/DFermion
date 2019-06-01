@@ -217,13 +217,18 @@
          call s_print_error('df_eval_susc_c','can not allocate enough memory')
      endif ! back if ( istat /= 0 ) block
 
+! try to calculate L(\omega,k) at first
      call cat_susc_lwq(Lwq)
 
-     do i=1,nbfrq 
+     V_LOOP: do i=1,nbfrq
+
          call cat_susc_conv( bmesh(i), Lwq, gd2, gt2, gl2 )
+
          call cat_susc_value( susc_c(i,:,:), vert_d(:,:,i), gd2, gt2, gl2 )
+
          susc_c(i,:,:) = susc_c(i,:,:) * one
-     enddo ! over i={1,nbfrq} loop
+
+     enddo V_LOOP ! over i={1,nbfrq} loop
 
 ! deallocate memory
      deallocate(Lwq)
