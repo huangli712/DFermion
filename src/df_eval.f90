@@ -223,6 +223,16 @@
 !! calculate the spin susceptibility within the dual fermion framework
 !!
   subroutine df_eval_susc_s()
+     use constants, only : dp, one
+
+     use control, only : norbs
+     use control, only : nffrq, nbfrq
+     use control, only : nkpts
+
+     use context, only : bmesh
+     use context, only : susc_s
+     use context, only : vert_m
+
      implicit none
 
      return
