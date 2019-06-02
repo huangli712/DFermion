@@ -252,15 +252,15 @@
 !!
   subroutine df_eval_susc_s()
      use constants, only : dp
-     use constants, only : one
+     use constants, only : half
 
      use control, only : norbs
      use control, only : nffrq, nbfrq
      use control, only : nkpts
 
      use context, only : bmesh
-     use context, only : susc_c
-     use context, only : vert_d
+     use context, only : susc_s
+     use context, only : vert_m
 
      implicit none
 
@@ -293,7 +293,7 @@
      allocate(gl2(nffrq,norbs,nkpts), stat=istat)
 
      if ( istat /= 0 ) then
-         call s_print_error('df_eval_susc_c','can not allocate enough memory')
+         call s_print_error('df_eval_susc_s','can not allocate enough memory')
      endif ! back if ( istat /= 0 ) block
 
 ! try to calculate L(\omega,k) at first
@@ -307,11 +307,11 @@
          call cat_susc_conv( bmesh(i), Lwq, gd2, gt2, gl2 )
 
 ! try to calculate the orbital-resolved and k-resolved susceptibilities.
-         call cat_susc_value( susc_c(i,:,:), vert_d(:,:,i), gd2, gt2, gl2 )
+         call cat_susc_value( susc_s(i,:,:), vert_m(:,:,i), gd2, gt2, gl2 )
 
 ! save the susceptibilies, here one is the normalization factor
-! note for charge susceptibility, the factor is one.
-         susc_c(i,:,:) = susc_c(i,:,:) * one
+! note for spin susceptibility, the factor is half.
+         susc_s(i,:,:) = susc_s(i,:,:) * half
 
      enddo V_LOOP ! over i={1,nbfrq} loop
 
