@@ -532,7 +532,7 @@
 !!
 !! @sub df_dump_vert_d
 !!
-!! write out vertex function (density channel) 
+!! write out vertex function (density channel)
 !!
   subroutine df_dump_vert_d()
      implicit none

@@ -57,7 +57,7 @@
      do j=1,norbs
          do i=1,nffrq
              associate ( zh => ( sum( dual_g(i,j,:) ) / sum( latt_g(i,j,:) ) ) )
-                 dmft_y(i,j) = dmft_h(i,j) + one / dmft_g(i,j) * zh 
+                 dmft_y(i,j) = dmft_h(i,j) + one / dmft_g(i,j) * zh
              end associate
          enddo ! over i={1,nffrq} loop
      enddo ! over j={1,norbs} loop
@@ -368,7 +368,7 @@
      do k=1,nkpts
          do j=1,norbs
              do i=1,nffrq
-                 Lwq(i,j,k) = one / ( one / dmft_g(i,j) + dmft_h(i,j) - ek(k) ) 
+                 Lwq(i,j,k) = one / ( one / dmft_g(i,j) + dmft_h(i,j) - ek(k) )
              enddo ! over i={1,nffrq} loop
          enddo ! over j={1,norbs} loop
      enddo ! over k={1,nkpts} loop
@@ -398,7 +398,7 @@
      implicit none
 
 ! external arguments
-! given bosonic frequency 
+! given bosonic frequency
      real(dp), intent(in) :: omega
 
 ! L(\omega, k)
@@ -507,7 +507,7 @@
 ! matrix form for bubble function (convolution of dual green's function)
      complex(dp), allocatable :: imat(:,:)
 
-! fully dressed vertex function, \Gamma 
+! fully dressed vertex function, \Gamma
      complex(dp), allocatable :: Gmat(:,:)
 
 ! allocate memory
@@ -526,7 +526,7 @@
              call s_diag_z(nffrq, gd2(:,i,k), imat)
              call cat_bse_solver(imat, vert, Gmat)
 
-! step 2: get susceptibility from \Gamma_{m/d} and convolution of dual 
+! step 2: get susceptibility from \Gamma_{m/d} and convolution of dual
 ! green's function
              yvec = czero
              call zgemv('N', nffrq, nffrq, cone, Gmat, nffrq, gt2(:,i,k), 1, czero, yvec, 1)

@@ -62,7 +62,7 @@
 ! eval I - \gamma \chi
      GamM = Imat - matmul(vrtM,chiM)
 
-! eval ( I - \gamma \chi )^-1 
+! eval ( I - \gamma \chi )^-1
      call s_inv_z(nffrq, GamM)
 
 ! eval ( I - \gamma \chi )^-1 \gamma
@@ -127,7 +127,7 @@
 ! update Vold with new GamM
          Vold = GamM
 
-     enddo BSE_ITERATOR ! over it={1,niter} loop 
+     enddo BSE_ITERATOR ! over it={1,niter} loop
 
      return
   end subroutine cat_bse_iterator

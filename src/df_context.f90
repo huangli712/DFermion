@@ -25,7 +25,7 @@
 !!
 !! @mod df_mesh
 !!
-!! define some essential k-meshes and frequency meshes 
+!! define some essential k-meshes and frequency meshes
 !!
   module df_mesh
      use constants, only : dp

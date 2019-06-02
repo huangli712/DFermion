@@ -239,7 +239,7 @@
              k = k + 1
              ek(k) = -two * part * ( cos( kx(i) ) + cos( ky(j) ) )
          enddo ! over j={1,nkp_y} loop
-     enddo ! over i={1,nkp_x} loop     
+     enddo ! over i={1,nkp_x} loop
      call s_assert(k == nkpts) ! we have to make sure this
 
 ! setup fermionic mesh
@@ -391,7 +391,7 @@
      do k=1,nkpts
          do j=1,norbs
              do i=1,nffrq
-                 latt_g(i,j,k) = one / ( one / dmft_g(i,j) + dmft_h(i,j) - ek(k) ) 
+                 latt_g(i,j,k) = one / ( one / dmft_g(i,j) + dmft_h(i,j) - ek(k) )
              enddo ! over i={1,nffrq} loop
          enddo ! over j={1,norbs} loop
      enddo ! over k={1,nkpts} loop
@@ -428,7 +428,7 @@
      do k=1,nkpts
          do j=1,norbs
              do i=1,nffrq
-                 dual_b(i,j,k) = latt_g(i,j,k) - dmft_g(i,j) 
+                 dual_b(i,j,k) = latt_g(i,j,k) - dmft_g(i,j)
                  dual_g(i,j,k) = dual_b(i,j,k)
                  dual_s(i,j,k) = czero
              enddo ! over i={1,nffrq} loop
@@ -565,7 +565,7 @@
      call cat_alloc_latt()
      call cat_alloc_susc()
      call cat_alloc_vert()
-     
+
      return
   end subroutine df_alloc_array
 

@@ -1,7 +1,7 @@
 !!!=========+=========+=========+=========+=========+=========+=========+!
 !!! AZALEA @ iQIST                                                       !
 !!!                                                                      !
-!!! A highly optimized dual fermion framework for dynamical mean field   ! 
+!!! A highly optimized dual fermion framework for dynamical mean field   !
 !!! theory which can be used to treat non-local correlations in strongly !
 !!! correlated systems                                                   !
 !!!                                                                      !

@@ -27,7 +27,7 @@
      use context, only : dmft_y
      use context, only : dual_g, dual_s, dual_b
      use context, only : latt_g, latt_s
- 
+
      implicit none
 
      DF_CORE: &
@@ -160,7 +160,7 @@
 ! matrix form for vertex function (density channel, \gamma^d)
      complex(dp), allocatable :: dmat(:,:)
 
-! fully dressed vertex function, \Gamma 
+! fully dressed vertex function, \Gamma
      complex(dp), allocatable :: Gmat(:,:)
 
 ! allocate memory
@@ -191,7 +191,7 @@
      !!    print *, it, fmesh(it), abs(sum(dual_g(it,1,:))) / nkpts
      !!    vr(1) = vr(1) + abs(sum(dual_g(it,1,:))) / nkpts
      !!enddo
-     !!print *, vr(1) / nffrq 
+     !!print *, vr(1) / nffrq
      !!
      !!STOP
 
@@ -240,8 +240,8 @@
              !!om = bmesh(4)
              !!print *, om
              !!call cat_fill_k(dual_g, gstp, om)
-             !!call cat_dia_2d(dual_g, gstp, g2) 
-             !!call cat_dia_2d(dual_g, dual_g, g2) 
+             !!call cat_dia_2d(dual_g, gstp, g2)
+             !!call cat_dia_2d(dual_g, dual_g, g2)
              !!do w=1,nffrq
              !!    print *, w, fmesh(w)
              !!    print *, g2(w,1,:)
