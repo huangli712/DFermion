@@ -251,39 +251,71 @@
 !! calculate the spin susceptibility within the dual fermion framework
 !!
   subroutine df_eval_susc_s()
-     use constants, only : dp, half
+     use constants, only : dp
+     use constants, only : one
 
      use control, only : norbs
      use control, only : nffrq, nbfrq
      use control, only : nkpts
 
      use context, only : bmesh
-     use context, only : susc_s
-     use context, only : vert_m
+     use context, only : susc_c
+     use context, only : vert_d
 
      implicit none
 
 ! local variables
+! loop index for bosonic frequencies
      integer :: i
 
+! status flag
+     integer :: istat
+
+! L_{\omega,k}
      complex(dp), allocatable :: Lwq(:,:,:)
+
+! convolution of dual green's function:
+! --> \sum_{k} G_{d}(\omgea, k) G_{d}(\omega + \Omega, k + q)
      complex(dp), allocatable :: gd2(:,:,:)
+
+! convolution of Lwq:
+! --> \sum_{k} L(\omega, k) L(\omega + \Omega, k + q)
      complex(dp), allocatable :: gt2(:,:,:)
+
+! convolution of lattice green's function:
+! --> \sum_{k} G_{d}(\omgea, k) G_{d}(\omega + \Omega, k + q)
      complex(dp), allocatable :: gl2(:,:,:)
 
-     allocate(Lwq(nffrq,norbs,nkpts))
-     allocate(gd2(nffrq,norbs,nkpts))
-     allocate(gt2(nffrq,norbs,nkpts))
-     allocate(gl2(nffrq,norbs,nkpts))
+! allocate memory
+     allocate(Lwq(nffrq,norbs,nkpts), stat=istat)
+     allocate(gd2(nffrq,norbs,nkpts), stat=istat)
+     allocate(gt2(nffrq,norbs,nkpts), stat=istat)
+     allocate(gl2(nffrq,norbs,nkpts), stat=istat)
 
+     if ( istat /= 0 ) then
+         call s_print_error('df_eval_susc_c','can not allocate enough memory')
+     endif ! back if ( istat /= 0 ) block
+
+! try to calculate L(\omega,k) at first
      call cat_susc_lwq(Lwq)
 
-     do i=1,nbfrq 
-         call cat_susc_conv( bmesh(i), Lwq, gd2, gt2, gl2 )
-         call cat_susc_value( susc_s(i,:,:), vert_m(:,:,i), gd2, gt2, gl2 )
-         susc_s(i,:,:) = susc_s(i,:,:) * half
-     enddo ! over i={1,nbfrq} loop
+     V_LOOP: do i=1,nbfrq
 
+! for a given bosonic frequency, try to calculate all of the necessary
+! convolutions. in order to calculate gt2, Lwq is needed. on the other
+! hand, gd2 and gl2 can be calculated with dual_g and latt_g, respectively.
+         call cat_susc_conv( bmesh(i), Lwq, gd2, gt2, gl2 )
+
+! try to calculate the orbital-resolved and k-resolved susceptibilities.
+         call cat_susc_value( susc_c(i,:,:), vert_d(:,:,i), gd2, gt2, gl2 )
+
+! save the susceptibilies, here one is the normalization factor
+! note for charge susceptibility, the factor is one.
+         susc_c(i,:,:) = susc_c(i,:,:) * one
+
+     enddo V_LOOP ! over i={1,nbfrq} loop
+
+! deallocate memory
      deallocate(Lwq)
      deallocate(gd2)
      deallocate(gt2)
