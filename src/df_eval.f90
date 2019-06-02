@@ -497,6 +497,7 @@
 ! loop indices
      integer :: i
      integer :: k
+     integer :: j
 
 ! status flag
      integer :: istat
@@ -530,13 +531,9 @@
 ! green's function
              yvec = czero
              call zgemv('N', nffrq, nffrq, cone, Gmat, nffrq, gt2(:,i,k), 1, czero, yvec, 1)
-             print *, yvec
-
-             STOP
-
              susc(i,k) = dot_product(gt2(:,i,k), yvec)
 
-! step 3: add up the contribution from lattice bubble
+! step 3: add up the contribution from lattice bubble to susc
              susc(i,k) = susc(i,k) + sum(gl2(:,i,k)) * add_lattice_bubble
 
          enddo K_LOOP ! over k={1,nkpts} loop
