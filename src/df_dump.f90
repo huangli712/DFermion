@@ -537,6 +537,8 @@
   subroutine df_dump_vert_d()
      implicit none
 
+     CONTINUE
+
      return
   end subroutine df_dump_vert_d
 
@@ -548,6 +550,8 @@
   subroutine df_dump_vert_m()
      implicit none
 
+     CONTINUE
+
      return
   end subroutine df_dump_vert_m
 
@@ -558,6 +562,8 @@
 !!
   subroutine df_dump_vert_f()
      implicit none
+
+     CONTINUE
 
      return
   end subroutine df_dump_vert_f
