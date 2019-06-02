@@ -222,10 +222,16 @@
 
      V_LOOP: do i=1,nbfrq
 
+! for a given bosonic frequency, try to calculate all of the necessary
+! convolutions. in order to calculate gt2, Lwq is needed. on the other
+! hand, gd2 and gl2 can be calculated with dual_g and latt_g, respectively.
          call cat_susc_conv( bmesh(i), Lwq, gd2, gt2, gl2 )
 
+! try to calculate the orbital-resolved and k-resolved susceptibilities.
          call cat_susc_value( susc_c(i,:,:), vert_d(:,:,i), gd2, gt2, gl2 )
 
+! save the susceptibilies, here one is the normalization factor
+! note for charge susceptibility, the factor is one.
          susc_c(i,:,:) = susc_c(i,:,:) * one
 
      enddo V_LOOP ! over i={1,nbfrq} loop
