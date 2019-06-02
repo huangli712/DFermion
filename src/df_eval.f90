@@ -530,6 +530,10 @@
 ! green's function
              yvec = czero
              call zgemv('N', nffrq, nffrq, cone, Gmat, nffrq, gt2(:,i,k), 1, czero, yvec, 1)
+             print *, yvec
+
+             STOP
+
              susc(i,k) = dot_product(gt2(:,i,k), yvec)
 
 ! step 3: add up the contribution from lattice bubble
