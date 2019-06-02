@@ -473,27 +473,47 @@
      implicit none
 
 ! external arguments
-     complex(dp), intent(in)  :: vert(nffrq,nffrq)
+! orbital- and momentum-resolved spin or charge susceptibility
      complex(dp), intent(out) :: susc(norbs,nkpts)
 
-     complex(dp), intent(in) :: gd2(nffrq,norbs,nkpts)
-     complex(dp), intent(in) :: gt2(nffrq,norbs,nkpts)
-     complex(dp), intent(in) :: gl2(nffrq,norbs,nkpts)
+! matrix form for vertex function
+     complex(dp), intent(in)  :: vert(nffrq,nffrq)
+
+! convolution of dual green's function
+     complex(dp), intent(in)  :: gd2(nffrq,norbs,nkpts)
+
+! convolution of Lwq
+     complex(dp), intent(in)  :: gt2(nffrq,norbs,nkpts)
+
+! convolution of lattice green's function
+     complex(dp), intent(in)  :: gl2(nffrq,norbs,nkpts)
+
+! local parameters
+! flag, it denotes whether the contribution from the lattice bubble will
+! be included in the calculation of susceptibility
+     complex(dp), parameter :: add_lattice_bubble = czero
 
 ! local variables
+! loop indices
      integer :: i
      integer :: k
 
-     complex(dp), parameter :: add_lattice_bubble = czero
+! status flag
+     integer :: istat
 
+! dummy complex(dp) vector
      complex(dp), allocatable :: yvec(:)
+
+! matrix form for bubble function (convolution of dual green's function)
      complex(dp), allocatable :: imat(:,:)
+
+! fully dressed vertex function, \Gamma 
      complex(dp), allocatable :: Gmat(:,:)
 
 ! allocate memory
-     allocate(yvec(nffrq))
-     allocate(imat(nffrq,nffrq))
-     allocate(Gmat(nffrq,nffrq))
+     allocate(yvec(nffrq)      , stat=istat)
+     allocate(imat(nffrq,nffrq), stat=istat)
+     allocate(Gmat(nffrq,nffrq), stat=istat)
 
      do i=1,norbs
          do k=1,nkpts
