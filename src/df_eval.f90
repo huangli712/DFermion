@@ -515,16 +515,28 @@
      allocate(imat(nffrq,nffrq), stat=istat)
      allocate(Gmat(nffrq,nffrq), stat=istat)
 
-     do i=1,norbs
-         do k=1,nkpts
+     if ( istat /= 0 ) then
+         call s_print_error('cat_susc_value','can not allocate enough memory')
+     endif ! back if ( istat /= 0 ) block
+
+     O_LOOP: do i=1,norbs
+         K_LOOP: do k=1,nkpts
+
+! step 1: try to solve the bethe-salpeter equation to obtain \Gamma_{m/d}
              call s_diag_z(nffrq, gd2(:,i,k), imat)
              call cat_bse_solver(imat, vert, Gmat)
+
+! step 2: get susceptibility from \Gamma_{m/d} and convolution of dual 
+! green's function
              yvec = czero
              call zgemv('N', nffrq, nffrq, cone, Gmat, nffrq, gt2(:,i,k), 1, czero, yvec, 1)
-             susc(i,k) = dot_product(gt2(:,i,k), yvec) 
+             susc(i,k) = dot_product(gt2(:,i,k), yvec)
+
+! step 3: add up the contribution from lattice bubble
              susc(i,k) = susc(i,k) + sum(gl2(:,i,k)) * add_lattice_bubble
-         enddo ! over k={1,nkpts} loop
-     enddo ! over i={1,norbs} loop
+
+         enddo K_LOOP ! over k={1,nkpts} loop
+     enddo O_LOOP ! over i={1,norbs} loop
 
 ! deallocate memory
      deallocate(yvec)
