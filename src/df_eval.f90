@@ -385,7 +385,8 @@
 !! try to calculate convolution between some lattice quantities
 !!
   subroutine cat_susc_conv(omega, Lwq, gd2, gt2, gl2)
-     use constants, only : dp, zero
+     use constants, only : dp
+     use constants, only : zero
 
      use control, only : norbs
      use control, only : nffrq
@@ -397,17 +398,34 @@
      implicit none
 
 ! external arguments
+! given bosonic frequency 
      real(dp), intent(in) :: omega
+
+! L(\omega, k)
      complex(dp), intent(in)  :: Lwq(nffrq,norbs,nkpts)
+
+! convolution of dual green's function
      complex(dp), intent(out) :: gd2(nffrq,norbs,nkpts)
+
+! convolution of Lwq
      complex(dp), intent(out) :: gt2(nffrq,norbs,nkpts)
+
+! convolution of lattice green's function
      complex(dp), intent(out) :: gl2(nffrq,norbs,nkpts)
 
 ! local variables
+! status flag
+     integer :: istat
+
+! shifted dual green's function
      complex(dp), allocatable :: gstp(:,:,:)
 
 ! allocate memory
-     allocate(gstp(nffrq,norbs,nkpts))
+     allocate(gstp(nffrq,norbs,nkpts), stat=istat)
+
+     if ( istat /= 0 ) then
+         call s_print_error('cat_susc_conv','can not allocate enough memory')
+     endif ! back if ( istat /= 0 ) block
 
 ! gd2 means the convolution of two dual green's functions
      if ( omega == zero ) then
@@ -445,7 +463,8 @@
 !! try to calculate the susceptibility for a given bosonic frequency
 !!
   subroutine cat_susc_value(susc, vert, gd2, gt2, gl2)
-     use constants, only : dp, cone, czero
+     use constants, only : dp
+     use constants, only : cone, czero
 
      use control, only : norbs
      use control, only : nffrq
