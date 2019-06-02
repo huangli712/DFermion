@@ -192,7 +192,7 @@
 ! status flag
      integer :: istat
 
-! L_{\omega,k}
+! L(\omega, k)
      complex(dp), allocatable :: Lwq(:,:,:)
 
 ! convolution of dual green's function:
@@ -271,7 +271,7 @@
 ! status flag
      integer :: istat
 
-! L_{\omega,k}
+! L(\omega, k)
      complex(dp), allocatable :: Lwq(:,:,:)
 
 ! convolution of dual green's function:
@@ -324,13 +324,19 @@
      return
   end subroutine df_eval_susc_s
 
+!!========================================================================
+!!>>> service layer                                                    <<<
+!!========================================================================
+
 !!
 !! @sub cat_susc_lwq
 !!
-!! try to calculate L_{\Omega,\omega}(q)
+!! try to calculate L(\omega, k), a key quantity for the calculation of
+!! spin and charge susceptibilities
 !!
   subroutine cat_susc_lwq(Lwq)
-     use constants, only : dp, one
+     use constants, only : dp
+     use constants, only : one
 
      use control, only : norbs
      use control, only : nffrq
@@ -343,18 +349,20 @@
      implicit none
 
 ! external arguments
+! the quantity what we want to calculate, L(\omega,k)
      complex(dp), intent(out) :: Lwq(nffrq,norbs,nkpts)
 
 ! local variables
+! loo indices
      integer :: i
      integer :: j
      integer :: k
 
 !!
-!! L_{\Omega,\omega}(q) = G_{dual} G_{latt} / G^{0}_{dual}
+!! L(\omega,k) = G_{dual} G_{latt} / G^{0}_{dual}
 !!
 
-! try to calculate G_{latt}
+! try to calculate OLD G_{latt}
 ! since latt_g was already updated at df_eval_latt_g(), here we have to
 ! recompute it. note that dmft_g and dmft_h were old.
      do k=1,nkpts
