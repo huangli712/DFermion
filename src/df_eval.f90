@@ -497,7 +497,6 @@
 ! loop indices
      integer :: i
      integer :: k
-     integer :: j
 
 ! status flag
      integer :: istat
