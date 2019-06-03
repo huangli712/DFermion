@@ -118,7 +118,8 @@
 !!
 !! @sub df_ladder
 !!
-!! implement the ladder dual fermion approximation framework
+!! implement the ladder dual fermion approximation framework. here, only
+!! the ladder-type diagrams are taken into considerations.
 !!
   subroutine df_ladder()
      use constants, only : dp
