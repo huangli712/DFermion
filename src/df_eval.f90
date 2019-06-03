@@ -386,7 +386,6 @@
 !!
   subroutine cat_susc_conv(omega, Lwq, gd2, gt2, gl2)
      use constants, only : dp
-     use constants, only : zero
 
      use control, only : norbs
      use control, only : nffrq
