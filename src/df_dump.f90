@@ -10,14 +10,11 @@
 !!!           df_dump_latt_s <<<---
 !!!           df_dump_susc_c
 !!!           df_dump_susc_s <<<---
-!!!           df_dump_vert_d
-!!!           df_dump_vert_m
-!!!           df_dump_vert_f <<<---
 !!! source  : df_dump.f90
 !!! type    : subroutines
 !!! author  : li huang (email:lihuang.dmft@gmail.com)
 !!! history : 09/16/2009 by li huang (created)
-!!!           05/29/2019 by li huang (last modified)
+!!!           06/03/2019 by li huang (last modified)
 !!! purpose : dump key observables produced by the diagrammatic framework
 !!!           for dynamical mean field theory to external files.
 !!! status  : unstable
@@ -524,46 +521,3 @@
 
      return
   end subroutine df_dump_susc_s
-
-!!========================================================================
-!!>>> dump data of vertex functions                                    <<<
-!!========================================================================
-
-!!
-!! @sub df_dump_vert_d
-!!
-!! write out vertex function (density channel)
-!!
-  subroutine df_dump_vert_d()
-     implicit none
-
-     CONTINUE
-
-     return
-  end subroutine df_dump_vert_d
-
-!!
-!! @sub df_dump_vert_m
-!!
-!! write out vertex function (magnetic channel)
-!!
-  subroutine df_dump_vert_m()
-     implicit none
-
-     CONTINUE
-
-     return
-  end subroutine df_dump_vert_m
-
-!!
-!! @sub df_dump_vert_f
-!!
-!! write out vertex function (full vertex)
-!!
-  subroutine df_dump_vert_f()
-     implicit none
-
-     CONTINUE
-
-     return
-  end subroutine df_dump_vert_f
