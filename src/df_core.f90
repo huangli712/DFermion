@@ -61,6 +61,10 @@
      call df_eval_susc_c()
      call df_eval_susc_s()
 
+! save the relevant data to external files. they are local hybridization
+! function, dual green's function, dual self-energy function, dual bath
+! green's function, charge susceptibility, and spin susceptibility. only
+! the master node can do this
      if ( myid == master ) then
          call df_dump_dmft_h(fmesh, dmft_y)
      endif ! back if ( myid == master ) block
