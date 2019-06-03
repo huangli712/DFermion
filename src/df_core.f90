@@ -221,7 +221,7 @@
                  write(mystd,'(4X,A,I2,A,F12.8,A)') 'bosonic frequency => ', v, ' (', om, ')'
              endif ! back if ( myid == master ) block
 
-             call cat_fill_k_new(dual_g, gstp, om)
+             call cat_fill_k(dual_g, gstp, om)
              call cat_dia_2d(dual_g, gstp, g2)
              gvrt = czero
 
