@@ -8,7 +8,7 @@
 !!! type    : subroutines
 !!! author  : li huang (email:lihuang.dmft@gmail.com)
 !!! history : 09/16/2009 by li huang (created)
-!!!           05/29/2019 by li huang (last modified)
+!!!           06/03/2019 by li huang (last modified)
 !!! purpose : main subroutines for the dual fermion framework.
 !!! status  : unstable
 !!! comment :
@@ -23,20 +23,22 @@
      use control, only : isdia
      use control, only : myid, master
 
-     use context, only : fmesh
+     use context, only : fmesh, bmesh
      use context, only : dmft_y
      use context, only : dual_g, dual_s, dual_b
      use context, only : latt_g, latt_s
+     use context, only : susc_c, susc_s
 
      implicit none
 
+! dispatch the jobs, decide which dual fermion engine should be used
      DF_CORE: &
      select case ( isdia )
 
-         case (1)
+         case (1) ! only standard 2nd diagrams are considered
              call df_std()
 
-         case (2)
+         case (2) ! only ladder diagrams are considered
              call df_ladder()
 
          case default
@@ -44,13 +46,20 @@
 
      end select DF_CORE
 
+! now dual_s (dual self-energy function) and dual_g (dual green's function)
+! are already updated, we can try to evaluate the other quantities.
+
+! try to update lattice quantities
      call df_eval_latt_g()
      call df_eval_latt_s()
 
+! try to update local hybridization function. it can be fed back to the
+! quantum impurity solver
+     call df_eval_dmft_h()
+
+! try to calculate charge susceptibility and spin susceptibility
      call df_eval_susc_c()
      call df_eval_susc_s()
-
-     call df_eval_dmft_h()
 
      if ( myid == master ) then
          call df_dump_dmft_h(fmesh, dmft_y)
@@ -74,6 +83,14 @@
 
      if ( myid == master ) then
          call df_dump_latt_s(fmesh, latt_s)
+     endif ! back if ( myid == master ) block
+
+     if ( myid == master ) then
+         call df_dump_susc_c(bmesh, susc_c)
+     endif ! back if ( myid == master ) block
+
+     if ( myid == master ) then
+         call df_dump_susc_s(bmesh, susc_s)
      endif ! back if ( myid == master ) block
 
      return
@@ -209,36 +226,36 @@
                  call cat_fill_k_new(dual_g, gstp, om)
              endif
 
-         O_LOOP: do o=1,norbs
+             O_LOOP: do o=1,norbs
 
-             mmat = vert_m(:,:,v)
-             dmat = vert_d(:,:,v)
+                 mmat = vert_m(:,:,v)
+                 dmat = vert_d(:,:,v)
 
-             K_LOOP: do k=1,nkpts
+                 K_LOOP: do k=1,nkpts
 
-                 call s_diag_z(nffrq, g2(:,o,k), imat)
+                     call s_diag_z(nffrq, g2(:,o,k), imat)
 
-                 call cat_bse_solver(imat, mmat, Gmat)
-                 call s_vecadd_z(nffrq, gvrt(:,o,k), Gmat, half * 3.0_dp)
-                 call cat_bse_iterator(1, one, imat, mmat, Gmat)
-                 call s_vecadd_z(nffrq, gvrt(:,o,k), Gmat, -half * half * 3.0_dp)
+                     call cat_bse_solver(imat, mmat, Gmat)
+                     call s_vecadd_z(nffrq, gvrt(:,o,k), Gmat, half * 3.0_dp)
+                     call cat_bse_iterator(1, one, imat, mmat, Gmat)
+                     call s_vecadd_z(nffrq, gvrt(:,o,k), Gmat, -half * half * 3.0_dp)
 
-                 call cat_bse_solver(imat, dmat, Gmat)
-                 call s_vecadd_z(nffrq, gvrt(:,o,k), Gmat, half * 1.0_dp)
-                 call cat_bse_iterator(1, one, imat, dmat, Gmat)
-                 call s_vecadd_z(nffrq, gvrt(:,o,k), Gmat, -half * half * 1.0_dp)
+                     call cat_bse_solver(imat, dmat, Gmat)
+                     call s_vecadd_z(nffrq, gvrt(:,o,k), Gmat, half * 1.0_dp)
+                     call cat_bse_iterator(1, one, imat, dmat, Gmat)
+                     call s_vecadd_z(nffrq, gvrt(:,o,k), Gmat, -half * half * 1.0_dp)
 
-             enddo K_LOOP
+                 enddo K_LOOP
 
-             do w=1,nffrq
-                 call cat_fft_2d(+1, nkp_x, nkp_y, gvrt(w,o,:), vr)
-                 call cat_fft_2d(-1, nkp_x, nkp_y, gstp(w,o,:), gr)
-                 gr = vr * gr / real(nkpts * nkpts)
-                 call cat_fft_2d(+1, nkp_x, nkp_y, gr, vr)
-                 dual_s(w,o,:) = dual_s(w,o,:) + vr / beta
-             enddo
+                 W_LOOP: do w=1,nffrq
+                     call cat_fft_2d(+1, nkp_x, nkp_y, gvrt(w,o,:), vr)
+                     call cat_fft_2d(-1, nkp_x, nkp_y, gstp(w,o,:), gr)
+                     gr = vr * gr / real(nkpts * nkpts)
+                     call cat_fft_2d(+1, nkp_x, nkp_y, gr, vr)
+                     dual_s(w,o,:) = dual_s(w,o,:) + vr / beta
+                 enddo W_LOOP
 
-         enddo O_LOOP
+             enddo O_LOOP
 
          enddo V_LOOP
 

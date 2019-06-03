@@ -439,7 +439,7 @@
      implicit none
 
 ! external arguments
-! matsubara frequency mesh
+! matsubara frequency mesh (bosonic)
      real(dp), intent(in)    :: rmesh(nbfrq)
 
 ! charge susceptibility
@@ -489,7 +489,7 @@
      implicit none
 
 ! external arguments
-! matsubara frequency mesh
+! matsubara frequency mesh (bosonic)
      real(dp), intent(in)    :: rmesh(nbfrq)
 
 ! spin susceptibility
