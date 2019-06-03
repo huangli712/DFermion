@@ -229,11 +229,7 @@
              call cat_dia_2d(dual_g, gstp, g2)
              gvrt = czero
 
-             if ( om == 0.0_dp ) then
-                 gstp = dual_g
-             else
-                 call cat_fill_k_new(dual_g, gstp, om)
-             endif
+             call cat_fill_k_new(dual_g, gstp, om)
 
              O_LOOP: do o=1,norbs
 
