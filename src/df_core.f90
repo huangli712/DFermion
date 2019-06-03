@@ -202,7 +202,7 @@
      DF_LOOP: do it=1,ndfit
 
          if ( myid == master ) then ! only master node can do it
-             write(mystd,'(2X,A,I3)') 'Ladder Dual Fermion Iteration:', it
+             write(mystd,'(2X,A,I3)') 'dual fermion iteration (ladder):', it
          endif ! back if ( myid == master ) block
 
          V_LOOP: do v=1,nbfrq
@@ -220,33 +220,11 @@
              call cat_dia_2d(dual_g, gstp, g2)
              gvrt = czero
 
-             !! DEBUG
-             !!
              if ( om == 0.0_dp ) then
                  gstp = dual_g
              else
                  call cat_fill_k_new(dual_g, gstp, om)
              endif
-
-             !!do w=1,nffrq
-             !!    print *, w, fmesh(w)
-             !!    print *, g2(w,1,:)
-             !!enddo
-             !!print *
-             !!print *
-             !!print *
-             !!print *
-             !!
-             !!om = bmesh(4)
-             !!print *, om
-             !!call cat_fill_k(dual_g, gstp, om)
-             !!call cat_dia_2d(dual_g, gstp, g2)
-             !!call cat_dia_2d(dual_g, dual_g, g2)
-             !!do w=1,nffrq
-             !!    print *, w, fmesh(w)
-             !!    print *, g2(w,1,:)
-             !!enddo
-             !!STOP 'hh'
 
          O_LOOP: do o=1,norbs
 
@@ -279,62 +257,14 @@
 
          enddo O_LOOP
 
-         !!if ( v == 7 ) then
-         !!    do w=1,nffrq
-         !!        print *, w, fmesh(w)
-         !!        print *, dual_s(w,1,:)
-         !!    enddo
-         !!
-         !!    STOP
-         !!endif
-
          enddo V_LOOP
-
-         !!if ( it == 10 ) then
-         !!    do w=1,nffrq
-         !!        print *, w, fmesh(w), dual_s(w,1,1)
-         !!    enddo
-         !!    STOP
-         !!endif
 
          call df_dyson(+1, gnew, dual_s, dual_b)
 
-         !!do w=1,nffrq
-         !!    print *, w, fmesh(w)
-         !!    print *, gnew(w,1,:)
-         !!enddo
-         !!STOP
-
          call s_mix_z( size(gnew), dual_g, gnew, dfmix)
-
-         !!do w=1,nffrq
-         !!    print *, w, fmesh(w)
-         !!    print *, gnew(w,1,:)
-         !!enddo
-         !!STOP
 
          dual_g = gnew
          dual_s = czero
-
-         !!if ( it == 10 ) then
-         !!    do w=1,nffrq
-         !!        print *, w, fmesh(w), dual_g(w,1,1)
-         !!    enddo
-         !!    STOP
-         !!endif
-
-         !!write(mystd,*)
-         !!write(mystd,*)
-         !!write(mystd,*)
-         !!write(mystd,*)
-
-         !!if ( it == 3 ) then
-         !!    do w=1,nffrq
-         !!        print *, w, fmesh(w)
-         !!        print *, gnew(w,1,:)
-         !!    enddo
-         !!    STOP
-         !!endif
 
          if ( myid == master ) then
              write(mystd,*)
@@ -342,25 +272,11 @@
 
      enddo DF_LOOP
 
-     !!do w=1,nffrq
-     !!    print *, w, fmesh(w)
-     !!    print *, dual_g(w,1,:)
-     !!enddo
-     !!print *
-     !!print *
-     !!print *
-     !!print *
-
 !!========================================================================
 !!>>> finishing ladder dual fermion iteration                          <<<
 !!========================================================================
 
      call df_dyson(-1, dual_g, dual_s, dual_b)
-
-     !!do w=1,nffrq
-     !!    print *, w, fmesh(w), dual_s(w,1,1)
-     !!enddo
-     !!STOP
 
      deallocate(gstp)
      deallocate(gnew)
