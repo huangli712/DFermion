@@ -133,7 +133,7 @@
      use control, only : beta
      use control, only : myid, master
 
-     use context, only : fmesh, bmesh
+     use context, only : bmesh
      use context, only : dual_g, dual_s, dual_b
      use context, only : vert_d, vert_m
 
