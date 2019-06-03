@@ -165,18 +165,6 @@
      complex(dp) :: vr(nkpts)
      complex(dp) :: gr(nkpts)
 
-! two-particle bubble function
-     complex(dp), allocatable :: g2  (:,:,:)
-
-! shifted dual green's function
-     complex(dp), allocatable :: gstp(:,:,:)
-
-! new dual green's function
-     complex(dp), allocatable :: gnew(:,:,:)
-
-! ladder green's function, used to calculate dual self-energy function
-     complex(dp), allocatable :: gvrt(:,:,:)
-
 ! matrix form for bubble function, \chi
      complex(dp), allocatable :: imat(:,:)
 
@@ -189,16 +177,28 @@
 ! fully dressed vertex function, \Gamma
      complex(dp), allocatable :: Gmat(:,:)
 
-! allocate memory
-     allocate(g2  (nffrq,norbs,nkpts), stat=istat)
-     allocate(gstp(nffrq,norbs,nkpts), stat=istat)
-     allocate(gnew(nffrq,norbs,nkpts), stat=istat)
-     allocate(gvrt(nffrq,norbs,nkpts), stat=istat)
+! two-particle bubble function
+     complex(dp), allocatable :: g2  (:,:,:)
 
+! shifted dual green's function
+     complex(dp), allocatable :: gstp(:,:,:)
+
+! new dual green's function
+     complex(dp), allocatable :: gnew(:,:,:)
+
+! ladder green's function, used to calculate dual self-energy function
+     complex(dp), allocatable :: gvrt(:,:,:)
+
+! allocate memory
      allocate(imat(nffrq,nffrq),       stat=istat)
      allocate(mmat(nffrq,nffrq),       stat=istat)
      allocate(dmat(nffrq,nffrq),       stat=istat)
      allocate(Gmat(nffrq,nffrq),       stat=istat)
+
+     allocate(g2  (nffrq,norbs,nkpts), stat=istat)
+     allocate(gstp(nffrq,norbs,nkpts), stat=istat)
+     allocate(gnew(nffrq,norbs,nkpts), stat=istat)
+     allocate(gvrt(nffrq,norbs,nkpts), stat=istat)
 
      if ( istat /= 0 ) then
          call s_print_error('df_ladder','can not allocate enough memory')
@@ -287,14 +287,16 @@
 
      call df_dyson(-1, dual_g, dual_s, dual_b)
 
-     deallocate(gstp)
-     deallocate(gnew)
-     deallocate(gvrt)
-     deallocate(g2)
+! deallocate memory
      deallocate(imat)
      deallocate(mmat)
      deallocate(dmat)
      deallocate(Gmat)
+
+     deallocate(g2)
+     deallocate(gstp)
+     deallocate(gnew)
+     deallocate(gvrt)
 
      return
   end subroutine df_ladder
