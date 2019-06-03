@@ -1,18 +1,18 @@
 !!!-----------------------------------------------------------------------
 !!! project : azalea
-!!! program : df_eval_dmft_h
+!!! program : df_eval_dmft_h <<<---
 !!!           df_eval_latt_g
-!!!           df_eval_latt_s
+!!!           df_eval_latt_s <<<---
 !!!           df_eval_susc_c
-!!!           df_eval_susc_s
+!!!           df_eval_susc_s <<<---
 !!!           cat_susc_lwq
 !!!           cat_susc_conv
-!!!           cat_susc_value
+!!!           cat_susc_value <<<---
 !!! source  : df_eval.f90
 !!! type    : subroutines
 !!! author  : li huang (email:lihuang.dmft@gmail.com)
 !!! history : 04/29/2009 by li huang (created)
-!!!           06/02/2019 by li huang (last modified)
+!!!           06/03/2019 by li huang (last modified)
 !!! purpose : try to evaluate some key observables.
 !!! status  : unstable
 !!! comment :
@@ -428,27 +428,15 @@
      endif ! back if ( istat /= 0 ) block
 
 ! gd2 means the convolution of two dual green's functions
-     if ( omega == zero ) then
-         gstp = dual_g
-     else
-         call cat_fill_k(dual_g, gstp, omega)
-     endif
+     call cat_fill_k_new(dual_g, gstp, omega)
      call cat_dia_2d(dual_g, gstp, gd2)
 
 ! gt2 means the convolution of two L_{\Omega,\omega}{q}
-     if ( omega == zero ) then
-         gstp = Lwq
-     else
-         call cat_fill_k(Lwq, gstp, omega)
-     endif
+     call cat_fill_k_new(Lwq, gstp, omega)
      call cat_dia_2d(Lwq, gstp, gt2)
 
 ! gl2 means the convolution of two lattice green's functions
-     if ( omega == zero ) then
-         gstp = latt_g
-     else
-         call cat_fill_k(latt_g, gstp, omega)
-     endif
+     call cat_fill_k_new(latt_g, gstp, omega)
      call cat_dia_2d(latt_g, gstp, gl2)
 
 ! deallocate memory
