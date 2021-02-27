@@ -1,4 +1,4 @@
-# DFAPP (Dual Fermion Application)
+# DFAPP
 
 The DFAPP software package implements a dual fermion framework for general lattice model. It can not work alone. It has to work with the [**iQIST**](https://github.com/huangli712/iqist) software package.
 
