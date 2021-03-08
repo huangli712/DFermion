@@ -105,7 +105,7 @@
 !!
 !! implement the standard dual fermion approximation framework. here, only
 !! the standard second-order diagrams are taken into considerations.
-!! 
+!!
 !!
   subroutine df_std()
      implicit none
