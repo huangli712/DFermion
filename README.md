@@ -4,7 +4,7 @@ The DFAPP software package implements a dual fermion framework for general latti
 
 ## Version
 
-v0.0.1 (devel)
+v0.0.2-devel.210509
 
 ## License
 
