@@ -69,7 +69,7 @@
 !!
 !! @sub cat_fill_gk
 !!
-!! try to fill G(\nu + \omega, K) by G(\nu, K), momentum-dependent version
+!! try to fill G(\nu + \omega, K) by G(\nu, K), momentum-dependent version.
 !!
   subroutine cat_fill_gk(gin, gout, shift)
      use constants, only : dp
