@@ -3,7 +3,7 @@
 ## Introduction
 ## ============
 ##
-## Makefile for dfapp/src directory.
+## Makefile for dfermion/src directory.
 ##
 ## Usage
 ## =====
@@ -21,13 +21,13 @@
 ## =======
 ##
 ## 01/17/2017 by li huang (created)
-## 05/09/2021 by li huang (last modified)
+## 06/24/2023 by li huang (last modified)
 ##
 ##
 
 .SUFFIXES: .f90
 
-include ../build/make.sys
+include ../build/make.inc
 
 modc = df_control.o df_context.o
 core = df_core.o
