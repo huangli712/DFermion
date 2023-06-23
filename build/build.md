@@ -1,8 +1,8 @@
-# DFAPP (Dual Fermion Application)
+# DFermion (Dual Fermion Application)
 
 ## Introduction
 
-The make.sys file is the key component of the building system. You have to modify it to fulfill your requirements. If it is not configured correctly, the building system won't work correctly as well. So in the following we would like to provide a detailed explanations for it.
+The make.inc file is the key component of the building system. You have to modify it to fulfill your requirements. If it is not configured correctly, the building system won't work correctly as well. So in the following we would like to provide a detailed explanations for it.
 
 ## Prerequisites
 
@@ -85,7 +85,7 @@ If you are using old version Intel fortran compiler, this option may be '-openmp
 
 ### FPP
 
-Specify whether the fortran preprocessor (FPP) is used. It has to be enabled or else the DFAPP can not be compiled correctly.
+Specify whether the fortran preprocessor (FPP) is used. It has to be enabled or else the DFermion can not be compiled correctly.
 
 **Possible options**:
 
@@ -93,7 +93,7 @@ Specify whether the fortran preprocessor (FPP) is used. It has to be enabled or 
 
 ### CPP
 
-Collection of preprocessor directives. Do not modify it unless you are an expert of DFAPP.
+Collection of preprocessor directives. Do not modify it unless you are an expert of DFermion.
 
 **Possible options**:
 
@@ -152,7 +152,7 @@ The '-Wl,-no_pie' option is useful when you are using the macOS system and want 
 
 ### LIBS
 
-Specify the external libraries. Now the DFAPP software package depends on LAPACK and BLAS heavily. To achieve good performance, the highly optimized LAPACK and BLAS implementations are essential.
+Specify the external libraries. Now the DFermion software package depends on LAPACK and BLAS heavily. To achieve good performance, the highly optimized LAPACK and BLAS implementations are essential.
 
 **Possible options**:
 
@@ -160,11 +160,11 @@ Specify the external libraries. Now the DFAPP software package depends on LAPACK
 * -L/home/lihuang/lapack -llapack -lblas
 * -L/opt/intel/mkl/lib -lmkl_core -lmkl_sequential -lmkl_rt
 
-Here we provide three typical choices. (1) In the macOS system, we can use the Apple Accelerate framework. (2) We use the home-built BLAS and LAPACK libraries. Please pay attention to the path. You have to modify it to meet your software environment. (3) We link the DFAPP code with the Intel MKL. Please pay attention to the path and the library's name. You have to modify them to meet your software environment. Please see the documentation about Intel MKL for more details.
+Here we provide three typical choices. (1) In the macOS system, we can use the Apple Accelerate framework. (2) We use the home-built BLAS and LAPACK libraries. Please pay attention to the path. You have to modify it to meet your software environment. (3) We link the DFermion code with the Intel MKL. Please pay attention to the path and the library's name. You have to modify them to meet your software environment. Please see the documentation about Intel MKL for more details.
 
 ### FLINK
 
-Specify where the FLINK is. Now the DFAPP software package depends on FLINK heavily.
+Specify where the FLINK is. Now the DFermion software package depends on FLINK heavily.
 
 **Possible options**:
 
@@ -174,7 +174,7 @@ Please download the latest version of [FLINK](https://github.com/huangli712/flin
 
 ### FFT\_INC
 
-Specify where the header files of FFTW3 is. Now the DFAPP software package depends on FFTW3 heavily.
+Specify where the header files of FFTW3 is. Now the DFermion software package depends on FFTW3 heavily.
 
 **Possible options**:
 
@@ -184,7 +184,7 @@ Please download the latest version of [FFTW3](http://fftw.org/download.html). An
 
 ### FFT\_LIB
 
-Specify where the library files of FFTW3 is. Now the DFAPP software package depends on FFTW3 heavily.
+Specify where the library files of FFTW3 is. Now the DFermion software package depends on FFTW3 heavily.
 
 **Possible options**:
 
