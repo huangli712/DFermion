@@ -3,9 +3,9 @@
 ## Introduction
 ## ============
 ##
-## This is the top Makefile for the DFAPP software package. You can use
+## This is the top Makefile for the DFermion software package. You can use
 ## it to build all of the executable programs and libraries. Please do
-## not modify it by yourself even you are very familiar with DFAPP.
+## not modify it by yourself even you are very familiar with DFermion.
 ##
 ## Usage
 ## =====
@@ -13,7 +13,7 @@
 ## 1. quick build
 ## --------------
 ##
-## 'make' or 'make dfapp'
+## 'make' or 'make dfermion'
 ##
 ## 2. clean the directories
 ## ------------------------
@@ -35,12 +35,12 @@
 ##
 ##
 
-# target for building dfapp
-dfapp:
-	@echo 'building dfapp'
+# target for building dfermion
+dfermion:
+	@echo 'building dfermion'
 	cd ../src; pwd; make
 
-# target for cleaning dfapp
+# target for cleaning dfermion
 clean:
-	@echo 'cleaning dfapp'
+	@echo 'cleaning dfermion'
 	cd ../src; pwd; make clean
