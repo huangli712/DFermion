@@ -427,15 +427,15 @@
      endif ! back if ( istat /= 0 ) block
 
 ! gd2 means the convolution of two dual green's functions
-     call cat_fill_k(dual_g, gstp, omega)
+     call cat_fill_gk(dual_g, gstp, omega)
      call cat_dia_2d(dual_g, gstp, gd2)
 
 ! gt2 means the convolution of two L_{\Omega,\omega}{q}
-     call cat_fill_k(Lwq, gstp, omega)
+     call cat_fill_gk(Lwq, gstp, omega)
      call cat_dia_2d(Lwq, gstp, gt2)
 
 ! gl2 means the convolution of two lattice green's functions
-     call cat_fill_k(latt_g, gstp, omega)
+     call cat_fill_gk(latt_g, gstp, omega)
      call cat_dia_2d(latt_g, gstp, gl2)
 
 ! deallocate memory
