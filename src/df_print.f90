@@ -1,5 +1,5 @@
 !!!-----------------------------------------------------------------------
-!!! project : azalea
+!!! project : dfermion @ azalea
 !!! program : df_print_header
 !!!           df_print_footer
 !!!           df_print_summary
@@ -10,7 +10,7 @@
 !!! type    : subroutines
 !!! author  : li huang (email:lihuang.dmft@gmail.com)
 !!! history : 09/15/2009 by li huang (created)
-!!!           05/09/2021 by li huang (last modified)
+!!!           06/24/2023 by li huang (last modified)
 !!! purpose : provide printing infrastructure for dual fermion framework.
 !!! status  : unstable
 !!! comment :
@@ -35,11 +35,13 @@
 
      implicit none
 
-! local variables
-! string for current date and time
+!! local variables
+     ! string for current date and time
      character (len = 20) :: date_time_string
 
-! obtain current date and time
+!! [body
+
+     ! obtain current date and time
      call s_time_builder(date_time_string)
 
 # if defined (MPI)
@@ -73,6 +75,8 @@
 
 # endif  /* MPI */
 
+!! body]
+
      return
   end subroutine df_print_header
 
@@ -89,17 +93,19 @@
 
      implicit none
 
-! local variables
-! string for current date and time
+!! local variables
+     ! string for current date and time
      character (len = 20) :: date_time_string
 
-! used to record the time usage information
+     ! used to record the time usage information
      real(dp) :: tot_time
 
-! obtain time usage information
+!! [body
+
+     ! obtain time usage information
      call cpu_time(tot_time)
 
-! obtain current date and time
+     ! obtain current date and time
      call s_time_builder(date_time_string)
 
      write(mystd,'(2X,a,f10.2,a)') cname//' >>> total time spent:', tot_time, 's'
@@ -107,6 +113,8 @@
 
      write(mystd,'(2X,a)') cname//' >>> I am tired and want to go to bed. Bye!'
      write(mystd,'(2X,a)') cname//' >>> happy ending at '//date_time_string
+
+!! body]
 
      return
   end subroutine df_print_footer
@@ -122,6 +130,8 @@
      use control ! ALL
 
      implicit none
+
+!! [body
 
      write(mystd,'(2X,a)') '[configuration parameters] -> core control'
      write(mystd,'(2X,a)') '-----------------------------------------------------'
@@ -151,6 +161,8 @@
 
      write(mystd,*)
 
+!! body]
+
      return
   end subroutine df_print_summary
 
@@ -162,7 +174,11 @@
   subroutine df_print_control()
      implicit none
 
+!! [body
+
      CONTINUE
+
+!! body]
 
      return
   end subroutine df_print_control
@@ -176,7 +192,11 @@
   subroutine df_print_runtime()
      implicit none
 
+!! [body
+
      CONTINUE
+
+!! body]
 
      return
   end subroutine df_print_runtime
@@ -189,7 +209,11 @@
   subroutine df_print_it_info()
      implicit none
 
+!! [body
+
      CONTINUE
+
+!! body]
 
      return
   end subroutine df_print_it_info
