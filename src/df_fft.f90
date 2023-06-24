@@ -1,5 +1,5 @@
 !!!-----------------------------------------------------------------------
-!!! project : azalea
+!!! project : dfermion @ azalea
 !!! program : cat_fft_1d
 !!!           cat_fft_2d
 !!!           cat_fft_3d
@@ -7,7 +7,7 @@
 !!! type    : subroutines
 !!! author  : li huang (email:lihuang.dmft@gmail.com)
 !!! history : 10/01/2008 by li huang (created)
-!!!           04/17/2019 by li huang (last modified)
+!!!           06/24/2023 by li huang (last modified)
 !!! purpose : try to implement the fast fourier transformation.
 !!! status  : unstable
 !!! comment :
@@ -16,7 +16,7 @@
 !!
 !! note:
 !!
-!! need fftw3 software package
+!! require fftw3 software package
 !!
 
 !!
@@ -30,23 +30,25 @@
 
      implicit none
 
-! import fftw header file
+     ! import fftw header file
      include 'fftw3.f03'
 
-! external arguments
-! fft direction, forward or backward
+!! external arguments
+     ! fft direction, forward or backward
      integer, intent(in) :: op
 
-! size of operand
+     ! size of operand
      integer, intent(in) :: nx
 
-! operand
+     ! operand
      complex(dp), intent(inout) :: fin(nx)
      complex(dp), intent(inout) :: fout(nx)
 
-! local variables
-! fftw descriptor handler
+!! local variables
+     ! fftw descriptor handler
      type(c_ptr) :: plan
+
+!! [body
 
      select case (op)
 
@@ -64,6 +66,8 @@
      call fftw_execute_dft(plan, fin, fout)
      call fftw_destroy_plan(plan)
 
+!! body]
+
      return
   end subroutine cat_fft_1d
 
@@ -78,24 +82,26 @@
 
      implicit none
 
-! import fftw header file
+     ! import fftw header file
      include 'fftw3.f03'
 
-! external arguments
-! fft direction, forward or backward
+!! external arguments
+     ! fft direction, forward or backward
      integer, intent(in) :: op
 
-! size of operand
+     ! size of operand
      integer, intent(in) :: nx
      integer, intent(in) :: ny
 
-! operand
+     ! operand
      complex(dp), intent(inout) :: fin(nx,ny)
      complex(dp), intent(inout) :: fout(nx,ny)
 
-! local variables
-! fftw descriptor handler
+!! local variables
+     ! fftw descriptor handler
      type(c_ptr) :: plan
+
+!! [body
 
      select case (op)
 
@@ -113,6 +119,8 @@
      call fftw_execute_dft(plan, fin, fout)
      call fftw_destroy_plan(plan)
 
+!! body]
+
      return
   end subroutine cat_fft_2d
 
@@ -127,25 +135,27 @@
 
      implicit none
 
-! import fftw header file
+     ! import fftw header file
      include 'fftw3.f03'
 
-! external arguments
-! fft direction, forward or backward
+!! external arguments
+     ! fft direction, forward or backward
      integer, intent(in) :: op
 
-! size of operand
+     ! size of operand
      integer, intent(in) :: nx
      integer, intent(in) :: ny
      integer, intent(in) :: nz
 
-! operand
+     ! operand
      complex(dp), intent(inout) :: fin(nx,ny,nz)
      complex(dp), intent(inout) :: fout(nx,ny,nz)
 
-! local variables
-! fftw descriptor handler
+!! local variables
+     ! fftw descriptor handler
      type(c_ptr) :: plan
+
+!! [body
 
      select case (op)
 
@@ -162,6 +172,8 @@
 
      call fftw_execute_dft(plan, fin, fout)
      call fftw_destroy_plan(plan)
+
+!! body]
 
      return
   end subroutine cat_fft_3d
