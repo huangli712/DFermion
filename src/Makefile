@@ -31,7 +31,7 @@ include ../build/make.inc
 
 modc = df_control.o df_context.o
 core = df_core.o
-lev1 = df_diagram.o df_eval.o df_fft.o df_solver.o
+lev1 = df_diagram.o df_eval.o df_solver.o
 lev2 = df_dump.o df_print.o df_stream.o
 lev3 = df_util.o
 main = df_main.o
