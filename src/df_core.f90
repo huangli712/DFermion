@@ -24,7 +24,7 @@
      use control, only : myid, master
 
      use context, only : fmesh, bmesh
-     use context, only : dmft_y
+     use context, only : dmft_d
      use context, only : dual_g, dual_s, dual_b
      use context, only : latt_g, latt_s
      use context, only : susc_c, susc_s
@@ -66,7 +66,7 @@
 ! green's function, charge susceptibility, and spin susceptibility. only
 ! the master node can do this
      if ( myid == master ) then
-         call df_dump_dmft_h(fmesh, dmft_y)
+         call df_dump_dmft_h(fmesh, dmft_d)
      endif ! back if ( myid == master ) block
 
      if ( myid == master ) then

@@ -1,5 +1,5 @@
 !!!-----------------------------------------------------------------------
-!!! project : azalea
+!!! project : dfermion @ azalea
 !!! program : df_mesh module
 !!!           df_dmft module
 !!!           df_dual module
@@ -11,7 +11,7 @@
 !!! type    : modules
 !!! author  : li huang (email:lihuang.dmft@gmail.com)
 !!! history : 09/16/2009 by li huang (created)
-!!!           05/31/2019 by li huang (last modified)
+!!!           06/25/2023 by li huang (last modified)
 !!! purpose : define the key data structure and global arrays/variables
 !!!           for dual fermion framework.
 !!! status  : unstable
@@ -110,11 +110,11 @@
      complex(dp), public, save, allocatable :: dmft_h(:,:)
 
 !!
-!! @var dmft_y
+!! @var dmft_d
 !!
 !! local hybridization function (new, output)
 !!
-     complex(dp), public, save, allocatable :: dmft_y(:,:)
+     complex(dp), public, save, allocatable :: dmft_d(:,:)
 
   end module df_dmft
 
@@ -349,7 +349,7 @@
      allocate(dmft_g(nffrq,norbs), stat=istat)
      allocate(dmft_s(nffrq,norbs), stat=istat)
      allocate(dmft_h(nffrq,norbs), stat=istat)
-     allocate(dmft_y(nffrq,norbs), stat=istat)
+     allocate(dmft_d(nffrq,norbs), stat=istat)
 
 ! check the status
      if ( istat /= 0 ) then
@@ -360,7 +360,7 @@
      dmft_g = czero
      dmft_s = czero
      dmft_h = czero
-     dmft_y = czero
+     dmft_d = czero
 
      return
   end subroutine cat_alloc_dmft
@@ -497,7 +497,7 @@
      if ( allocated(dmft_g) ) deallocate(dmft_g)
      if ( allocated(dmft_s) ) deallocate(dmft_s)
      if ( allocated(dmft_h) ) deallocate(dmft_h)
-     if ( allocated(dmft_y) ) deallocate(dmft_y)
+     if ( allocated(dmft_d) ) deallocate(dmft_d)
 
      return
   end subroutine cat_free_dmft

@@ -33,7 +33,7 @@
      use control, only : norbs
      use control, only : nffrq
 
-     use context, only : dmft_g, dmft_h, dmft_y
+     use context, only : dmft_g, dmft_h, dmft_d
      use context, only : dual_g
      use context, only : latt_g
 
@@ -52,12 +52,12 @@
 !! dual_g and latt_g must be updated ahead of time.
 !!
 !! actually, dmft_h will not be changed, the new hybridization function
-!! is stored in dmft_y.
+!! is stored in dmft_d.
 !!
      do j=1,norbs
          do i=1,nffrq
              associate ( zh => ( sum( dual_g(i,j,:) ) / sum( latt_g(i,j,:) ) ) )
-                 dmft_y(i,j) = dmft_h(i,j) + one / dmft_g(i,j) * zh
+                 dmft_d(i,j) = dmft_h(i,j) + one / dmft_g(i,j) * zh
              end associate
          enddo ! over i={1,nffrq} loop
      enddo ! over j={1,norbs} loop
