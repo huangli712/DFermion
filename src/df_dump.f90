@@ -1,20 +1,20 @@
 !!!-----------------------------------------------------------------------
-!!! project : azalea
+!!! project : dfermion @ azalea
 !!! program : df_dump_dmft_g
 !!!           df_dump_dmft_s
-!!!           df_dump_dmft_h <<<---
+!!!           df_dump_dmft_h
 !!!           df_dump_dual_g
 !!!           df_dump_dual_s
-!!!           df_dump_dual_b <<<---
+!!!           df_dump_dual_b
 !!!           df_dump_latt_g
-!!!           df_dump_latt_s <<<---
+!!!           df_dump_latt_s
 !!!           df_dump_susc_c
-!!!           df_dump_susc_s <<<---
+!!!           df_dump_susc_s
 !!! source  : df_dump.f90
 !!! type    : subroutines
 !!! author  : li huang (email:lihuang.dmft@gmail.com)
 !!! history : 09/16/2009 by li huang (created)
-!!!           06/03/2019 by li huang (last modified)
+!!!           06/24/2023 by li huang (last modified)
 !!! purpose : dump key observables produced by the diagrammatic framework
 !!!           for dynamical mean field theory to external files.
 !!! status  : unstable
@@ -40,22 +40,24 @@
 
      implicit none
 
-! external arguments
-! matsubara frequency mesh
+!! external arguments
+     ! matsubara frequency mesh
      real(dp), intent(in)    :: rmesh(nffrq)
 
-! impurity green's function
+     ! impurity green's function
      complex(dp), intent(in) :: grnf(nffrq,norbs)
 
-! local variables
-! loop index
+!! local variables
+     ! loop index
      integer :: i
      integer :: j
 
-! open data file: df.dmft_g.dat
+!! [body
+
+     ! open data file: df.dmft_g.dat
      open(mytmp, file='df.dmft_g.dat', form='formatted', status='unknown')
 
-! write it
+     ! write it
      do i=1,norbs
          do j=1,nffrq
              write(mytmp,'(i6,5f16.8)') i, rmesh(j), grnf(j,i), czero
@@ -66,6 +68,8 @@
 
 ! close data file
      close(mytmp)
+
+!! body]
 
      return
   end subroutine df_dump_dmft_g
@@ -85,22 +89,24 @@
 
      implicit none
 
-! external arguments
-! matsubara frequency mesh
+!! external arguments
+     ! matsubara frequency mesh
      real(dp), intent(in)    :: rmesh(nffrq)
 
-! impurity self-energy function
+     ! impurity self-energy function
      complex(dp), intent(in) :: sigf(nffrq,norbs)
 
-! local variables
-! loop index
+!! local variables
+     ! loop index
      integer :: i
      integer :: j
 
-! open data file: df.dmft_s.dat
+!! [body
+
+     ! open data file: df.dmft_s.dat
      open(mytmp, file='df.dmft_s.dat', form='formatted', status='unknown')
 
-! write it
+     ! write it
      do i=1,norbs
          do j=1,nffrq
              write(mytmp,'(i6,5f16.8)') i, rmesh(j), sigf(j,i), czero
@@ -109,8 +115,10 @@
          write(mytmp,*)
      enddo ! over i={1,norbs} loop
 
-! close data file
+     ! close data file
      close(mytmp)
+
+!! body]
 
      return
   end subroutine df_dump_dmft_s
@@ -130,22 +138,24 @@
 
      implicit none
 
-! external arguments
-! matsubara frequency mesh
+!! external arguments
+     ! matsubara frequency mesh
      real(dp), intent(in)    :: rmesh(nffrq)
 
-! impurity hybridization function
+     ! impurity hybridization function
      complex(dp), intent(in) :: hybf(nffrq,norbs)
 
-! local variables
-! loop index
+!! local variables
+     ! loop index
      integer :: i
      integer :: j
 
-! open data file: df.dmft_h.dat
+!! [body
+
+     ! open data file: df.dmft_h.dat
      open(mytmp, file='df.dmft_h.dat', form='formatted', status='unknown')
 
-! write it
+     ! write it
      do i=1,norbs
          do j=1,nffrq
              write(mytmp,'(i6,5f16.8)') i, rmesh(j), hybf(j,i), czero
@@ -154,8 +164,10 @@
          write(mytmp,*)
      enddo ! over i={1,norbs} loop
 
-! close data file
+     ! close data file
      close(mytmp)
+
+!! body]
 
      return
   end subroutine df_dump_dmft_h
@@ -180,23 +192,25 @@
 
      implicit none
 
-! external arguments
-! matsubara frequency mesh
+!! external arguments
+     ! matsubara frequency mesh
      real(dp), intent(in)    :: rmesh(nffrq)
 
-! dual green's function
+     ! dual green's function
      complex(dp), intent(in) :: grnd(nffrq,norbs,nkpts)
 
-! local variables
-! loop index
+!! local variables
+     ! loop index
      integer :: i
      integer :: j
      integer :: k
 
-! open data file: df.dual_g.dat
+!! [body
+
+     ! open data file: df.dual_g.dat
      open(mytmp, file='df.dual_g.dat', form='formatted', status='unknown')
 
-! write it
+     ! write it
      do k=1,nkpts
          do j=1,norbs
              write(mytmp,'(2(a,i6))') '# kpt:', k, '  orb:', j
@@ -208,8 +222,10 @@
          enddo ! over j={1,norbs} loop
      enddo ! over k={1,nkpts} loop
 
-! close data file
+     ! close data file
      close(mytmp)
+
+!! body]
 
      return
   end subroutine df_dump_dual_g
@@ -230,23 +246,25 @@
 
      implicit none
 
-! external arguments
-! matsubara frequency mesh
+!! external arguments
+     ! matsubara frequency mesh
      real(dp), intent(in)    :: rmesh(nffrq)
 
-! dual self-energy function
+     ! dual self-energy function
      complex(dp), intent(in) :: sigd(nffrq,norbs,nkpts)
 
-! local variables
-! loop index
+!! local variables
+     ! loop index
      integer :: i
      integer :: j
      integer :: k
 
-! open data file: df.dual_s.dat
+!! [body
+
+     ! open data file: df.dual_s.dat
      open(mytmp, file='df.dual_s.dat', form='formatted', status='unknown')
 
-! write it
+     ! write it
      do k=1,nkpts
          do j=1,norbs
              write(mytmp,'(2(a,i6))') '# kpt:', k, '  orb:', j
@@ -258,8 +276,10 @@
          enddo ! over j={1,norbs} loop
      enddo ! over k={1,nkpts} loop
 
-! close data file
+     ! close data file
      close(mytmp)
+
+!! body]
 
      return
   end subroutine df_dump_dual_s
@@ -280,23 +300,25 @@
 
      implicit none
 
-! external arguments
-! matsubara frequency mesh
+!! external arguments
+     ! matsubara frequency mesh
      real(dp), intent(in)    :: rmesh(nffrq)
 
-! dual bare green's function
+     ! dual bare green's function
      complex(dp), intent(in) :: wssd(nffrq,norbs,nkpts)
 
-! local variables
-! loop index
+!! local variables
+     ! loop index
      integer :: i
      integer :: j
      integer :: k
 
-! open data file: df.dual_b.dat
+!! [body
+
+     ! open data file: df.dual_b.dat
      open(mytmp, file='df.dual_b.dat', form='formatted', status='unknown')
 
-! write it
+     ! write it
      do k=1,nkpts
          do j=1,norbs
              write(mytmp,'(2(a,i6))') '# kpt:', k, '  orb:', j
@@ -308,8 +330,10 @@
          enddo ! over j={1,norbs} loop
      enddo ! over k={1,nkpts} loop
 
-! close data file
+     ! close data file
      close(mytmp)
+
+!! body]
 
      return
   end subroutine df_dump_dual_b
@@ -334,23 +358,25 @@
 
      implicit none
 
-! external arguments
-! matsubara frequency mesh
+!! external arguments
+     ! matsubara frequency mesh
      real(dp), intent(in)    :: rmesh(nffrq)
 
-! lattice green's function
+     ! lattice green's function
      complex(dp), intent(in) :: grnk(nffrq,norbs,nkpts)
 
-! local variables
-! loop index
+!! local variables
+     ! loop index
      integer :: i
      integer :: j
      integer :: k
 
-! open data file: df.latt_g.dat
+!! [body
+
+     ! open data file: df.latt_g.dat
      open(mytmp, file='df.latt_g.dat', form='formatted', status='unknown')
 
-! write it
+     ! write it
      do k=1,nkpts
          do j=1,norbs
              write(mytmp,'(2(a,i6))') '# kpt:', k, '  orb:', j
@@ -362,8 +388,10 @@
          enddo ! over j={1,norbs} loop
      enddo ! over k={1,nkpts} loop
 
-! close data file
+     ! close data file
      close(mytmp)
+
+!! body]
 
      return
   end subroutine df_dump_latt_g
@@ -384,23 +412,25 @@
 
      implicit none
 
-! external arguments
-! matsubara frequency mesh
+!! external arguments
+     ! matsubara frequency mesh
      real(dp), intent(in)    :: rmesh(nffrq)
 
-! lattice self-energy function
+     ! lattice self-energy function
      complex(dp), intent(in) :: sigk(nffrq,norbs,nkpts)
 
-! local variables
-! loop index
+!! local variables
+     ! loop index
      integer :: i
      integer :: j
      integer :: k
 
-! open data file: df.latt_s.dat
+!! [body
+
+     ! open data file: df.latt_s.dat
      open(mytmp, file='df.latt_s.dat', form='formatted', status='unknown')
 
-! write it
+     ! write it
      do k=1,nkpts
          do j=1,norbs
              write(mytmp,'(2(a,i6))') '# kpt:', k, '  orb:', j
@@ -412,8 +442,10 @@
          enddo ! over j={1,norbs} loop
      enddo ! over k={1,nkpts} loop
 
-! close data file
+     ! close data file
      close(mytmp)
+
+!! body]
 
      return
   end subroutine df_dump_latt_s
@@ -438,23 +470,25 @@
 
      implicit none
 
-! external arguments
-! matsubara frequency mesh (bosonic)
+!! external arguments
+     ! matsubara frequency mesh (bosonic)
      real(dp), intent(in)    :: rmesh(nbfrq)
 
-! charge susceptibility
+     ! charge susceptibility
      complex(dp), intent(in) :: susc(nbfrq,norbs,nkpts)
 
-! local variables
-! loop index
+!! local variables
+     ! loop index
      integer :: i
      integer :: j
      integer :: k
 
-! open data file: df.susc_c.dat
+!! [body
+
+     ! open data file: df.susc_c.dat
      open(mytmp, file='df.susc_c.dat', form='formatted', status='unknown')
 
-! write it
+     ! write it
      do k=1,nkpts
          do j=1,norbs
              write(mytmp,'(2(a,i6))') '# kpt:', k, '  orb:', j
@@ -466,8 +500,10 @@
          enddo ! over j={1,norbs} loop
      enddo ! over k={1,nkpts} loop
 
-! close data file
+     ! close data file
      close(mytmp)
+
+!! body]
 
      return
   end subroutine df_dump_susc_c
@@ -488,23 +524,25 @@
 
      implicit none
 
-! external arguments
-! matsubara frequency mesh (bosonic)
+!! external arguments
+     ! matsubara frequency mesh (bosonic)
      real(dp), intent(in)    :: rmesh(nbfrq)
 
-! spin susceptibility
+     ! spin susceptibility
      complex(dp), intent(in) :: susc(nbfrq,norbs,nkpts)
 
-! local variables
-! loop index
+!! local variables
+     ! loop index
      integer :: i
      integer :: j
      integer :: k
 
-! open data file: df.susc_s.dat
+!! [body
+
+     ! open data file: df.susc_s.dat
      open(mytmp, file='df.susc_s.dat', form='formatted', status='unknown')
 
-! write it
+     ! write it
      do k=1,nkpts
          do j=1,norbs
              write(mytmp,'(2(a,i6))') '# kpt:', k, '  orb:', j
@@ -516,8 +554,10 @@
          enddo ! over j={1,norbs} loop
      enddo ! over k={1,nkpts} loop
 
-! close data file
+     ! close data file
      close(mytmp)
+
+!! body]
 
      return
   end subroutine df_dump_susc_s
