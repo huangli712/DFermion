@@ -274,14 +274,14 @@
 !!>>> declare private variables                                        <<<
 !!========================================================================
 
-! status flag
+     ! status flag
      integer, private :: istat
 
 !!========================================================================
 !!>>> declare accessibility for module routines                        <<<
 !!========================================================================
 
-! declaration of module procedures: allocate memory
+     ! declaration of module procedures: allocate memory
      public :: cat_alloc_mesh
      public :: cat_alloc_dmft
      public :: cat_alloc_dual
@@ -289,7 +289,7 @@
      public :: cat_alloc_susc
      public :: cat_alloc_vert
 
-! declaration of module procedures: deallocate memory
+     ! declaration of module procedures: deallocate memory
      public :: cat_free_mesh
      public :: cat_free_dmft
      public :: cat_free_dual
@@ -311,7 +311,9 @@
   subroutine cat_alloc_mesh()
      implicit none
 
-! allocate memory
+!! [body
+
+     ! allocate memory
      allocate(kx(nkp_x), stat=istat)
      allocate(ky(nkp_y), stat=istat)
      allocate(kz(nkp_z), stat=istat)
@@ -320,12 +322,12 @@
      allocate(fmesh(nffrq), stat=istat)
      allocate(bmesh(nbfrq), stat=istat)
 
-! check the status
+     ! check the status
      if ( istat /= 0 ) then
          call s_print_error('cat_alloc_mesh','can not allocate enough memory')
      endif ! back if ( istat /= 0 ) block
 
-! initialize them
+     ! initialize them
      kx = zero
      ky = zero
      kz = zero
@@ -333,6 +335,8 @@
 
      fmesh = zero
      bmesh = zero
+
+!! body]
 
      return
   end subroutine cat_alloc_mesh
@@ -345,22 +349,26 @@
   subroutine cat_alloc_dmft()
      implicit none
 
-! allocate memory
+!! [body
+
+     ! allocate memory
      allocate(dmft_g(nffrq,norbs), stat=istat)
      allocate(dmft_s(nffrq,norbs), stat=istat)
      allocate(dmft_h(nffrq,norbs), stat=istat)
      allocate(dmft_d(nffrq,norbs), stat=istat)
 
-! check the status
+     ! check the status
      if ( istat /= 0 ) then
          call s_print_error('cat_alloc_dmft','can not allocate enough memory')
      endif ! back if ( istat /= 0 ) block
 
-! initialize them
+     ! initialize them
      dmft_g = czero
      dmft_s = czero
      dmft_h = czero
      dmft_d = czero
+
+!! body]
 
      return
   end subroutine cat_alloc_dmft
@@ -373,20 +381,24 @@
   subroutine cat_alloc_dual()
      implicit none
 
-! allocate memory
+!! [body
+
+     ! allocate memory
      allocate(dual_g(nffrq,norbs,nkpts), stat=istat)
      allocate(dual_s(nffrq,norbs,nkpts), stat=istat)
      allocate(dual_b(nffrq,norbs,nkpts), stat=istat)
 
-! check the status
+     ! check the status
      if ( istat /= 0 ) then
          call s_print_error('cat_alloc_dual','can not allocate enough memory')
      endif ! back if ( istat /= 0 ) block
 
-! initialize them
+     ! initialize them
      dual_g = czero
      dual_s = czero
      dual_b = czero
+
+!! body]
 
      return
   end subroutine cat_alloc_dual
@@ -399,18 +411,22 @@
   subroutine cat_alloc_latt()
      implicit none
 
-! allocate memory
+!! [body
+
+     ! allocate memory
      allocate(latt_g(nffrq,norbs,nkpts), stat=istat)
      allocate(latt_s(nffrq,norbs,nkpts), stat=istat)
 
-! check the status
+     ! check the status
      if ( istat /= 0 ) then
          call s_print_error('cat_alloc_latt','can not allocate enough memory')
      endif ! back if ( istat /= 0 ) block
 
-! initialize them
+     ! initialize them
      latt_g = czero
      latt_s = czero
+
+!! body]
 
      return
   end subroutine cat_alloc_latt
@@ -423,18 +439,22 @@
   subroutine cat_alloc_susc()
      implicit none
 
-! allocate memory
+!! [body
+
+     ! allocate memory
      allocate(susc_c(nbfrq,norbs,nkpts), stat=istat)
      allocate(susc_s(nbfrq,norbs,nkpts), stat=istat)
 
-! check the status
+     ! check the status
      if ( istat /= 0 ) then
          call s_print_error('cat_alloc_susc','can not allocate enough memory')
      endif ! back if ( istat /= 0 ) block
 
-! initialize them
+     ! initialize them
      susc_c = czero
      susc_s = czero
+
+!! body]
 
      return
   end subroutine cat_alloc_susc
@@ -447,18 +467,22 @@
   subroutine cat_alloc_vert()
      implicit none
 
-! allocate memory
+!! [body
+
+     ! allocate memory
      allocate(vert_d(nffrq,nffrq,nbfrq), stat=istat)
      allocate(vert_m(nffrq,nffrq,nbfrq), stat=istat)
 
-! check the status
+     ! check the status
      if ( istat /= 0 ) then
          call s_print_error('cat_alloc_vert','can not allocate enough memory')
      endif ! back if ( istat /= 0 ) block
 
-! initialize them
+     ! initialize them
      vert_d = czero
      vert_m = czero
+
+!! body]
 
      return
   end subroutine cat_alloc_vert
@@ -475,6 +499,8 @@
   subroutine cat_free_mesh()
      implicit none
 
+!! [body
+
      if ( allocated(kx)    )  deallocate(kx   )
      if ( allocated(ky)    )  deallocate(ky   )
      if ( allocated(kz)    )  deallocate(kz   )
@@ -482,6 +508,8 @@
 
      if ( allocated(fmesh) )  deallocate(fmesh)
      if ( allocated(bmesh) )  deallocate(bmesh)
+
+!! body]
 
      return
   end subroutine cat_free_mesh
@@ -494,10 +522,14 @@
   subroutine cat_free_dmft()
      implicit none
 
+!! [body
+
      if ( allocated(dmft_g) ) deallocate(dmft_g)
      if ( allocated(dmft_s) ) deallocate(dmft_s)
      if ( allocated(dmft_h) ) deallocate(dmft_h)
      if ( allocated(dmft_d) ) deallocate(dmft_d)
+
+!! body]
 
      return
   end subroutine cat_free_dmft
@@ -510,9 +542,13 @@
   subroutine cat_free_dual()
      implicit none
 
+!! [body
+
      if ( allocated(dual_g) ) deallocate(dual_g)
      if ( allocated(dual_s) ) deallocate(dual_s)
      if ( allocated(dual_b) ) deallocate(dual_b)
+
+!! body]
 
      return
   end subroutine cat_free_dual
@@ -525,8 +561,12 @@
   subroutine cat_free_latt()
      implicit none
 
+!! [body
+
      if ( allocated(latt_g) ) deallocate(latt_g)
      if ( allocated(latt_s) ) deallocate(latt_s)
+
+!! body]
 
      return
   end subroutine cat_free_latt
@@ -539,8 +579,12 @@
   subroutine cat_free_susc()
      implicit none
 
+!! [body
+
      if ( allocated(susc_c) ) deallocate(susc_c)
      if ( allocated(susc_s) ) deallocate(susc_s)
+
+!! body]
 
      return
   end subroutine cat_free_susc
@@ -553,8 +597,12 @@
   subroutine cat_free_vert()
      implicit none
 
+!! [body
+
      if ( allocated(vert_d) ) deallocate(vert_d)
      if ( allocated(vert_m) ) deallocate(vert_m)
+
+!! body]
 
      return
   end subroutine cat_free_vert
