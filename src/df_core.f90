@@ -130,6 +130,10 @@
 
      CONTINUE
 
+!! [body
+
+!! body]
+
      return
   end subroutine df_std
 
@@ -157,57 +161,59 @@
 
      implicit none
 
-! local variables
-! loop index for dual fermion iterations
+!! local variables
+     ! loop index for dual fermion iterations
      integer  :: it
 
-! loop index for k-points
+     ! loop index for k-points
      integer  :: k
 
-! loop index for orbitals
+     ! loop index for orbitals
      integer  :: o
 
-! loop index for bosonic frequency \nu
+     ! loop index for bosonic frequency \nu
      integer  :: v
 
-! loop index for fermionic frequency \omega
+     ! loop index for fermionic frequency \omega
      integer  :: w
 
-! status flag
+     ! status flag
      integer  :: istat
 
-! current bosonic frequency
+     ! current bosonic frequency
      real(dp) :: om
 
-! dummy complex(dp) arrays, used to do fourier transformation
+     ! dummy complex(dp) arrays, used to do fourier transformation
      complex(dp) :: vr(nkpts)
      complex(dp) :: gr(nkpts)
 
-! matrix form for bubble function, \chi
+     ! matrix form for bubble function, \chi
      complex(dp), allocatable :: imat(:,:)
 
-! matrix form for vertex function (magnetic channel, \gamma^m)
+     ! matrix form for vertex function (magnetic channel, \gamma^m)
      complex(dp), allocatable :: mmat(:,:)
 
-! matrix form for vertex function (density channel, \gamma^d)
+     ! matrix form for vertex function (density channel, \gamma^d)
      complex(dp), allocatable :: dmat(:,:)
 
-! fully dressed vertex function, \Gamma
+     ! fully dressed vertex function, \Gamma
      complex(dp), allocatable :: Gmat(:,:)
 
-! two-particle bubble function
+     ! two-particle bubble function
      complex(dp), allocatable :: g2  (:,:,:)
 
-! shifted dual green's function
+     ! shifted dual green's function
      complex(dp), allocatable :: gstp(:,:,:)
 
-! new dual green's function
+     ! new dual green's function
      complex(dp), allocatable :: gnew(:,:,:)
 
-! ladder green's function, used to calculate dual self-energy function
+     ! ladder green's function, used to calculate dual self-energy function
      complex(dp), allocatable :: gvrt(:,:,:)
 
-! allocate memory
+!! [body
+
+     ! allocate memory
      allocate(imat(nffrq,nffrq),       stat=istat)
      allocate(mmat(nffrq,nffrq),       stat=istat)
      allocate(dmat(nffrq,nffrq),       stat=istat)
@@ -295,7 +301,7 @@
 
      call df_dyson(-1, dual_g, dual_s, dual_b)
 
-! deallocate memory
+     ! deallocate memory
      deallocate(imat)
      deallocate(mmat)
      deallocate(dmat)
@@ -305,6 +311,8 @@
      deallocate(gstp)
      deallocate(gnew)
      deallocate(gvrt)
+
+!! body]
 
      return
   end subroutine df_ladder
@@ -325,18 +333,22 @@
 
      implicit none
 
-! external arguments
+!! external arguments
      integer, intent(in) :: op
 
      complex(dp), intent(inout) :: dual_g(nffrq,norbs,nkpts)
      complex(dp), intent(inout) :: dual_s(nffrq,norbs,nkpts)
      complex(dp), intent(inout) :: dual_b(nffrq,norbs,nkpts)
 
+!! [body
+
      if ( op == 1 ) then
          dual_g = one / ( one / dual_b - dual_s )
      else
          dual_s = one / dual_b - one / dual_g
      endif ! back if ( op == 1 ) block
+
+!! body]
 
      return
   end subroutine df_dyson
