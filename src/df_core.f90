@@ -78,34 +78,35 @@
      ! hybridization function, dual green's function, dual self-energy
      ! function, dual bath green's function, charge susceptibility, and
      ! spin susceptibility. only the master node can do this
+     !
      if ( myid == master ) then
          call df_dump_dmft_h(fmesh, dmft_d)
      endif ! back if ( myid == master ) block
-
+     !
      if ( myid == master ) then
          call df_dump_dual_g(fmesh, dual_g)
      endif ! back if ( myid == master ) block
-
+     !
      if ( myid == master ) then
          call df_dump_dual_s(fmesh, dual_s)
      endif ! back if ( myid == master ) block
-
+     !
      if ( myid == master ) then
          call df_dump_dual_b(fmesh, dual_b)
      endif ! back if ( myid == master ) block
-
+     !
      if ( myid == master ) then
          call df_dump_latt_g(fmesh, latt_g)
      endif ! back if ( myid == master ) block
-
+     !
      if ( myid == master ) then
          call df_dump_latt_s(fmesh, latt_s)
      endif ! back if ( myid == master ) block
-
+     !
      if ( myid == master ) then
          call df_dump_susc_c(bmesh, susc_c)
      endif ! back if ( myid == master ) block
-
+     !
      if ( myid == master ) then
          call df_dump_susc_s(bmesh, susc_s)
      endif ! back if ( myid == master ) block
