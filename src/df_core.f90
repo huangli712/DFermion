@@ -43,6 +43,8 @@
 
      implicit none
 
+!! [body
+
      ! dispatch the jobs, decide which dual fermion engine should be used
      DF_CORE: &
      select case ( isdia )
@@ -110,6 +112,8 @@
      if ( myid == master ) then
          call df_dump_susc_s(bmesh, susc_s)
      endif ! back if ( myid == master ) block
+
+!! body]
 
      return
   end subroutine df_run
