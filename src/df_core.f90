@@ -4,9 +4,9 @@
 !!!           df_std
 !!!           df_ladder
 !!!           df_dyson
-!!! program : cat_bse_solver
+!!!           cat_bse_solver
 !!!           cat_bse_iterator
-!!! program : cat_dia_1d
+!!!           cat_dia_1d
 !!!           cat_dia_2d
 !!!           cat_dia_3d
 !!!           cat_fft_1d
@@ -29,7 +29,7 @@
 !!
 !! @sub df_run
 !!
-!! core computational engine, it is used to dispatch the jobs
+!! core computational engine, it is used to dispatch the jobs.
 !!
   subroutine df_run()
      use control, only : isdia
@@ -58,25 +58,26 @@
 
      end select DF_CORE
 
-! now dual_s (dual self-energy function) and dual_g (dual green's function)
-! are already updated, we can try to evaluate the other quantities.
+     ! now dual_s (dual self-energy function)
+     ! and dual_g (dual green's function)
+     ! are already updated, we can try to evaluate the other quantities.
 
-! try to update lattice quantities
+     ! try to update lattice quantities
      call df_eval_latt_g()
      call df_eval_latt_s()
 
-! try to update local hybridization function. it can be fed back to the
-! quantum impurity solver
+     ! try to update local hybridization function. it can be fed back to
+     ! the quantum impurity solver
      call df_eval_dmft_h()
 
-! try to calculate charge susceptibility and spin susceptibility
+     ! try to calculate charge susceptibility and spin susceptibility
      call df_eval_susc_c()
      call df_eval_susc_s()
 
-! save the relevant data to external files. they are local hybridization
-! function, dual green's function, dual self-energy function, dual bath
-! green's function, charge susceptibility, and spin susceptibility. only
-! the master node can do this
+     ! save the relevant data to external files. they are the local
+     ! hybridization function, dual green's function, dual self-energy
+     ! function, dual bath green's function, charge susceptibility, and
+     ! spin susceptibility. only the master node can do this
      if ( myid == master ) then
          call df_dump_dmft_h(fmesh, dmft_d)
      endif ! back if ( myid == master ) block
