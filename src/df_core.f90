@@ -1,14 +1,22 @@
 !!!-----------------------------------------------------------------------
-!!! project : azalea
+!!! project : dfermion @ azalea
 !!! program : df_run
 !!!           df_std
 !!!           df_ladder
 !!!           df_dyson
+!!! program : cat_bse_solver
+!!!           cat_bse_iterator
+!!! program : cat_dia_1d
+!!!           cat_dia_2d
+!!!           cat_dia_3d
+!!!           cat_fft_1d
+!!!           cat_fft_2d
+!!!           cat_fft_3d
 !!! source  : df_core.f90
 !!! type    : subroutines
 !!! author  : li huang (email:lihuang.dmft@gmail.com)
 !!! history : 09/16/2009 by li huang (created)
-!!!           06/03/2019 by li huang (last modified)
+!!!           06/25/2023 by li huang (last modified)
 !!! purpose : main subroutines for the dual fermion framework.
 !!! status  : unstable
 !!! comment :
@@ -31,7 +39,7 @@
 
      implicit none
 
-! dispatch the jobs, decide which dual fermion engine should be used
+     ! dispatch the jobs, decide which dual fermion engine should be used
      DF_CORE: &
      select case ( isdia )
 
@@ -322,19 +330,10 @@
 
      return
   end subroutine df_dyson
-!!!-----------------------------------------------------------------------
-!!! project : dfermion @ azalea
-!!! program : cat_bse_solver
-!!!           cat_bse_iterator
-!!! source  : df_solver.f90
-!!! type    : subroutines
-!!! author  : li huang (email:lihuang.dmft@gmail.com)
-!!! history : 10/01/2008 by li huang (created)
-!!!           06/24/2023 by li huang (last modified)
-!!! purpose : try to implement the Bethe-Salpter equation solver.
-!!! status  : unstable
-!!! comment :
-!!!-----------------------------------------------------------------------
+
+!!========================================================================
+!!>>> solve bethe-salpeter equation                                    <<<
+!!========================================================================
 
 !!
 !! note:
@@ -461,26 +460,9 @@
 
      return
   end subroutine cat_bse_iterator
-!!!-----------------------------------------------------------------------
-!!! project : dfermion @ azalea
-!!! program : cat_dia_1d
-!!!           cat_dia_2d
-!!!           cat_dia_3d
-!!!           cat_fft_1d
-!!!           cat_fft_2d
-!!!           cat_fft_3d
-!!! source  : df_diagram.f90
-!!! type    : subroutines
-!!! author  : li huang (email:lihuang.dmft@gmail.com)
-!!! history : 10/01/2008 by li huang (created)
-!!!           06/24/2023 by li huang (last modified)
-!!! purpose : try to calculate the bubble diagram (convolution).
-!!! status  : unstable
-!!! comment :
-!!!-----------------------------------------------------------------------
 
 !!========================================================================
-!!>>> core subroutines                                                 <<<
+!!>>> calculate bubble diagrams                                        <<<
 !!========================================================================
 
 !!
@@ -679,7 +661,7 @@
   end subroutine cat_dia_3d
 
 !!========================================================================
-!!>>> fast fourier transformation subroutines                          <<<
+!!>>> fast fourier transformations                                     <<<
 !!========================================================================
 
 !!
