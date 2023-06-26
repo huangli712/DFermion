@@ -290,30 +290,32 @@
 
      implicit none
 
-! local variables
-! loop index
+!! local variables
+     ! loop index
      integer  :: i
      integer  :: j
 
-! used to check whether the input file (df.dmft_g.in) exists
+     ! used to check whether the input file (df.dmft_g.in) exists
      logical  :: exists
 
-! dummy real(dp) variables
+     ! dummy real(dp) variables
      real(dp) :: r1, r2
      real(dp) :: c1, c2
 
-! read in impurity green's function if available
-!-------------------------------------------------------------------------
+!! [body
+
+     ! read in impurity green's function if available
+     !--------------------------------------------------------------------
      if ( myid == master ) then ! only master node can do it
          exists = .false.
 
-! inquire about file's existence
+         ! inquire about file's existence
          inquire (file = 'df.dmft_g.in', exist = exists)
 
-! find input file: df.dmft_g.in, read it
+         ! find input file: df.dmft_g.in, read it
          if ( exists .eqv. .true. ) then
 
-! read in impurity green's function from df.dmft_g.in
+             ! read in impurity green's function from df.dmft_g.in
              open(mytmp, file = 'df.dmft_g.in', form = 'formatted', status = 'unknown')
              do i=1,nffrq
                  read(mytmp,*) r1, r2, c1, c2
@@ -324,20 +326,20 @@
 
          endif ! back if ( exists .eqv. .true. ) block
      endif ! back if ( myid == master ) block
-!^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+     !^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-! read in hybridization function if available
-!-------------------------------------------------------------------------
+     ! read in hybridization function if available
+     !--------------------------------------------------------------------
      if ( myid == master ) then ! only master node can do it
          exists = .false.
 
-! inquire about file's existence
+         ! inquire about file's existence
          inquire (file = 'df.dmft_h.in', exist = exists)
 
-! find input file: df.dmft_h.in, read it
+         ! find input file: df.dmft_h.in, read it
          if ( exists .eqv. .true. ) then
 
-! read in hybridization function from df.dmft_h.in
+             ! read in hybridization function from df.dmft_h.in
              open(mytmp, file = 'df.dmft_h.in', form = 'formatted', status = 'unknown')
              do i=1,nffrq
                  read(mytmp,*) r1, r2, c1, c2
@@ -348,22 +350,22 @@
 
          endif ! back if ( exists .eqv. .true. ) block
      endif ! back if ( myid == master ) block
-!^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+     !^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ! since the data/arrays may be updated in master node, it is important to
 ! broadcast them from root to all children processes
 # if defined (MPI)
 
-! broadcast data
+     ! broadcast data
      call mp_bcast(dmft_g, master)
      call mp_bcast(dmft_h, master)
 
-! block until all processes have reached here
+     ! block until all processes have reached here
      call mp_barrier()
 
 # endif  /* MPI */
 
-! try to calculate the local self-energy function
+     ! try to calculate the local self-energy function
      do i=1,norbs
          do j=1,nffrq
              associate ( val => ( czi * fmesh(j) + mune ) )
@@ -371,6 +373,8 @@
              end associate
          enddo ! over j={1,nffrq} loop
      enddo ! over i={1,norbs} loop
+
+!! body]
 
      return
   end subroutine df_input_dmft_
