@@ -397,13 +397,15 @@
 
      implicit none
 
-! local variables
-! loop index
+!! local variables
+     ! loop index
      integer :: i
      integer :: j
      integer :: k
 
-! calculate lattice green's function
+!! [body
+
+     ! calculate lattice green's function
      do k=1,nkpts
          do j=1,norbs
              do i=1,nffrq
@@ -411,6 +413,8 @@
              enddo ! over i={1,nffrq} loop
          enddo ! over j={1,norbs} loop
      enddo ! over k={1,nkpts} loop
+
+!! body]
 
      return
   end subroutine df_input_latt_
@@ -433,14 +437,16 @@
 
      implicit none
 
-! local variables
-! loop index
+!! local variables
+     ! loop index
      integer :: i
      integer :: j
      integer :: k
 
-! calculate dual green's functions, dual self-energy functions, and dual
-! bath's functions
+!! [body
+
+     ! calculate dual green's functions, dual self-energy functions,
+     ! and dual bath's functions
      do k=1,nkpts
          do j=1,norbs
              do i=1,nffrq
@@ -450,6 +456,8 @@
              enddo ! over i={1,nffrq} loop
          enddo ! over j={1,norbs} loop
      enddo ! over k={1,nkpts} loop
+
+!! body]
 
      return
   end subroutine df_input_dual_
