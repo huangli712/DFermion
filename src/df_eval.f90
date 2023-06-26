@@ -75,6 +75,10 @@
 !!
 !! calculate the lattice green's function within the dual fermion framework
 !!
+!! note:
+!!
+!! dual_g must be updated ahead of time. however, dmft_h is old.
+!!
   subroutine df_eval_latt_g()
      use constants, only : one
 
@@ -99,11 +103,8 @@
      ! loop index for k-points
      integer :: k
 
-!!
-!! note:
-!!
-!! dual_g must be updated ahead of time. however, dmft_h is old.
-!!
+!! [body
+
      do k=1,nkpts
          do j=1,norbs
              do i=1,nffrq
@@ -114,6 +115,8 @@
          enddo ! over j={1,norbs} loop
      enddo ! over k={1,nkpts} loop
 
+!! body]
+
      return
   end subroutine df_eval_latt_g
 
@@ -121,6 +124,10 @@
 !! @sub df_eval_latt_s
 !!
 !! calculate the lattice self-energy function within the dual fermion framework
+!!
+!! note:
+!!
+!! dual_s must be updated ahead of time. however, dmft_g and dmft_s are old.
 !!
   subroutine df_eval_latt_s()
      use constants, only : one
@@ -135,21 +142,18 @@
 
      implicit none
 
-! local variables
-! loop index for fermionic frequency \omega
+!! local variables
+     ! loop index for fermionic frequency \omega
      integer :: i
 
-! loop index for orbitals
+     ! loop index for orbitals
      integer :: j
 
-! loop index for k-points
+     ! loop index for k-points
      integer :: k
 
-!!
-!! note:
-!!
-!! dual_s must be updated ahead of time. however, dmft_g and dmft_s are old.
-!!
+!! [body
+
      do k=1,nkpts
          do j=1,norbs
              do i=1,nffrq
@@ -159,6 +163,8 @@
              enddo ! over i={1,nffrq} loop
          enddo ! over j={1,norbs} loop
      enddo ! over k={1,nkpts} loop
+
+!! body]
 
      return
   end subroutine df_eval_latt_s
