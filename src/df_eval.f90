@@ -277,29 +277,31 @@
 
      implicit none
 
-! local variables
-! loop index for bosonic frequencies
+!! local variables
+     ! loop index for bosonic frequencies
      integer :: i
 
-! status flag
+     ! status flag
      integer :: istat
 
-! L(\omega, k)
+     ! L(\omega, k)
      complex(dp), allocatable :: Lwq(:,:,:)
 
-! convolution of dual green's function:
-! --> \sum_{k} G_{d}(\omgea, k) G_{d}(\omega + \Omega, k + q)
+     ! convolution of dual green's function:
+     ! --> \sum_{k} G_{d}(\omgea, k) G_{d}(\omega + \Omega, k + q)
      complex(dp), allocatable :: gd2(:,:,:)
 
-! convolution of Lwq:
-! --> \sum_{k} L(\omega, k) L(\omega + \Omega, k + q)
+     ! convolution of Lwq:
+     ! --> \sum_{k} L(\omega, k) L(\omega + \Omega, k + q)
      complex(dp), allocatable :: gt2(:,:,:)
 
-! convolution of lattice green's function:
-! --> \sum_{k} G_{d}(\omgea, k) G_{d}(\omega + \Omega, k + q)
+     ! convolution of lattice green's function:
+     ! --> \sum_{k} G_{d}(\omgea, k) G_{d}(\omega + \Omega, k + q)
      complex(dp), allocatable :: gl2(:,:,:)
 
-! allocate memory
+!! [body
+
+     ! allocate memory
      allocate(Lwq(nffrq,norbs,nkpts), stat=istat)
      allocate(gd2(nffrq,norbs,nkpts), stat=istat)
      allocate(gt2(nffrq,norbs,nkpts), stat=istat)
@@ -309,30 +311,34 @@
          call s_print_error('df_eval_susc_s','can not allocate enough memory')
      endif ! back if ( istat /= 0 ) block
 
-! try to calculate L(\omega,k) at first
+     ! try to calculate L(\omega,k) at first
      call cat_susc_lwq(Lwq)
 
      V_LOOP: do i=1,nbfrq
 
-! for a given bosonic frequency, try to calculate all of the necessary
-! convolutions. in order to calculate gt2, Lwq is needed. on the other
-! hand, gd2 and gl2 can be calculated with dual_g and latt_g, respectively.
+         ! for a given bosonic frequency, try to calculate all of the
+         ! necessary convolutions. in order to calculate gt2, Lwq is
+         ! needed. on the other hand, gd2 and gl2 can be calculated with
+         ! dual_g and latt_g, respectively.
          call cat_susc_conv( bmesh(i), Lwq, gd2, gt2, gl2 )
 
-! try to calculate the orbital-resolved and k-resolved susceptibilities.
+         ! try to calculate the orbital-resolved and k-resolved
+         ! susceptibilities.
          call cat_susc_value( susc_s(i,:,:), vert_m(:,:,i), gd2, gt2, gl2 )
 
-! save the susceptibilies, here one is the normalization factor
-! note for spin susceptibility, the factor is half.
+         ! save the susceptibilies, here one is the normalization factor
+         ! note for spin susceptibility, the factor is half.
          susc_s(i,:,:) = susc_s(i,:,:) * half
 
      enddo V_LOOP ! over i={1,nbfrq} loop
 
-! deallocate memory
+     ! deallocate memory
      deallocate(Lwq)
      deallocate(gd2)
      deallocate(gt2)
      deallocate(gl2)
+
+!! body]
 
      return
   end subroutine df_eval_susc_s
