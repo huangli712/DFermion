@@ -501,8 +501,8 @@
      complex(dp), intent(in)  :: gl2(nffrq,norbs,nkpts)
 
 !! local parameters
-     ! a flag, it denotes whether the contribution from the lattice bubble
-     ! will be included in the calculation of susceptibility.
+     ! a flag, it denotes whether the contribution from the lattice
+     ! bubble will be included in the calculation of susceptibility.
      complex(dp), parameter :: add_lattice_bubble = czero
 
 !! local variables
