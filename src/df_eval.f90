@@ -417,50 +417,54 @@
 
      implicit none
 
-! external arguments
-! given bosonic frequency
+!! external arguments
+     ! given bosonic frequency
      real(dp), intent(in) :: omega
 
-! L(\omega, k)
+     ! L(\omega, k)
      complex(dp), intent(in)  :: Lwq(nffrq,norbs,nkpts)
 
-! convolution of dual green's function
+     ! convolution of dual green's function
      complex(dp), intent(out) :: gd2(nffrq,norbs,nkpts)
 
-! convolution of Lwq
+     ! convolution of Lwq
      complex(dp), intent(out) :: gt2(nffrq,norbs,nkpts)
 
-! convolution of lattice green's function
+     ! convolution of lattice green's function
      complex(dp), intent(out) :: gl2(nffrq,norbs,nkpts)
 
-! local variables
-! status flag
+!! local variables
+     ! status flag
      integer :: istat
 
-! shifted dual green's function
+     ! shifted dual green's function
      complex(dp), allocatable :: gstp(:,:,:)
 
-! allocate memory
+!! [body
+
+     ! allocate memory
      allocate(gstp(nffrq,norbs,nkpts), stat=istat)
 
      if ( istat /= 0 ) then
          call s_print_error('cat_susc_conv','can not allocate enough memory')
      endif ! back if ( istat /= 0 ) block
 
-! gd2 means the convolution of two dual green's functions
+     ! gd2 means the convolution of two dual green's functions
      call cat_fill_gk(dual_g, gstp, omega)
      call cat_dia_2d(dual_g, gstp, gd2)
 
-! gt2 means the convolution of two L_{\Omega,\omega}{q}
+     ! gt2 means the convolution of two L_{\Omega,\omega}{q}
      call cat_fill_gk(Lwq, gstp, omega)
      call cat_dia_2d(Lwq, gstp, gt2)
 
-! gl2 means the convolution of two lattice green's functions
+     ! gl2 means the convolution of two lattice green's functions
      call cat_fill_gk(latt_g, gstp, omega)
      call cat_dia_2d(latt_g, gstp, gl2)
 
-! deallocate memory
+     ! deallocate memory
      deallocate(gstp)
+
+!! body]
 
      return
   end subroutine cat_susc_conv
@@ -480,45 +484,47 @@
 
      implicit none
 
-! external arguments
-! orbital- and momentum-resolved spin or charge susceptibility
+!! external arguments
+     ! orbital- and momentum-resolved spin or charge susceptibility
      complex(dp), intent(out) :: susc(norbs,nkpts)
 
-! matrix form for vertex function
+     ! matrix form for vertex function
      complex(dp), intent(in)  :: vert(nffrq,nffrq)
 
-! convolution of dual green's function
+     ! convolution of dual green's function
      complex(dp), intent(in)  :: gd2(nffrq,norbs,nkpts)
 
-! convolution of Lwq
+     ! convolution of Lwq
      complex(dp), intent(in)  :: gt2(nffrq,norbs,nkpts)
 
-! convolution of lattice green's function
+     ! convolution of lattice green's function
      complex(dp), intent(in)  :: gl2(nffrq,norbs,nkpts)
 
-! local parameters
-! flag, it denotes whether the contribution from the lattice bubble will
-! be included in the calculation of susceptibility
+!! local parameters
+     ! a flag, it denotes whether the contribution from the lattice bubble
+     ! will be included in the calculation of susceptibility.
      complex(dp), parameter :: add_lattice_bubble = czero
 
-! local variables
-! loop indices
+!! local variables
+     ! loop indices
      integer :: i
      integer :: k
 
-! status flag
+     ! status flag
      integer :: istat
 
-! dummy complex(dp) vector
+     ! dummy complex(dp) vector
      complex(dp), allocatable :: yvec(:)
 
-! matrix form for bubble function (convolution of dual green's function)
+     ! matrix form for bubble function (convolution of dual green's function)
      complex(dp), allocatable :: imat(:,:)
 
-! fully dressed vertex function, \Gamma
+     ! fully dressed vertex function, \Gamma
      complex(dp), allocatable :: Gmat(:,:)
 
-! allocate memory
+!! [body
+
+     ! allocate memory
      allocate(yvec(nffrq)      , stat=istat)
      allocate(imat(nffrq,nffrq), stat=istat)
      allocate(Gmat(nffrq,nffrq), stat=istat)
@@ -530,26 +536,30 @@
      O_LOOP: do i=1,norbs
          K_LOOP: do k=1,nkpts
 
-! step 1: try to solve the bethe-salpeter equation to obtain \Gamma_{m/d}
+             ! step 1: try to solve the bethe-salpeter equation to
+             ! obtain \Gamma_{m/d}.
              call s_diag_z(nffrq, gd2(:,i,k), imat)
              call cat_bse_solver(imat, vert, Gmat)
 
-! step 2: get susceptibility from \Gamma_{m/d} and convolution of dual
-! green's function
+             ! step 2: get susceptibility from \Gamma_{m/d} and
+             ! convolution of dual green's function.
              yvec = czero
              call zgemv('N', nffrq, nffrq, cone, Gmat, nffrq, gt2(:,i,k), 1, czero, yvec, 1)
              susc(i,k) = dot_product(gt2(:,i,k), yvec)
 
-! step 3: add up the contribution from lattice bubble to susc
+             ! step 3: add up the contribution from lattice bubble
+             ! to susc.
              susc(i,k) = susc(i,k) + sum(gl2(:,i,k)) * add_lattice_bubble
 
          enddo K_LOOP ! over k={1,nkpts} loop
      enddo O_LOOP ! over i={1,norbs} loop
 
-! deallocate memory
+     ! deallocate memory
      deallocate(yvec)
      deallocate(imat)
      deallocate(Gmat)
+
+!! body]
 
      return
   end subroutine cat_susc_value
