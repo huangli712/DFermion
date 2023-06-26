@@ -482,32 +482,34 @@
 
      implicit none
 
-! local variables
-! loop index
+!! local variables
+     ! loop index
      integer  :: i
      integer  :: if1, if2
 
-! used to check whether the input file (df.vert_d.in) exists
+     ! used to check whether the input file (df.vert_d.in) exists
      logical  :: exists
 
-! dummy real(dp) variables
+     ! dummy real(dp) variables
      real(dp) :: r1, r2
      real(dp) :: c1, c2
      real(dp) :: d1, d2
      real(dp) :: v1, v2
 
-! read in vertex function (density channel) if available
-!-------------------------------------------------------------------------
+!! [body
+
+     ! read in vertex function (density channel) if available
+     !--------------------------------------------------------------------
      if ( myid == master ) then ! only master node can do it
          exists = .false.
 
-! inquire about file's existence
+         ! inquire about file's existence
          inquire (file = 'df.vert_d.in', exist = exists)
 
-! find input file: df.vert_d.in, read it
+         ! find input file: df.vert_d.in, read it
          if ( exists .eqv. .true. ) then
 
-! read in vertex function (density channel) from df.vert_d.in
+             ! read in vertex function (density channel) from df.vert_d.in
              open(mytmp, file = 'df.vert_d.in', form = 'formatted', status = 'unknown')
              do i=1,nbfrq
                  do if1=1,nffrq
@@ -522,20 +524,20 @@
 
          endif ! back if ( exists .eqv. .true. ) block
      endif ! back if ( myid == master ) block
-!^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+     !^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-! read in vertex function (magentic channel) if available
-!-------------------------------------------------------------------------
+     ! read in vertex function (magentic channel) if available
+     !--------------------------------------------------------------------
      if ( myid == master ) then ! only master node can do it
          exists = .false.
 
-! inquire about file's existence
+         ! inquire about file's existence
          inquire (file = 'df.vert_m.in', exist = exists)
 
-! find input file: df.vert_m.in, read it
+         ! find input file: df.vert_m.in, read it
          if ( exists .eqv. .true. ) then
 
-! read in vertex function (magnetic channel) from df.vert_m.in
+             ! read in vertex function (magnetic channel) from df.vert_m.in
              open(mytmp, file = 'df.vert_m.in', form = 'formatted', status = 'unknown')
              do i=1,nbfrq
                  do if1=1,nffrq
@@ -550,20 +552,22 @@
 
          endif ! back if ( exists .eqv. .true. ) block
      endif ! back if ( myid == master ) block
-!^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+     !^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ! since the data/arrays may be updated in master node, it is important to
 ! broadcast them from root to all children processes
 # if defined (MPI)
 
-! broadcast data
+     ! broadcast data
      call mp_bcast(vert_d, master)
      call mp_bcast(vert_m, master)
 
-! block until all processes have reached here
+     ! block until all processes have reached here
      call mp_barrier()
 
 # endif  /* MPI */
+
+!! body]
 
      return
   end subroutine df_input_vert_
@@ -582,13 +586,17 @@
 
      implicit none
 
-! allocate memory for context module
+!! [body
+
+     ! allocate memory for context module
      call cat_alloc_mesh()
      call cat_alloc_dmft()
      call cat_alloc_dual()
      call cat_alloc_latt()
      call cat_alloc_susc()
      call cat_alloc_vert()
+
+!! body]
 
      return
   end subroutine df_alloc_array
@@ -600,6 +608,10 @@
 !!
   subroutine df_reset_array()
      implicit none
+
+!! [body
+
+!! body]
 
      return
   end subroutine df_reset_array
@@ -614,13 +626,17 @@
 
      implicit none
 
-! deallocate memory for context module
+!! [body
+
+     ! deallocate memory for context module
      call cat_free_mesh()
      call cat_free_dmft()
      call cat_free_dual()
      call cat_free_latt()
      call cat_free_susc()
      call cat_free_vert()
+
+!! body]
 
      return
   end subroutine df_final_array
