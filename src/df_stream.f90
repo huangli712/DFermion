@@ -221,13 +221,15 @@
 
      implicit none
 
-! local variables
-! loop index
+!! local variables
+     ! loop index
      integer :: i
      integer :: j
      integer :: k
 
-! setup k-mesh
+!! [body
+
+     ! setup k-mesh
      do i=1,nkp_x
          kx(i) = (two * pi) * float(i - 1)/ float(nkp_x)
      enddo ! over i={1,nkp_x} loop
@@ -240,7 +242,7 @@
          kz(i) = (two * pi) * float(i - 1)/ float(nkp_z)
      enddo ! over i={1,nkp_z} loop
 
-! build a 2d lattice (band dispersion)
+     ! build a 2d lattice (band dispersion)
      k = 0
      do i=1,nkp_x
          do j=1,nkp_y
@@ -250,15 +252,17 @@
      enddo ! over i={1,nkp_x} loop
      call s_assert(k == nkpts) ! we have to make sure this
 
-! setup fermionic mesh
+     ! setup fermionic mesh
      do i=1,nffrq
          fmesh(i) = (two * i - one - nffrq) * pi / beta
      enddo ! over i={1,nffrq} loop
 
-! setup bosonic mesh
+     ! setup bosonic mesh
      do i=1,nbfrq
          bmesh(i) = (two * i - one - nbfrq) * pi / beta
      enddo ! over i={1,nbfrq} loop
+
+!! body]
 
      return
   end subroutine df_input_mesh_
