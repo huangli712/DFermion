@@ -1,20 +1,20 @@
 !!!-----------------------------------------------------------------------
-!!! project : azalea
+!!! project : dfermion @ azalea
 !!! program : df_setup_param
-!!!           df_setup_model <<<---
+!!!           df_setup_model
 !!!           df_input_mesh_
 !!!           df_input_dmft_
 !!!           df_input_latt_
 !!!           df_input_dual_
-!!!           df_input_vert_ <<<---
+!!!           df_input_vert_
 !!!           df_alloc_array
 !!!           df_reset_array
-!!!           df_final_array <<<---
+!!!           df_final_array
 !!! source  : df_stream.f90
 !!! type    : subroutines
 !!! author  : li huang (email:lihuang.dmft@gmail.com)
 !!! history : 09/16/2009 by li huang (created)
-!!!           05/31/2019 by li huang (last modified)
+!!!           06/26/2023 by li huang (last modified)
 !!! purpose : initialize and finalize the dual fermion framework.
 !!! status  : unstable
 !!! comment :
@@ -42,59 +42,61 @@
 
      implicit none
 
-! local variables
-! used to check whether the input file (df.config.in) exists
+!! local variables
+     ! used to check whether the input file (df.config.in) exists
      logical :: exists
 
-! setup general control flags
-!-------------------------------------------------------------------------
-     isdia = 2       ! self-consistent scheme
-!^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+!! [body
 
-! setup common variables for interacting lattice model
-!-------------------------------------------------------------------------
+     ! setup general control flags
+     !--------------------------------------------------------------------
+     isdia = 2       ! self-consistent scheme
+     !^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+     ! setup common variables for interacting lattice model
+     !--------------------------------------------------------------------
      nband = 1       ! number of correlated bands
      nspin = 2       ! number of spin projections
      norbs = 2       ! number of correlated orbitals
-!-------------------------------------------------------------------------
+     !--------------------------------------------------------------------
      nkpts = 64      ! number of k-points
      nkp_x = 8       ! number of k-points (x_axis)
      nkp_y = 8       ! number of k-points (y_axis)
      nkp_z = 8       ! number of k-points (z_axis)
-!-------------------------------------------------------------------------
+     !--------------------------------------------------------------------
      mune  = 0.00_dp ! chemical potential or fermi level
      beta  = 1.00_dp ! inversion of temperature
      part  = 1.00_dp ! hopping parameter t for Hubbard model
-!^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+     !^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-! setup common variables for dual fermion framework
-!-------------------------------------------------------------------------
+     ! setup common variables for dual fermion framework
+     !--------------------------------------------------------------------
      nffrq = 16      ! number of fermionic frequencies
      nbfrq = 7       ! number of bosonic frequncies
-!-------------------------------------------------------------------------
+     !--------------------------------------------------------------------
      ndfit = 10      ! number of dual fermion iteration
      nbsit = 10      ! number of BSE iteration
-!-------------------------------------------------------------------------
+     !--------------------------------------------------------------------
      dfmix = 1.00_dp ! mixing parameter (dual fermion iteration)
      bsmix = 0.70_dp ! mixing parameter (BSE solver)
-!^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+     !^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-! read in input file if possible, only master node can do it
+     ! read in input file if possible, only master node can do it
      if ( myid == master ) then
          exists = .false.
 
-! inquire file status: df.config.in
+         ! inquire file status: df.config.in
          inquire (file = 'df.config.in', exist = exists)
 
-! read in parameters, default setting should be overrided
+         ! read in parameters, default setting should be overrided
          if ( exists .eqv. .true. ) then
-! create the file parser
+             ! create the file parser
              call p_create()
 
-! parse the config file
+             ! parse the config file
              call p_parse('df.config.in')
 
-! extract parameters
+             ! extract parameters
              call p_get('isdia' , isdia )
 
              call p_get('nband' , nband )
@@ -119,7 +121,7 @@
              call p_get('dfmix' , dfmix )
              call p_get('bsmix' , bsmix )
 
-! destroy the parser
+             ! destroy the parser
              call p_destroy()
          endif ! back if ( exists .eqv. .true. ) block
      endif ! back if ( myid == master ) block
@@ -160,6 +162,8 @@
      call mp_barrier()
 
 # endif  /* MPI */
+
+!! body]
 
      return
   end subroutine df_setup_param
