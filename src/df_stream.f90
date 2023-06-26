@@ -126,8 +126,6 @@
          endif ! back if ( exists .eqv. .true. ) block
      endif ! back if ( myid == master ) block
 
-! since config parameters may be updated in master node, it is crucial
-! to broadcast config parameters from root to all children processes
 # if defined (MPI)
 
      call mp_bcast( isdia , master )
@@ -352,8 +350,6 @@
      endif ! back if ( myid == master ) block
      !^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-! since the data/arrays may be updated in master node, it is important to
-! broadcast them from root to all children processes
 # if defined (MPI)
 
      ! broadcast data
@@ -554,8 +550,6 @@
      endif ! back if ( myid == master ) block
      !^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-! since the data/arrays may be updated in master node, it is important to
-! broadcast them from root to all children processes
 # if defined (MPI)
 
      ! broadcast data
