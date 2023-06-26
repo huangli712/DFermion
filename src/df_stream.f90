@@ -177,20 +177,24 @@
   subroutine df_setup_model()
      implicit none
 
-! setup frequency mesh
+!! [body
+
+     ! setup frequency mesh
      call df_input_mesh_()
 
-! setup local variables (from quantum impurity solver)
+     ! setup local variables (from quantum impurity solver)
      call df_input_dmft_()
 
-! setup lattice variables (from scratch)
+     ! setup lattice variables (from scratch)
      call df_input_latt_()
 
-! setup dual variables (from scratch)
+     ! setup dual variables (from scratch)
      call df_input_dual_()
 
-! setup vertex functions (from quantum impurity solver)
+     ! setup vertex functions (from quantum impurity solver)
      call df_input_vert_()
+
+!! body]
 
      return
   end subroutine df_setup_model
