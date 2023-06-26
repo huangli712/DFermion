@@ -1,18 +1,18 @@
 !!!-----------------------------------------------------------------------
 !!! project : azalea
-!!! program : df_eval_dmft_h <<<---
+!!! program : df_eval_dmft_h
 !!!           df_eval_latt_g
-!!!           df_eval_latt_s <<<---
+!!!           df_eval_latt_s
 !!!           df_eval_susc_c
-!!!           df_eval_susc_s <<<---
+!!!           df_eval_susc_s
 !!!           cat_susc_lwq
 !!!           cat_susc_conv
-!!!           cat_susc_value <<<---
+!!!           cat_susc_value
 !!! source  : df_eval.f90
 !!! type    : subroutines
 !!! author  : li huang (email:lihuang.dmft@gmail.com)
 !!! history : 04/29/2009 by li huang (created)
-!!!           06/03/2019 by li huang (last modified)
+!!!           06/26/2026 by li huang (last modified)
 !!! purpose : try to evaluate some key observables.
 !!! status  : unstable
 !!! comment :
@@ -27,6 +27,11 @@
 !!
 !! calculate the local hybridization function within the dual fermion framework
 !!
+!! note:
+!!
+!! dual_g and latt_g must be updated ahead of time. actually, dmft_h will
+!! not be changed, the new hybridization function is stored in dmft_d.
+!!
   subroutine df_eval_dmft_h()
      use constants, only : one
 
@@ -39,21 +44,15 @@
 
      implicit none
 
-! local variables
-! loop index for fermionic frequency \omega
+!! local variables
+     ! loop index for fermionic frequency \omega
      integer :: i
 
-! loop index for orbitals
+     ! loop index for orbitals
      integer :: j
 
-!!
-!! note:
-!!
-!! dual_g and latt_g must be updated ahead of time.
-!!
-!! actually, dmft_h will not be changed, the new hybridization function
-!! is stored in dmft_d.
-!!
+!! [body
+
      do j=1,norbs
          do i=1,nffrq
              associate ( zh => ( sum( dual_g(i,j,:) ) / sum( latt_g(i,j,:) ) ) )
@@ -61,6 +60,8 @@
              end associate
          enddo ! over i={1,nffrq} loop
      enddo ! over j={1,norbs} loop
+
+!! body]
 
      return
   end subroutine df_eval_dmft_h
@@ -88,14 +89,14 @@
 
      implicit none
 
-! local variables
-! loop index for fermionic frequency \omega
+!! local variables
+     ! loop index for fermionic frequency \omega
      integer :: i
 
-! loop index for orbitals
+     ! loop index for orbitals
      integer :: j
 
-! loop index for k-points
+     ! loop index for k-points
      integer :: k
 
 !!
