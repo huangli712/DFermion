@@ -351,7 +351,9 @@
 !! @sub cat_susc_lwq
 !!
 !! try to calculate L(\omega, k), a key quantity for the calculation of
-!! spin and charge susceptibilities
+!! spin and charge susceptibilities:
+!!
+!! L(\omega,k) = G_{dual} G_{latt} / G^{0}_{dual}
 !!
   subroutine cat_susc_lwq(Lwq)
      use constants, only : dp
@@ -367,23 +369,21 @@
 
      implicit none
 
-! external arguments
-! the quantity what we want to calculate, L(\omega,k)
+!! external arguments
+     ! the quantity what we want to calculate, L(\omega,k)
      complex(dp), intent(out) :: Lwq(nffrq,norbs,nkpts)
 
-! local variables
-! loo indices
+!! local variables
+     ! loop indices
      integer :: i
      integer :: j
      integer :: k
 
-!!
-!! L(\omega,k) = G_{dual} G_{latt} / G^{0}_{dual}
-!!
+!! [body
 
-! try to calculate OLD G_{latt}
-! since latt_g was already updated at df_eval_latt_g(), here we have to
-! recompute it. note that dmft_g and dmft_h were old.
+     ! try to calculate OLD G_{latt}
+     ! since latt_g was already updated at df_eval_latt_g(), here we have
+     ! to recompute it. note that dmft_g and dmft_h were old.
      do k=1,nkpts
          do j=1,norbs
              do i=1,nffrq
@@ -394,6 +394,8 @@
 
      Lwq = Lwq / dual_b
      Lwq = Lwq * dual_g
+
+!! body]
 
      return
   end subroutine cat_susc_lwq
