@@ -1,5 +1,5 @@
 !!!-----------------------------------------------------------------------
-!!! project : azalea
+!!! project : dfermion @ azalea
 !!! program : df_eval_dmft_h
 !!!           df_eval_latt_g
 !!!           df_eval_latt_s

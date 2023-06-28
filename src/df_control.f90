@@ -38,10 +38,12 @@
 !! control flag, define the running scheme of the code
 !!
 !! if isdia == 1:
-!!     standard dual fermion approximation scheme
+!!     standard dual fermion approximation scheme, only the second order
+!!     diagrams are included.
 !!
 !! if isdia == 2:
-!!     ladder dual fermion approximation scheme
+!!     ladder dual fermion approximation scheme, only the ladder diagrams
+!!     are included.
 !!
 !! if isdia == 3:
 !!     reserved
@@ -129,7 +131,7 @@
 !!
 !! @var nbsit
 !!
-!! number of iterations for solving Bethe-Salpter equation
+!! number of iterations for solving the Bethe-Salpter equation
 !!
      integer, public, save :: nbsit  = 10
 
@@ -154,7 +156,7 @@
 !!
 !! @var part
 !!
-!! hopping parameter t for Hubbard model
+!! hopping parameter t for lattice model
 !!
      real(dp), public, save :: part  = 0.50_dp
 
@@ -163,14 +165,16 @@
 !!
 !! @var dfmix
 !!
-!! mixing parameter for dual fermion iteration
+!! mixing parameter for dual fermion iteration. it is used to mix the
+!! dual green's function or dual self-energy function. 
 !!
      real(dp), public, save :: dfmix = 0.70_dp
 
 !!
 !! @var bsmix
 !!
-!! mixing parameter for Bethe-Salpter equation iteration
+!! mixing parameter for solving the Bethe-Salpter equation via iteration
+!! approach. that is to say it is only useful in cat_bse_iterator().
 !!
      real(dp), public, save :: bsmix = 0.70_dp
 
@@ -232,21 +236,21 @@
 !!
 !! version string, version number + date info. + status info.
 !!
-     character(len=20), public, parameter :: V_FULL = 'v0.0.3 @ 2023.06.24D'
+     character(len=20), public, parameter :: V_FULL = 'v0.0.4 @ 2023.06.28D'
 
 !!
 !! @var V_CURR
 !!
 !! version string, only version number
 !!
-     character(len=06), public, parameter :: V_CURR = 'v0.0.3'
+     character(len=06), public, parameter :: V_CURR = 'v0.0.4'
 
 !!
 !! @var V_DATE
 !!
 !! version string, only date info.
 !!
-     character(len=11), public, parameter :: V_DATE = '2023.06.24'
+     character(len=11), public, parameter :: V_DATE = '2023.06.28'
 
 !!
 !! @var V_STAT

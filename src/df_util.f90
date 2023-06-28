@@ -15,7 +15,7 @@
 !!
 !! @sub cat_fill_gl
 !!
-!! try to fill G(\nu + \omega) by G(\nu), momentum-independent version.
+!! try to fill G(\nu + \omega) by G(\nu), for local green's function only.
 !!
   subroutine cat_fill_gl(gin, gout, shift)
      use constants, only : dp
@@ -69,7 +69,8 @@
 !!
 !! @sub cat_fill_gk
 !!
-!! try to fill G(\nu + \omega, K) by G(\nu, K), momentum-dependent version.
+!! try to fill G(\nu + \omega, K) by G(\nu, K), for lattice green's
+!! function only.
 !!
   subroutine cat_fill_gk(gin, gout, shift)
      use constants, only : dp
