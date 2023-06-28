@@ -130,6 +130,21 @@
 
      implicit none
 
+!! external arguments
+     ! k-mesh along x-axis
+     real(dp), intent(in) :: kx(nkp_x)
+
+     ! k-mesh along y-axis
+     real(dp), intent(in) :: ky(nkp_y)
+
+     ! k-mesh along z-axis
+     real(dp), intent(in) :: kz(nkp_z)
+
+!! local variables
+     ! loop index
+     integer :: i
+     integer :: j
+
 !! [body
 !! body]
 
