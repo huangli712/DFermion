@@ -85,6 +85,11 @@
 !!>>> dump data of matsubara grid                                      <<<
 !!========================================================================
 
+!!
+!! @sub df_dump_fmesh
+!!
+!! write out the fermionic matsubara grid.
+!!
   subroutine df_dump_fmesh()
      use constants, only : dp
      use constants, only : mytmp
@@ -96,6 +101,11 @@
      return
   end subroutine df_dump_fmesh
 
+!!
+!! @sub df_dump_bmesh
+!!
+!! write out the bosonic matsubara grid.
+!!
   subroutine df_dump_bmesh()
      use constants, only : dp
      use constants, only : mytmp
