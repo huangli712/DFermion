@@ -44,6 +44,18 @@
      return
   end subroutine df_dump_bz_3d
 
+  subroutine df_dump_fmesh()
+     implicit none
+
+     return
+  end subroutine df_dump_fmesh
+
+  subroutine df_dump_bmesh()
+     implicit none
+
+     return
+  end subroutine df_dump_bmesh
+
 !!========================================================================
 !!>>> dump data of local variables                                     <<<
 !!========================================================================
