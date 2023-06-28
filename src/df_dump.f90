@@ -104,7 +104,7 @@
      ! write it
      do i=1,nkp_x
          do j=1,nkp_y
-             write(mytmp,'(2i6,f16.8)') i, j, kx(i), ky(j)
+             write(mytmp,'(2i6,2f16.8)') i, j, kx(i), ky(j)
          enddo ! over j={1,nkp_y} loop
      enddo ! over i={1,nkp_x} loop
 
@@ -148,13 +148,15 @@
 
 !! [body
 
-     ! open data file: df.bz_2d.dat
-     open(mytmp, file='df.bz_2d.dat', form='formatted', status='unknown')
+     ! open data file: df.bz_3d.dat
+     open(mytmp, file='df.bz_3d.dat', form='formatted', status='unknown')
 
      ! write it
      do i=1,nkp_x
          do j=1,nkp_y
-             write(mytmp,'(2i6,f16.8)') i, j, kx(i), ky(j)
+             do k=1,nkp_z
+             write(mytmp,'(3i6,3f16.8)') i, j, k, kx(i), ky(j), kz(k)
+             enddo ! over k={1,nkp_z} loop
          enddo ! over j={1,nkp_y} loop
      enddo ! over i={1,nkp_x} loop
 
