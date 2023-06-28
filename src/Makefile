@@ -21,7 +21,7 @@
 ## =======
 ##
 ## 01/17/2017 by li huang (created)
-## 06/24/2023 by li huang (last modified)
+## 06/28/2023 by li huang (last modified)
 ##
 ##
 
@@ -31,8 +31,8 @@ include ../build/make.inc
 
 modc = df_control.o df_context.o
 core = df_core.o
-lev1 = df_eval.o
-lev2 = df_dump.o df_print.o df_stream.o
+lev1 = df_eval.o df_stream.o
+lev2 = df_dump.o df_print.o
 lev3 = df_util.o
 main = df_main.o
 mlib = libflink.a
