@@ -224,7 +224,27 @@
 
      implicit none
 
+!! external arguments
+     ! bosonic matsubara grid
+     real(dp), intent(in) :: bmesh(nbfrq)
+
+!! local variables
+     ! loop index
+     integer :: i
+
 !! [body
+
+     ! open data file: df.bmesh.dat
+     open(mytmp, file='df.bmesh.dat', form='formatted', status='unknown')
+
+     ! write it
+     do i=1,nbfrq
+         write(mytmp,'(i6,f16.8)') i, bmesh(i)
+     enddo ! over i={1,nbfrq} loop
+
+     ! close data file
+     close(mytmp)
+
 !! body]
 
      return
