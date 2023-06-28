@@ -183,6 +183,9 @@
      ! current bosonic frequency
      real(dp) :: om
 
+     real(dp) :: tmp
+     real(dp) :: gdsum(nffrq)
+
      ! dummy complex(dp) arrays, used to do fourier transformation
      complex(dp) :: vr(nkpts)
      complex(dp) :: gr(nkpts)
@@ -285,6 +288,32 @@
          call df_dyson(+1, gnew, dual_s, dual_b)
 
          call s_mix_z( size(gnew), dual_g, gnew, dfmix)
+
+         do k = 1, nkpts
+         do o = 1, norbs
+         do w = 1, nffrq
+             tmp = tmp + abs(dual_s(w,o,k))
+         enddo
+         enddo
+         enddo
+         print *, tmp / nffrq / norbs / nkpts
+
+         tmp = 0.0
+         do k = 1, nkpts
+         do o = 1, norbs
+         do w = 1, nffrq
+             tmp = tmp + abs(gnew(w,o,k) - dual_g(w,o,k))
+         enddo
+         enddo
+         enddo
+         print *, tmp / nffrq / norbs / nkpts
+
+         gdsum = 0.0_dp
+         do w = 1, nffrq
+             gdsum(w) = abs(sum(dual_g(w, :, :))) / norbs / nkpts
+         enddo
+         tmp = abs(sum(gdsum)) / nffrq
+         print *, tmp
 
          dual_g = gnew
          dual_s = czero
