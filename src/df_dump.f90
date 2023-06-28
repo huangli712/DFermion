@@ -75,7 +75,7 @@
 !!
 !! write out the k-mesh for 2d lattice model.
 !!
-  subroutine df_dump_bz_2d()
+  subroutine df_dump_bz_2d(kx, ky)
      use constants, only : dp
      use constants, only : mytmp
 
@@ -84,7 +84,33 @@
 
      implicit none
 
+!! external arguments
+     ! k-mesh along x-axis
+     real(dp), intent(in) :: kx(nkp_x)
+
+     ! k-mesh along y-axis
+     real(dp), intent(in) :: ky(nkp_y)
+
+!! local variables
+     ! loop index
+     integer :: i
+     integer :: j
+
 !! [body
+
+     ! open data file: df.bz_2d.dat
+     open(mytmp, file='df.bz_2d.dat', form='formatted', status='unknown')
+
+     ! write it
+     do i=1,nkp_x
+         do j=1,nkp_y
+             write(mytmp,'(2i6,f16.8)') i, j, kx(i), ky(j)
+         enddo ! over j={1,nkp_y} loop
+     enddo ! over i={1,nkp_x} loop
+
+     ! close data file
+     close(mytmp)
+
 !! body]
 
      return
@@ -95,7 +121,7 @@
 !!
 !! write out the k-mesh for 3d lattice model.
 !!
-  subroutine df_dump_bz_3d()
+  subroutine df_dump_bz_3d(kx, ky, kz)
      use constants, only : dp
      use constants, only : mytmp
 
