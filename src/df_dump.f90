@@ -34,7 +34,8 @@
      use constants, only : dp
      use constants, only : mytmp
 
-     use control, only : nkpts, nkp_x
+     use control, only : nkpts
+     use control, only : nkp_x
 
      implicit none
 
@@ -45,7 +46,8 @@
      use constants, only : dp
      use constants, only : mytmp
 
-     use control, only : nkpts, nkp_x, nkp_y
+     use control, only : nkpts
+     use control, only : nkp_x, nkp_y
 
      implicit none
 
@@ -56,7 +58,8 @@
      use constants, only : dp
      use constants, only : mytmp
 
-     use control, only : nkpts, nkp_x, nkp_y, nkp_z
+     use control, only : nkpts
+     use control, only : nkp_x, nkp_y, nkp_z
 
      implicit none
 
@@ -68,12 +71,22 @@
 !!========================================================================
 
   subroutine df_dump_fmesh()
+     use constants, only : dp
+     use constants, only : mytmp
+
+     use control, only : nffrq
+
      implicit none
 
      return
   end subroutine df_dump_fmesh
 
   subroutine df_dump_bmesh()
+     use constants, only : dp
+     use constants, only : mytmp
+
+     use control, only : nbfrq
+
      implicit none
 
      return
