@@ -53,6 +53,18 @@
      integer :: i
 
 !! [body
+
+     ! open data file: df.bz_1d.dat
+     open(mytmp, file='df.bz_1d.dat', form='formatted', status='unknown')
+
+     ! write it
+     do i=1,nkp_x
+         write(mytmp,'(i6,f16.8)') i, kx(i)
+     enddo ! over i={1,nkp_x} loop
+
+     ! close data file
+     close(mytmp)
+
 !! body]
 
      return
@@ -185,7 +197,7 @@
          write(mytmp,*)
      enddo ! over i={1,norbs} loop
 
-! close data file
+     ! close data file
      close(mytmp)
 
 !! body]
