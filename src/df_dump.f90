@@ -177,13 +177,21 @@
 !!
 !! write out the fermionic matsubara grid.
 !!
-  subroutine df_dump_fmesh()
+  subroutine df_dump_fmesh(fmesh)
      use constants, only : dp
      use constants, only : mytmp
 
      use control, only : nffrq
 
      implicit none
+
+!! external arguments
+     ! fermionic matsubara grid
+     real(dp), intent(in) :: fmesh(nffrq)
+
+!! local variables
+     ! loop index
+     integer :: i
 
 !! [body
 !! body]
@@ -196,7 +204,7 @@
 !!
 !! write out the bosonic matsubara grid.
 !!
-  subroutine df_dump_bmesh()
+  subroutine df_dump_bmesh(bmesh)
      use constants, only : dp
      use constants, only : mytmp
 
