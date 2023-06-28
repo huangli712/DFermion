@@ -30,6 +30,11 @@
 !!>>> dump data of k-mesh in brillouin zone                            <<<
 !!========================================================================
 
+!!
+!! @sub df_dump_bz_1d
+!!
+!! write out the k-mesh for 1d lattice model.
+!!
   subroutine df_dump_bz_1d()
      use constants, only : dp
      use constants, only : mytmp
@@ -42,6 +47,11 @@
      return
   end subroutine df_dump_bz_1d
 
+!!
+!! @sub df_dump_bz_2d
+!!
+!! write out the k-mesh for 2d lattice model.
+!!
   subroutine df_dump_bz_2d()
      use constants, only : dp
      use constants, only : mytmp
@@ -54,6 +64,11 @@
      return
   end subroutine df_dump_bz_2d
 
+!!
+!! @sub df_dump_bz_3d
+!!
+!! write out the k-mesh for 3d lattice model.
+!!
   subroutine df_dump_bz_3d()
      use constants, only : dp
      use constants, only : mytmp
