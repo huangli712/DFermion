@@ -1,0 +1,7 @@
+nkpts = 144
+nkp_x = 12
+nkp_y = 12
+nkp_z = 12
+beta  = 2.0
+nffrq = 128
+nbfrq = 19

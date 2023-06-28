@@ -4,7 +4,7 @@ The DFermion software package implements a dual fermion framework for general la
 
 ## Version
 
-v0.0.3-devel.230624
+v0.0.4-devel.230628
 
 ## License
 
