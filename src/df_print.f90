@@ -10,7 +10,7 @@
 !!! type    : subroutines
 !!! author  : li huang (email:lihuang.dmft@gmail.com)
 !!! history : 09/15/2009 by li huang (created)
-!!!           06/24/2023 by li huang (last modified)
+!!!           06/29/2023 by li huang (last modified)
 !!! purpose : provide printing infrastructure for dual fermion framework.
 !!! status  : unstable
 !!! comment :

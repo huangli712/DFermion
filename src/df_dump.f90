@@ -1,6 +1,11 @@
 !!!-----------------------------------------------------------------------
 !!! project : dfermion @ azalea
-!!! program : df_dump_dmft_g
+!!! program : df_dump_bz_1d
+!!!           df_dump_bz_2d
+!!!           df_dump_bz_3d
+!!!           df_dump_fmesh
+!!!           df_dump_bmesh
+!!!           df_dump_dmft_g
 !!!           df_dump_dmft_s
 !!!           df_dump_dmft_h
 !!!           df_dump_dual_g
@@ -14,12 +19,30 @@
 !!! type    : subroutines
 !!! author  : li huang (email:lihuang.dmft@gmail.com)
 !!! history : 09/16/2009 by li huang (created)
-!!!           06/24/2023 by li huang (last modified)
+!!!           06/29/2023 by li huang (last modified)
 !!! purpose : dump key observables produced by the diagrammatic framework
 !!!           for dynamical mean field theory to external files.
 !!! status  : unstable
 !!! comment :
 !!!-----------------------------------------------------------------------
+
+  subroutine df_dump_bz_1d()
+     implicit none
+
+     return
+  end subroutine df_dump_bz_1d
+
+  subroutine df_dump_bz_2d()
+     implicit none
+
+     return
+  end subroutine df_dump_bz_2d
+
+  subroutine df_dump_bz_3d()
+     implicit none
+
+     return
+  end subroutine df_dump_bz_3d
 
 !!========================================================================
 !!>>> dump data of local variables                                     <<<
