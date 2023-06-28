@@ -44,6 +44,9 @@
 
      implicit none
 
+!! [body
+!! body]
+
      return
   end subroutine df_dump_bz_1d
 
@@ -61,6 +64,9 @@
 
      implicit none
 
+!! [body
+!! body]
+
      return
   end subroutine df_dump_bz_2d
 
@@ -77,6 +83,9 @@
      use control, only : nkp_x, nkp_y, nkp_z
 
      implicit none
+
+!! [body
+!! body]
 
      return
   end subroutine df_dump_bz_3d
@@ -98,6 +107,9 @@
 
      implicit none
 
+!! [body
+!! body]
+
      return
   end subroutine df_dump_fmesh
 
@@ -113,6 +125,9 @@
      use control, only : nbfrq
 
      implicit none
+
+!! [body
+!! body]
 
      return
   end subroutine df_dump_bmesh
