@@ -31,18 +31,33 @@
 !!========================================================================
 
   subroutine df_dump_bz_1d()
+     use constants, only : dp
+     use constants, only : mytmp
+
+     use control, only : nkpts, nkp_x
+
      implicit none
 
      return
   end subroutine df_dump_bz_1d
 
   subroutine df_dump_bz_2d()
+     use constants, only : dp
+     use constants, only : mytmp
+
+     use control, only : nkpts, nkp_x, nkp_y
+
      implicit none
 
      return
   end subroutine df_dump_bz_2d
 
   subroutine df_dump_bz_3d()
+     use constants, only : dp
+     use constants, only : mytmp
+
+     use control, only : nkpts, nkp_x, nkp_y, nkp_z
+
      implicit none
 
      return
