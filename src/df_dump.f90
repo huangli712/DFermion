@@ -35,7 +35,7 @@
 !!
 !! write out the k-mesh for 1d lattice model.
 !!
-  subroutine df_dump_bz_1d()
+  subroutine df_dump_bz_1d(kx)
      use constants, only : dp
      use constants, only : mytmp
 
@@ -43,6 +43,14 @@
      use control, only : nkp_x
 
      implicit none
+
+!! external arguments
+     ! k-mesh along x-axis
+     real(dp), intent(in) :: kx(nkp_x)
+
+!! local variables
+     ! loop index
+     integer :: i
 
 !! [body
 !! body]
