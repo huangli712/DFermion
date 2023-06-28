@@ -194,6 +194,18 @@
      integer :: i
 
 !! [body
+
+     ! open data file: df.fmesh.dat
+     open(mytmp, file='df.fmesh.dat', form='formatted', status='unknown')
+
+     ! write it
+     do i=1,nffrq
+         write(mytmp,'(i6,f16.8)') i, fmesh(i)
+     enddo ! over i={1,nffrq} loop
+
+     ! close data file
+     close(mytmp)
+
 !! body]
 
      return
