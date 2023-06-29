@@ -264,32 +264,49 @@
                  write(mystd,'(4X,A,I2,A,F12.8,A)') 'bosonic frequency => ', v, ' (', om, ')'
              endif ! back if ( myid == master ) block
 
+             ! calculate two-particle bubbles, g2
              call cat_fill_gk(dual_g, gstp, om)
              call cat_dia_2d(dual_g, gstp, g2)
 
+             ! extract impurity vertex functions for density and magnetic
+             ! channels. in principles, they should be orbital-dependent.
+             ! we will it later.
              mmat = vert_m(:,:,v)
              dmat = vert_d(:,:,v)
 
+             ! actually, gvrt denotes
+             !
+             ! 3 ( \Gamma^{m} - 0.5\Gamma^{(2),m} ) +
+             ! 1 ( \Gamma^{d} - 0.5\Gamma^{(2),d} )
+             !
+             ! it is used to calcuate dual self-energy function. next we
+             ! try to calculate the fully dressed vertex function \Gamma
+             ! and use it to build gvrt.
              gvrt = czero
-                 K_LOOP: do k=1,nkpts
+             K_LOOP: do k=1,nkpts
                  O_LOOP1: do o=1,norbs
 
+                     ! build diagonal matrix for the bubbles
                      call s_diag_z(nffrq, g2(:,o,k), imat)
 
+                     ! evaluate the first term, magnetic channel
                      call cat_bse_solver(imat, mmat, Gmat)
                      call s_vecadd_z(nffrq, gvrt(:,o,k), Gmat, half * 3.0_dp)
                      call cat_bse_iterator(1, one, imat, mmat, Gmat)
                      call s_vecadd_z(nffrq, gvrt(:,o,k), Gmat, -half * half * 3.0_dp)
 
+                     ! evaluate the second term, density channel
                      call cat_bse_solver(imat, dmat, Gmat)
                      call s_vecadd_z(nffrq, gvrt(:,o,k), Gmat, half * 1.0_dp)
                      call cat_bse_iterator(1, one, imat, dmat, Gmat)
                      call s_vecadd_z(nffrq, gvrt(:,o,k), Gmat, -half * half * 1.0_dp)
 
                  enddo O_LOOP1
-                 enddo K_LOOP
+             enddo K_LOOP
 
-                 O_LOOP: do o=1,norbs
+             ! now gvrt and gstp are used to calculate dual self-energy
+             ! function via fast fourier transformation
+             O_LOOP: do o=1,norbs
                  W_LOOP: do w=1,nffrq
                      call cat_fft_2d(+1, nkp_x, nkp_y, gvrt(w,o,:), vr)
                      call cat_fft_2d(-1, nkp_x, nkp_y, gstp(w,o,:), gr)
@@ -297,7 +314,7 @@
                      call cat_fft_2d(+1, nkp_x, nkp_y, gr, vr)
                      dual_s(w,o,:) = dual_s(w,o,:) + vr / beta
                  enddo W_LOOP
-                 enddo O_LOOP
+             enddo O_LOOP
 
          enddo V_LOOP
 
