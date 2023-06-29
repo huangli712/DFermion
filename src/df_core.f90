@@ -267,6 +267,9 @@
              ! calculate two-particle bubbles, g2
              call cat_fill_gk(dual_g, gstp, om)
              call cat_dia_2d(dual_g, gstp, g2)
+             if ( myid == master ) then
+                 write(mystd,'(6X,A)') 'calculate two-particle bubbles'
+             endif
 
              ! extract impurity vertex functions for density and magnetic
              ! channels. in principles, they should be orbital-dependent.
