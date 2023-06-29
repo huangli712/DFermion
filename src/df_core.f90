@@ -306,6 +306,9 @@
 
                  enddo O_LOOP1
              enddo K_LOOP
+             if ( myid == master ) then
+                 write(mystd,'(6X,A)') 'solve Bethe-salpeter equations'
+             endif
 
              ! now gvrt and gstp are used to calculate dual self-energy
              ! function via fast fourier transformation
