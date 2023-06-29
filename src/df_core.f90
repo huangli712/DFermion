@@ -318,8 +318,10 @@
 
          enddo V_LOOP
 
+         ! determine new dual green's function
          call df_dyson(+1, gnew, dual_s, dual_b)
 
+         ! try to mix old and new dual green's function
          call s_mix_z( size(gnew), dual_g, gnew, dfmix)
 
          do k = 1, nkpts
