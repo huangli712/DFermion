@@ -16,7 +16,7 @@
 !!! type    : subroutines
 !!! author  : li huang (email:lihuang.dmft@gmail.com)
 !!! history : 09/16/2009 by li huang (created)
-!!!           06/25/2023 by li huang (last modified)
+!!!           06/30/2023 by li huang (last modified)
 !!! purpose : main subroutines for the dual fermion framework.
 !!! status  : unstable
 !!! comment :
@@ -35,6 +35,7 @@
      use control, only : isdia
      use control, only : myid, master
 
+     use context, only : kx, ky
      use context, only : fmesh, bmesh
      use context, only : dmft_d
      use context, only : dual_g, dual_s, dual_b
@@ -68,8 +69,8 @@
      call df_eval_latt_g()
      call df_eval_latt_s()
 
-     ! try to update local hybridization function. it can be fed back to
-     ! the quantum impurity solver
+     ! try to update local hybridization function
+     ! it can be fed back to the quantum impurity solver
      call df_eval_dmft_h()
 
      ! try to calculate charge susceptibility and spin susceptibility
@@ -80,6 +81,18 @@
      ! hybridization function, dual green's function, dual self-energy
      ! function, dual bath green's function, charge susceptibility, and
      ! spin susceptibility. only the master node can do this
+     !
+     if ( myid == master ) then
+         call df_dump_bz_2d(kx, ky)
+     endif ! back if ( myid == master ) block
+     !
+     if ( myid == master ) then
+         call df_dump_fmesh(fmesh)
+     endif ! back if ( myid == master ) block
+     !
+     if ( myid == master ) then
+         call df_dump_bmesh(bmesh)
+     endif ! back if ( myid == master ) block
      !
      if ( myid == master ) then
          call df_dump_dmft_h(fmesh, dmft_d)
