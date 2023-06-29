@@ -39,7 +39,6 @@
      use constants, only : dp
      use constants, only : mytmp
 
-     use control, only : nkpts
      use control, only : nkp_x
 
      implicit none
@@ -79,7 +78,6 @@
      use constants, only : dp
      use constants, only : mytmp
 
-     use control, only : nkpts
      use control, only : nkp_x, nkp_y
 
      implicit none
@@ -125,7 +123,6 @@
      use constants, only : dp
      use constants, only : mytmp
 
-     use control, only : nkpts
      use control, only : nkp_x, nkp_y, nkp_z
 
      implicit none

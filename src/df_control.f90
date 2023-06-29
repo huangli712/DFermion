@@ -6,7 +6,7 @@
 !!! type    : module
 !!! author  : li huang (email:lihuang.dmft@gmail.com)
 !!! history : 09/15/2009 by li huang (created)
-!!!           06/24/2023 by li huang (last modified)
+!!!           06/29/2023 by li huang (last modified)
 !!! purpose : define global control parameters for dual fermion framework.
 !!! status  : unstable
 !!! comment :
@@ -80,14 +80,14 @@
 !!
 !! number of fermionic frequencies for the two-particle green's function
 !!
-     integer, public, save :: nffrq  = 32
+     integer, public, save :: nffrq  = 16
 
 !!
 !! @var nbfrq
 !!
 !! number of bosonic frequncies for the two-particle green's function
 !!
-     integer, public, save :: nbfrq  = 8
+     integer, public, save :: nbfrq  = 7
 
 !^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -126,7 +126,7 @@
 !!
 !! number of dual fermion iterations
 !!
-     integer, public, save :: ndfit  = 1
+     integer, public, save :: ndfit  = 10
 
 !!
 !! @var nbsit
@@ -144,21 +144,21 @@
 !!
 !! chemical potential or fermi level
 !!
-     real(dp), public, save :: mune  = 2.00_dp
+     real(dp), public, save :: mune  = 0.00_dp
 
 !!
 !! @var beta
 !!
 !! inversion of temperature
 !!
-     real(dp), public, save :: beta  = 8.00_dp
+     real(dp), public, save :: beta  = 1.00_dp
 
 !!
 !! @var part
 !!
 !! hopping parameter t for lattice model
 !!
-     real(dp), public, save :: part  = 0.50_dp
+     real(dp), public, save :: part  = 1.00_dp
 
 !^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -168,7 +168,7 @@
 !! mixing parameter for dual fermion iteration. it is used to mix the
 !! dual green's function or dual self-energy function. 
 !!
-     real(dp), public, save :: dfmix = 0.70_dp
+     real(dp), public, save :: dfmix = 1.00_dp
 
 !!
 !! @var bsmix
