@@ -307,7 +307,7 @@
                  enddo O_LOOP1
              enddo K_LOOP
              if ( myid == master ) then
-                 write(mystd,'(6X,A)') 'solve Bethe-salpeter equations'
+                 write(mystd,'(6X,A)') 'solve bethe-salpeter equations'
              endif
 
              ! now gvrt and gstp are used to calculate dual self-energy
@@ -321,6 +321,9 @@
                      dual_s(w,o,:) = dual_s(w,o,:) + vr / beta
                  enddo W_LOOP
              enddo O_LOOP
+             if ( myid == master ) then
+                 write(mystd,'(6X,A)') 'calculate dual self-energy function'
+             endif
 
          enddo V_LOOP
 
