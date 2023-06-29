@@ -141,9 +141,9 @@
   subroutine df_std()
      implicit none
 
-     CONTINUE
-
 !! [body
+
+     CONTINUE
 
 !! body]
 
@@ -158,7 +158,7 @@
 !!
   subroutine df_ladder()
      use constants, only : dp
-     use constants, only : one, half, czero
+     use constants, only : zero, one, half, czero
      use constants, only : mystd
 
      use control, only : norbs
@@ -196,10 +196,13 @@
      ! current bosonic frequency
      real(dp) :: om
 
-     real(dp) :: tmp
+     ! real(dp) dummy variables
+     real(dp) :: raux
+
+     ! sum of dual green's function
      real(dp) :: gdsum(nffrq)
 
-     ! dummy complex(dp) arrays, used to do fourier transformation
+     ! complex(dp) dummy arrays, for fast fourier transformation
      complex(dp) :: vr(nkpts)
      complex(dp) :: gr(nkpts)
 
@@ -263,14 +266,13 @@
 
              call cat_fill_gk(dual_g, gstp, om)
              call cat_dia_2d(dual_g, gstp, g2)
+
+             mmat = vert_m(:,:,v)
+             dmat = vert_d(:,:,v)
+
              gvrt = czero
-
-             O_LOOP: do o=1,norbs
-
-                 mmat = vert_m(:,:,v)
-                 dmat = vert_d(:,:,v)
-
                  K_LOOP: do k=1,nkpts
+                 O_LOOP1: do o=1,norbs
 
                      call s_diag_z(nffrq, g2(:,o,k), imat)
 
@@ -284,8 +286,10 @@
                      call cat_bse_iterator(1, one, imat, dmat, Gmat)
                      call s_vecadd_z(nffrq, gvrt(:,o,k), Gmat, -half * half * 1.0_dp)
 
+                 enddo O_LOOP1
                  enddo K_LOOP
 
+                 O_LOOP: do o=1,norbs
                  W_LOOP: do w=1,nffrq
                      call cat_fft_2d(+1, nkp_x, nkp_y, gvrt(w,o,:), vr)
                      call cat_fft_2d(-1, nkp_x, nkp_y, gstp(w,o,:), gr)
@@ -293,8 +297,7 @@
                      call cat_fft_2d(+1, nkp_x, nkp_y, gr, vr)
                      dual_s(w,o,:) = dual_s(w,o,:) + vr / beta
                  enddo W_LOOP
-
-             enddo O_LOOP
+                 enddo O_LOOP
 
          enddo V_LOOP
 
@@ -305,28 +308,28 @@
          do k = 1, nkpts
          do o = 1, norbs
          do w = 1, nffrq
-             tmp = tmp + abs(dual_s(w,o,k))
+             raux = raux + abs(dual_s(w,o,k))
          enddo
          enddo
          enddo
-         print *, tmp / nffrq / norbs / nkpts
+         print *, raux / nffrq / norbs / nkpts
 
-         tmp = 0.0
+         raux = 0.0
          do k = 1, nkpts
          do o = 1, norbs
          do w = 1, nffrq
-             tmp = tmp + abs(gnew(w,o,k) - dual_g(w,o,k))
+             raux = raux + abs(gnew(w,o,k) - dual_g(w,o,k))
          enddo
          enddo
          enddo
-         print *, tmp / nffrq / norbs / nkpts
+         print *, raux / nffrq / norbs / nkpts
 
          gdsum = 0.0_dp
          do w = 1, nffrq
              gdsum(w) = abs(sum(dual_g(w, :, :))) / norbs / nkpts
          enddo
-         tmp = abs(sum(gdsum)) / nffrq
-         print *, tmp
+         raux = abs(sum(gdsum)) / nffrq
+         print *, raux
 
          dual_g = gnew
          dual_s = czero
