@@ -254,21 +254,23 @@
      DF_LOOP: do it=1,ndfit
 
          if ( myid == master ) then ! only master node can do it
-             write(mystd,'(2X,A,I3)') 'dual fermion iteration (ladder):', it
+             write(mystd,'(2X,a,i3)') 'dual fermion iteration (ladder):', it
+             write(mystd,'(2X,a)') '-----------------------------------------------------'
          endif ! back if ( myid == master ) block
 
          V_LOOP: do v=1,nbfrq
 
              om = bmesh(v)
              if ( myid == master ) then ! only master node can do it
-                 write(mystd,'(4X,A,I2,A,F12.8,A)') 'bosonic frequency => ', v, ' (', om, ')'
+                 write(mystd,'(4X,a,i3,a,i3,a,f12.8,a)') &
+                     'bosonic frequency => ', v, ' /', nbfrq, ' (', om, ')'
              endif ! back if ( myid == master ) block
 
              ! calculate two-particle bubbles, g2
              call cat_fill_gk(dual_g, gstp, om)
              call cat_dia_2d(dual_g, gstp, g2)
              if ( myid == master ) then
-                 write(mystd,'(6X,A)') 'calculate two-particle bubbles'
+                 write(mystd,'(6X,a)') 'calculate two-particle bubbles'
              endif
 
              ! extract impurity vertex functions for density and magnetic
@@ -307,7 +309,7 @@
                  enddo O_LOOP1
              enddo K_LOOP
              if ( myid == master ) then
-                 write(mystd,'(6X,A)') 'solve bethe-salpeter equations'
+                 write(mystd,'(6X,a)') 'solve bethe-salpeter equations'
              endif
 
              ! now gvrt and gstp are used to calculate dual self-energy
@@ -322,7 +324,7 @@
                  enddo W_LOOP
              enddo O_LOOP
              if ( myid == master ) then
-                 write(mystd,'(6X,A)') 'calculate dual self-energy function'
+                 write(mystd,'(6X,a)') 'calculate dual self-energy function'
              endif
 
          enddo V_LOOP
