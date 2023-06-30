@@ -253,6 +253,7 @@
 
      DF_LOOP: do it=1,ndfit
 
+         ! write out iteration information
          if ( myid == master ) then ! only master node can do it
              write(mystd,'(2X,2(a,i3))') &
                  'dual fermion iteration (ladder):', it, ' /', ndfit
@@ -262,22 +263,25 @@
 
          V_LOOP: do v=1,nbfrq
 
+             ! get bosonic frequency
              om = bmesh(v)
+             !
              if ( myid == master ) then ! only master node can do it
-                 write(mystd,'(2X,a,i3,a,i3,a,f12.8,a)') &
+                 write(mystd,'(2X,2(a,i3),a,f12.8,a)') &
                      '> bosonic frequency => ', v, ' /', nbfrq, ' (', om, ')'
              endif ! back if ( myid == master ) block
 
              ! calculate two-particle bubbles, g2
              call cat_fill_gk(dual_g, gstp, om)
              call cat_dia_2d(dual_g, gstp, g2)
-             if ( myid == master ) then
+             !
+             if ( myid == master ) then ! only master node can do it
                  write(mystd,'(4X,a)') 'calculate two-particle bubbles'
              endif
 
              ! extract impurity vertex functions for density and magnetic
              ! channels. in principles, they should be orbital-dependent.
-             ! we will it later.
+             ! we will fix it later.
              mmat = vert_m(:,:,v)
              dmat = vert_d(:,:,v)
 
@@ -310,7 +314,8 @@
 
                  enddo O_LOOP1
              enddo K_LOOP
-             if ( myid == master ) then
+             !
+             if ( myid == master ) then ! only master node can do it
                  write(mystd,'(4X,a)') 'solve bethe-salpeter equations'
              endif
 
@@ -325,8 +330,9 @@
                      dual_s(w,o,:) = dual_s(w,o,:) + vr / beta
                  enddo W_LOOP
              enddo O_LOOP
-             if ( myid == master ) then
-                 write(mystd,'(4X,a)') 'calculate dual self-energy function'
+             !
+             if ( myid == master ) then ! only master node can do it
+                 write(mystd,'(4X,a)') 'solve schwinger-dyson equations'
              endif
 
          enddo V_LOOP
