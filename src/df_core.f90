@@ -344,13 +344,14 @@
 
          ! determine new dual green's function
          call df_dyson(+1, gnew, dual_s, dual_b)
-
+         if ( myid == master ) then ! only master node can do it
+             write(mystd,'(2X,a)') 'solve dyson equation'
+         endif ! back if ( myid == master ) block
 
          ! try to mix old and new dual green's function
          call s_mix_z( size(gnew), dual_g, gnew, dfmix)
 
          print *, sum(abs(gnew - dual_g)) / size(gnew)
-         !print *, raux !/ nffrq / norbs / nkpts
 
          dual_g = gnew
          dual_s = czero
