@@ -615,6 +615,7 @@
      ! we have to make sure nkpts == nkp_x
      call s_assert2(nkpts == nkp_x, 'nkpts != nkp_x')
 
+     ! loop over orbitals and fermionic frequencies
      do i=1,norbs
          do j=1,nffrq
              gk = gin(j,i,:)
@@ -631,6 +632,8 @@
              chiq(j,i,:) = -gk
          enddo ! over j={1,nffrq} loop
      enddo ! over i={1,norbs} loop
+
+     ! normalize it
      chiq = chiq / real(nkpts * beta)
 
 !! body]
@@ -680,6 +683,7 @@
      ! we have to make sure nkpts == nkp_x * nkp_y
      call s_assert2(nkpts == (nkp_x * nkp_y), 'nkpts != (nkp_x * nkp_y)')
 
+     ! loop over orbitals and fermionic frequencies
      do i=1,norbs
          do j=1,nffrq
              gk = gin(j,i,:)
@@ -696,6 +700,8 @@
              chiq(j,i,:) = -gk
          enddo ! over j={1,nffrq} loop
      enddo ! over i={1,norbs} loop
+
+     ! normalize it
      chiq = chiq / real(nkpts * nkpts * beta)
 
 !! body]
@@ -745,6 +751,7 @@
      ! we have to make sure nkpts == nkp_x * nkp_y * nkp_z
      call s_assert2(nkpts == (nkp_x * nkp_y * nkp_z), 'nkpts != (nkp_x * nkp_y * nkp_z)')
 
+     ! loop over orbitals and fermionic frequencies
      do i=1,norbs
          do j=1,nffrq
              gk = gin(j,i,:)
@@ -761,6 +768,8 @@
              chiq(j,i,:) = -gk
          enddo ! over j={1,nffrq} loop
      enddo ! over i={1,norbs} loop
+
+     ! normalize it
      chiq = chiq / real(nkpts * nkpts * nkpts * beta)
 
 !! body]
