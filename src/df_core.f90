@@ -196,6 +196,9 @@
      ! current bosonic frequency
      real(dp) :: om
 
+     ! difference between two dual green's functions
+     real(dp) :: gdiff
+
      ! complex(dp) dummy arrays, for fast fourier transformation
      complex(dp) :: vr(nkpts)
      complex(dp) :: gr(nkpts)
@@ -346,15 +349,16 @@
          call df_dyson(+1, gnew, dual_s, dual_b)
          !
          if ( myid == master ) then ! only master node can do it
-             write(mystd,'(4X,a)') 'solve dyson equations'
+             write(mystd,'(2X,a)') 'solve dyson equations'
          endif ! back if ( myid == master ) block
 
          ! try to mix old and new dual green's function
          call s_mix_z( size(gnew), dual_g, gnew, dfmix)
+         gdiff = sum(abs(gnew - dual_g)) / size(gnew)
          !
          if ( myid == master ) then ! only master node can do it
-             write(mystd,'(4X,a)') "mix dual green's functions"
-             write(mystd,'(4X,a,e24.16)') 'gdiff =', sum(abs(gnew - dual_g)) / size(gnew)
+             write(mystd,'(2X,a)') "mix dual green's functions"
+             write(mystd,'(2X,a,e24.16)') 'gdiff =', gdiff
          endif ! back if ( myid == master ) block
 
          ! reset dual green's function and dual self-energy function
@@ -372,6 +376,7 @@
 !!>>> finishing ladder dual fermion iteration                          <<<
 !!========================================================================
 
+     ! solve dyson equation again to get final dual self-energy function
      call df_dyson(-1, dual_g, dual_s, dual_b)
 
      ! deallocate memory
@@ -394,7 +399,7 @@
 !! @sub df_dyson
 !!
 !! try to calculate the dual green's function or self-energy function by
-!! using the dyson equation
+!! solving the dyson equation
 !!
   subroutine df_dyson(op, dual_g, dual_s, dual_b)
      use constants, only : dp
@@ -407,11 +412,19 @@
      implicit none
 
 !! external arguments
+     ! a flag, it indicates the one that should be calculated.
+     ! if op = +1, calculate dual green's function
+     ! if op = -1, calculate dual self-energy function
      integer, intent(in) :: op
 
+     ! dual green's function
      complex(dp), intent(inout) :: dual_g(nffrq,norbs,nkpts)
+
+     ! dual self-energy function
      complex(dp), intent(inout) :: dual_s(nffrq,norbs,nkpts)
-     complex(dp), intent(inout) :: dual_b(nffrq,norbs,nkpts)
+
+     ! dual bath green's function
+     complex(dp), intent(in)    :: dual_b(nffrq,norbs,nkpts)
 
 !! [body
 
