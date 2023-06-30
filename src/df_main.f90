@@ -1,5 +1,5 @@
 !!!=========+=========+=========+=========+=========+=========+=========+!
-!!! AZALEA @ DFermion                                                      !
+!!! DFermion @ AZALEA                                                    !
 !!!                                                                      !
 !!! A highly optimized dual fermion framework for dynamical mean field   !
 !!! theory which can be used to treat non-local correlations in strongly !
@@ -12,7 +12,7 @@
 !!!=========+=========+=========+=========+=========+=========+=========+!
 
 !!========================================================================
-  PROGRAM DFAPP_MAIN !                                                 <<<
+  PROGRAM DF_MAIN !                                                    <<<
 !!========================================================================
 
      use mmpi, only : mp_init      ! init mpi environment
@@ -43,7 +43,7 @@
 
 # endif  /* MPI */
 
-     DFAPP_START: BLOCK
+     DF_START: BLOCK
 
          ! print the welcome messages
          if ( myid == master ) then ! only master node can do it
@@ -64,13 +64,13 @@
              call df_print_summary()
          endif ! back if ( myid == master ) block
 
-     END BLOCK DFAPP_START
+     END BLOCK DF_START
 
 !!========================================================================
      call DF_RUN() ! call the driver                                   <<<
 !!========================================================================
 
-     DFAPP_SLEEP: BLOCK
+     DF_SLEEP: BLOCK
 
          ! deallocate memory spaces
          call df_final_array()
@@ -80,7 +80,7 @@
              call df_print_footer()
          endif ! back if ( myid == master ) block
 
-     END BLOCK DFAPP_SLEEP
+     END BLOCK DF_SLEEP
 
 ! finalize mpi envirnoment
 # if defined (MPI)
@@ -96,5 +96,5 @@
 !! body]
 
 !!========================================================================
-  END PROGRAM DFAPP_MAIN !                                             <<<
+  END PROGRAM DF_MAIN !                                                <<<
 !!========================================================================
