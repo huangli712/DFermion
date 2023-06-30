@@ -344,23 +344,29 @@
 
          ! determine new dual green's function
          call df_dyson(+1, gnew, dual_s, dual_b)
+         !
          if ( myid == master ) then ! only master node can do it
-             write(mystd,'(2X,a)') 'solve dyson equation'
+             write(mystd,'(4X,a)') 'solve dyson equations'
          endif ! back if ( myid == master ) block
 
          ! try to mix old and new dual green's function
          call s_mix_z( size(gnew), dual_g, gnew, dfmix)
+         !
+         if ( myid == master ) then ! only master node can do it
+             write(mystd,'(4X,a)') "mix dual green's functions"
+             write(mystd,'(4X,a,e24.16)') 'gdiff =', sum(abs(gnew - dual_g)) / size(gnew)
+         endif ! back if ( myid == master ) block
 
-         print *, sum(abs(gnew - dual_g)) / size(gnew)
-
+         ! reset dual green's function and dual self-energy function
          dual_g = gnew
          dual_s = czero
 
+         ! write out iteration information
          if ( myid == master ) then
              write(mystd,*)
-         endif
+         endif ! back if ( myid == master ) block
 
-     enddo DF_LOOP
+     enddo DF_LOOP ! over it={1,ndfit} loop
 
 !!========================================================================
 !!>>> finishing ladder dual fermion iteration                          <<<
