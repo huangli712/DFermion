@@ -1,0 +1,10 @@
+isscf = 1
+isspn = 2
+isort = 2
+isvrt = 2
+nffrq = 128
+nbfrq = 1
+Uc    = 8.0
+mune  = 4.0
+beta  = 0.5
+part  = 1.0
