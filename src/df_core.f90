@@ -196,12 +196,6 @@
      ! current bosonic frequency
      real(dp) :: om
 
-     ! real(dp) dummy variables
-     real(dp) :: raux
-
-     ! sum of dual green's function
-     real(dp) :: gdsum(nffrq)
-
      ! complex(dp) dummy arrays, for fast fourier transformation
      complex(dp) :: vr(nkpts)
      complex(dp) :: gr(nkpts)
@@ -277,7 +271,7 @@
              !
              if ( myid == master ) then ! only master node can do it
                  write(mystd,'(4X,a)') 'calculate two-particle bubbles'
-             endif
+             endif ! back if ( myid == master ) block
 
              ! extract impurity vertex functions for density and magnetic
              ! channels. in principles, they should be orbital-dependent.
@@ -312,62 +306,51 @@
                      call cat_bse_iterator(1, one, imat, dmat, Gmat)
                      call s_vecadd_z(nffrq, gvrt(:,o,k), Gmat, -half * half * 1.0_dp)
 
-                 enddo O_LOOP1
-             enddo K_LOOP
+                 enddo O_LOOP1 ! over o={1,norbs} loop
+             enddo K_LOOP ! over k={1,nkpts} loop
              !
              if ( myid == master ) then ! only master node can do it
                  write(mystd,'(4X,a)') 'solve bethe-salpeter equations'
-             endif
+             endif ! back if ( myid == master ) block
 
              ! now gvrt and gstp are used to calculate dual self-energy
              ! function via fast fourier transformation
-             O_LOOP: do o=1,norbs
+             O_LOOP2: do o=1,norbs
                  W_LOOP: do w=1,nffrq
+
                      call cat_fft_2d(+1, nkp_x, nkp_y, gvrt(w,o,:), vr)
                      call cat_fft_2d(-1, nkp_x, nkp_y, gstp(w,o,:), gr)
+                     !
                      gr = vr * gr / real(nkpts * nkpts)
+                     !
                      call cat_fft_2d(+1, nkp_x, nkp_y, gr, vr)
+                     !
                      dual_s(w,o,:) = dual_s(w,o,:) + vr / beta
-                 enddo W_LOOP
-             enddo O_LOOP
+
+                 enddo W_LOOP ! over w={1,nffrq} loop
+             enddo O_LOOP2 ! over o={1,norbs} loop
              !
              if ( myid == master ) then ! only master node can do it
                  write(mystd,'(4X,a)') 'solve schwinger-dyson equations'
-             endif
+             endif ! back if ( myid == master ) block
 
-         enddo V_LOOP
+         enddo V_LOOP ! over v={1,nbfrq} loop
+
+         ! write out iteration information
+         if ( myid == master ) then ! only master node can do it
+             write(mystd,'(2X,a)') &
+                 '-----------------------------------------------------'
+         endif ! back if ( myid == master ) block
 
          ! determine new dual green's function
          call df_dyson(+1, gnew, dual_s, dual_b)
 
+
          ! try to mix old and new dual green's function
          call s_mix_z( size(gnew), dual_g, gnew, dfmix)
 
-         do k = 1, nkpts
-         do o = 1, norbs
-         do w = 1, nffrq
-             raux = raux + abs(dual_s(w,o,k))
-         enddo
-         enddo
-         enddo
-         print *, raux / nffrq / norbs / nkpts
-
-         raux = 0.0
-         do k = 1, nkpts
-         do o = 1, norbs
-         do w = 1, nffrq
-             raux = raux + abs(gnew(w,o,k) - dual_g(w,o,k))
-         enddo
-         enddo
-         enddo
-         print *, raux / nffrq / norbs / nkpts
-
-         gdsum = 0.0_dp
-         do w = 1, nffrq
-             gdsum(w) = abs(sum(dual_g(w, :, :))) / norbs / nkpts
-         enddo
-         raux = abs(sum(gdsum)) / nffrq
-         print *, raux
+         print *, sum(abs(gnew - dual_g)) / size(gnew)
+         !print *, raux !/ nffrq / norbs / nkpts
 
          dual_g = gnew
          dual_s = czero
