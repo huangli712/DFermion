@@ -6,12 +6,21 @@
 !!! type    : module
 !!! author  : li huang (email:lihuang.dmft@gmail.com)
 !!! history : 09/15/2009 by li huang (created)
-!!!           06/29/2023 by li huang (last modified)
+!!!           07/02/2023 by li huang (last modified)
 !!! purpose : define global control parameters for dual fermion framework.
 !!! status  : unstable
 !!! comment :
 !!!-----------------------------------------------------------------------
 
+!!========================================================================
+!!>>> module control                                                   <<<
+!!========================================================================
+
+!!
+!! @mod control
+!!
+!! define the control parameters and dimensional parameters.
+!!
   module control
      use constants, only : dp
 
@@ -226,8 +235,15 @@
 
   end module control
 
+!!========================================================================
+!!>>> module version                                                   <<<
+!!========================================================================
 
-
+!!
+!! @mod version
+!!
+!! define the semantic version string.
+!!
   module version
      implicit none
 
