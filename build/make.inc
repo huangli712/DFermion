@@ -13,13 +13,13 @@
 ##
 ## This building system is designed, created, and maintained by
 ##
-## Li Huang // email: lihuang.dmft@gmail.com
+## Li Huang // email: huangli@caep.cn
 ##
 ## History
 ## =======
 ##
 ## 05/11/2015 by li huang (created)
-## 06/23/2023 by li huang (last modified)
+## 04/03/2025 by li huang (last modified)
 ##
 ##
 
@@ -49,7 +49,7 @@ LFLAGS = $(OMP)
 # External linear algebra library
 #-------------------------------------------------------------------------
 LIBS   = -L/Users/lihuang/opt/intel/mkl/lib -lmkl_core -lmkl_sequential -lmkl_rt
-FLINK  = /Users/lihuang/Working/devel/flink/src
+FLINK  = /Users/lihuang/Working/devel/Flink/src
 
 # External fast fourier transformation library
 #-------------------------------------------------------------------------
