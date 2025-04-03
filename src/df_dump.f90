@@ -17,9 +17,9 @@
 !!!           df_dump_susc_s
 !!! source  : df_dump.f90
 !!! type    : subroutines
-!!! author  : li huang (email:lihuang.dmft@gmail.com)
+!!! author  : li huang (email:huangli@caep.cn)
 !!! history : 09/16/2009 by li huang (created)
-!!!           06/29/2023 by li huang (last modified)
+!!!           04/03/2025 by li huang (last modified)
 !!! purpose : dump key observables produced by the diagrammatic framework
 !!!           for dynamical mean field theory to external files.
 !!! status  : unstable

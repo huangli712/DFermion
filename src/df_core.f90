@@ -14,9 +14,9 @@
 !!!           cat_fft_3d
 !!! source  : df_core.f90
 !!! type    : subroutines
-!!! author  : li huang (email:lihuang.dmft@gmail.com)
+!!! author  : li huang (email:huangli@caep.cn)
 !!! history : 09/16/2009 by li huang (created)
-!!!           06/30/2023 by li huang (last modified)
+!!!           04/03/2025 by li huang (last modified)
 !!! purpose : main subroutines for the dual fermion framework.
 !!! status  : unstable
 !!! comment :

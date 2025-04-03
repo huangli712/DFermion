@@ -4,9 +4,9 @@
 !!!           version module
 !!! source  : df_control.f90
 !!! type    : module
-!!! author  : li huang (email:lihuang.dmft@gmail.com)
+!!! author  : li huang (email:huangli@caep.cn)
 !!! history : 09/15/2009 by li huang (created)
-!!!           07/02/2023 by li huang (last modified)
+!!!           04/03/2025 by li huang (last modified)
 !!! purpose : define global control parameters for dual fermion framework.
 !!! status  : unstable
 !!! comment :
@@ -252,21 +252,21 @@
 !!
 !! version string, version number + date info. + status info.
 !!
-     character(len=20), public, parameter :: V_FULL = 'v0.0.4 @ 2023.06.28D'
+     character(len=20), public, parameter :: V_FULL = 'v0.5.0 @ 2025.04.03D'
 
 !!
 !! @var V_CURR
 !!
 !! version string, only version number
 !!
-     character(len=06), public, parameter :: V_CURR = 'v0.0.4'
+     character(len=06), public, parameter :: V_CURR = 'v0.5.0'
 
 !!
 !! @var V_DATE
 !!
 !! version string, only date info.
 !!
-     character(len=11), public, parameter :: V_DATE = '2023.06.28'
+     character(len=11), public, parameter :: V_DATE = '2025.04.03'
 
 !!
 !! @var V_STAT
@@ -294,7 +294,7 @@
 !!
 !! version string, email info.
 !!
-     character(len=22), public, parameter :: V_MAIL = 'lihuang.dmft@gmail.com'
+     character(len=22), public, parameter :: V_MAIL = 'huangli@caep.cn'
 
 !!
 !! @var V_GPL3

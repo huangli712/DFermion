@@ -12,9 +12,9 @@
 !!!           df_final_array
 !!! source  : df_stream.f90
 !!! type    : subroutines
-!!! author  : li huang (email:lihuang.dmft@gmail.com)
+!!! author  : li huang (email:huangli@caep.cn)
 !!! history : 09/16/2009 by li huang (created)
-!!!           06/26/2023 by li huang (last modified)
+!!!           04/03/2025 by li huang (last modified)
 !!! purpose : initialize and finalize the dual fermion framework.
 !!! status  : unstable
 !!! comment :

@@ -9,9 +9,9 @@
 !!!           context module
 !!! source  : df_context.f90
 !!! type    : modules
-!!! author  : li huang (email:lihuang.dmft@gmail.com)
+!!! author  : li huang (email:huangli@caep.cn)
 !!! history : 09/16/2009 by li huang (created)
-!!!           06/25/2023 by li huang (last modified)
+!!!           04/03/2025 by li huang (last modified)
 !!! purpose : define the key data structure and global arrays/variables
 !!!           for dual fermion framework.
 !!! status  : unstable

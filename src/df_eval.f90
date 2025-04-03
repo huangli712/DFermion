@@ -10,9 +10,9 @@
 !!!           cat_susc_value
 !!! source  : df_eval.f90
 !!! type    : subroutines
-!!! author  : li huang (email:lihuang.dmft@gmail.com)
+!!! author  : li huang (email:huangli@caep.cn)
 !!! history : 04/29/2009 by li huang (created)
-!!!           06/29/2023 by li huang (last modified)
+!!!           04/03/2025 by li huang (last modified)
 !!! purpose : try to evaluate some key observables.
 !!! status  : unstable
 !!! comment :

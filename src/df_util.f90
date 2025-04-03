@@ -4,9 +4,9 @@
 !!!           cat_fill_gk
 !!! source  : df_util.f90
 !!! type    : subroutines
-!!! author  : li huang (email:lihuang.dmft@gmail.com)
+!!! author  : li huang (email:huangli@caep.cn)
 !!! history : 10/01/2008 by li huang (created)
-!!!           06/24/2023 by li huang (last modified)
+!!!           04/03/2025 by li huang (last modified)
 !!! purpose : provide some utility subroutines to deal with the GFs.
 !!! status  : unstable
 !!! comment :
