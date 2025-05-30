@@ -1,0 +1,4 @@
+name = "DFermion"
+uuid = "9779364a-2333-40cf-8e18-3394d61eba52"
+authors = ["Li Huang <huangli@caep.cn>"]
+version = "0.5.0"
